@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WK Poule 2026 Jouw Aars is Wahed Paars</title>
+<title>WK Poule 2026 · Jouw Aars is Wahed Paars</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>(function(){emailjs.init({publicKey:'Bp2zEMam_Labn-X5G'});})();</script>
@@ -16,45 +16,37 @@
   --green-bg:#0F2A06;--green-text:#97C459;--green-border:#3B6D11;
   --amber-bg:#2A1A06;--amber-text:#EF9F27;--amber-border:#854F0B;
   --red-text:#F09595;--radius:8px;--radius-lg:12px;
+  --gold:#F5C842;--silver:#B0B8C1;--bronze:#CD7F32;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--text);min-height:100vh;transition:background .2s,color .2s;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--text);min-height:100vh;}
 .app{max-width:860px;margin:0 auto;padding:1rem;}
-
-.header{text-align:center;padding:1.75rem 1rem 1rem;position:relative;}
+.header{text-align:center;padding:1.75rem 1rem 1rem;}
 .header h1{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:.2rem;}
 .header .sub{font-size:13px;color:var(--text2);}
-
 .countdown-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem;}
 .cd-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:.75rem 1rem;text-align:center;}
 .cd-label{font-size:11px;color:var(--text2);margin-bottom:4px;}
 .cd-time{font-size:20px;font-weight:700;letter-spacing:.5px;font-variant-numeric:tabular-nums;}
 .cd-time.urgent{color:#D85A30;}
 .cd-sub{font-size:10px;color:var(--text3);margin-top:2px;}
-
 .pub-banner{background:var(--green-bg);border:.5px solid var(--green-border);border-radius:var(--radius);padding:.65rem 1rem;font-size:13px;color:var(--green-text);margin-bottom:1rem;text-align:center;display:none;}
 .pub-banner a{color:var(--green-text);font-weight:600;}
-
-.tab-bar{display:flex;gap:3px;margin-bottom:1.25rem;background:var(--bg2);border-radius:var(--radius-lg);padding:4px;border:.5px solid var(--border);}
-.tab{flex:1;padding:8px 3px;text-align:center;font-size:12px;font-weight:500;border:none;background:transparent;cursor:pointer;border-radius:8px;color:var(--text2);transition:all .15s;}
+.tab-bar{display:flex;gap:3px;margin-bottom:1.25rem;background:var(--bg2);border-radius:var(--radius-lg);padding:4px;border:.5px solid var(--border);overflow-x:auto;}
+.tab{flex:1;min-width:fit-content;padding:8px 6px;text-align:center;font-size:11px;font-weight:500;border:none;background:transparent;cursor:pointer;border-radius:8px;color:var(--text2);transition:all .15s;white-space:nowrap;}
 .tab.active{background:var(--bg);color:var(--text);border:.5px solid var(--border2);}
 .tab:hover:not(.active){background:var(--bg3);}
-
 .section{display:none;}.section.active{display:block;}
-
 .card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem;margin-bottom:1rem;}
 .card h3{font-size:14px;font-weight:600;margin-bottom:.75rem;}
-
 .rule-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:.5px solid var(--border);font-size:12.5px;}
 .rule-row:last-child{border:none;}
 .rule-pts{font-weight:600;color:var(--blue-text);white-space:nowrap;margin-left:12px;}
-
 .type-badge{font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;}
 .ta{background:var(--blue-bg);color:var(--blue-text);}
 .tb{background:var(--green-bg);color:var(--green-text);}
 .tc{background:var(--amber-bg);color:var(--amber-text);}
 .td{background:#2A0A0A;color:#F09595;}
-
 .group-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem;margin-bottom:1rem;}
 .group-title{font-size:11px;font-weight:700;color:var(--text2);margin-bottom:.75rem;letter-spacing:.8px;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
 .match{display:grid;grid-template-columns:1fr auto 1fr;gap:4px;align-items:center;margin-bottom:.5rem;font-size:12.5px;}
@@ -65,14 +57,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .score-input:focus{outline:none;border-color:#378ADD;}
 .sdash{color:var(--text3);font-size:11px;}
 .match-meta{font-size:10px;color:var(--text3);text-align:center;margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border);}
-.match-meta:last-of-type{border:none;}
 .match-block{margin-bottom:.25rem;}
-
 .standings-section{margin-top:.75rem;border-top:.5px solid var(--border);padding-top:.75rem;}
 .standings-label{font-size:11px;color:var(--text2);margin-bottom:.4rem;}
 .standings-row{display:grid;grid-template-columns:auto 1fr auto;gap:6px;align-items:center;margin-bottom:4px;font-size:12px;}
 .st-select{font-size:11px;border:.5px solid var(--border2);border-radius:4px;background:var(--bg2);color:var(--text);padding:2px 4px;}
-
 .ko-section{margin-bottom:1.25rem;}
 .ko-section h3{font-size:14px;font-weight:600;margin-bottom:.5rem;color:var(--text2);}
 .ko-match{display:grid;grid-template-columns:1fr 56px 1fr;gap:6px;align-items:center;margin-bottom:.4rem;padding:.45rem .65rem;background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius);}
@@ -80,40 +69,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ko-input:focus{outline:none;border-color:#378ADD;}
 .ko-label{font-size:10px;color:var(--text3);text-align:center;line-height:1.3;}
 .ko-bracket{font-size:9px;color:var(--text3);font-weight:600;text-align:center;margin-bottom:2px;}
-
-/* ── AUTOCOMPLETE ── */
 .ac-wrap{position:relative;width:100%;}
-.ac-dropdown{
-  position:absolute;top:100%;left:0;right:0;
-  background:var(--bg2);border:.5px solid var(--border2);
-  border-radius:var(--radius);margin-top:2px;
-  max-height:180px;overflow-y:auto;z-index:999;
-  box-shadow:0 4px 16px rgba(0,0,0,.4);
-}
-.ac-item{
-  padding:6px 10px;font-size:12px;cursor:pointer;
-  display:flex;align-items:center;gap:7px;
-  border-bottom:.5px solid var(--border);
-}
+.ac-dropdown{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:.5px solid var(--border2);border-radius:var(--radius);margin-top:2px;max-height:180px;overflow-y:auto;z-index:999;box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.ac-item{padding:6px 10px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:7px;border-bottom:.5px solid var(--border);}
 .ac-item:last-child{border:none;}
 .ac-item:hover,.ac-item.active{background:var(--blue-bg);color:var(--blue-text);}
 .ac-flag{font-size:15px;flex-shrink:0;}
-
 .extra-card{margin-bottom:.875rem;}
 .extra-q{font-size:13px;font-weight:500;margin-bottom:.25rem;}
 .extra-pts{font-size:11px;color:var(--text2);margin-bottom:.5rem;}
 .extra-input{width:100%;padding:7px 10px;font-size:13px;border:.5px solid var(--border2);border-radius:var(--radius);background:var(--bg2);color:var(--text);}
 .extra-input:focus{outline:none;border-color:#378ADD;}
-
 .field-label{font-size:13px;font-weight:600;margin-bottom:.4rem;display:block;}
 .text-input{width:100%;padding:9px 11px;font-size:14px;border:.5px solid var(--border2);border-radius:var(--radius);background:var(--bg2);color:var(--text);}
 .text-input:focus{outline:none;border-color:#378ADD;}
-
+.textarea-input{width:100%;padding:9px 11px;font-size:12px;border:.5px solid var(--border2);border-radius:var(--radius);background:var(--bg2);color:var(--text);font-family:monospace;resize:vertical;min-height:100px;}
+.textarea-input:focus{outline:none;border-color:#378ADD;}
 .progress-wrap{margin:.75rem 0 .25rem;}
 .progress-bar-bg{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:4px;}
 .progress-bar-fill{height:100%;background:linear-gradient(90deg,#378ADD,#1D9E75);border-radius:3px;transition:width .4s ease;}
 .progress-text{font-size:12px;color:var(--text2);}
-
 .btn{width:100%;padding:11px;font-size:14px;font-weight:500;border:.5px solid var(--border2);border-radius:var(--radius-lg);cursor:pointer;background:var(--bg);color:var(--text);margin-top:.6rem;transition:background .15s;}
 .btn:hover{background:var(--bg2);}
 .btn.ok{background:var(--green-bg);color:var(--green-text);border-color:var(--green-border);}
@@ -122,24 +97,52 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .btn-green{background:var(--green-bg);color:var(--green-text);border-color:var(--green-border);}
 .btn-green:hover{opacity:.85;}
 .btn-red{color:var(--red-text);}
-
+.btn-sm{padding:6px 14px;font-size:12px;width:auto;margin-top:0;}
 .entry-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius);padding:.75rem;margin-bottom:.5rem;}
 .entry-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.2rem;}
 .entry-name{font-weight:600;font-size:14px;}
 .entry-meta{font-size:11px;color:var(--text2);}
 .del-btn{font-size:11px;padding:2px 8px;border:.5px solid var(--border);border-radius:4px;cursor:pointer;background:transparent;color:var(--text2);}
-
 .pub-status{padding:.6rem .875rem;border-radius:var(--radius);font-size:13px;margin-bottom:.75rem;border:.5px solid;}
 .pub-on{background:var(--green-bg);color:var(--green-text);border-color:var(--green-border);}
 .pub-off{background:var(--amber-bg);color:var(--amber-text);border-color:var(--amber-border);}
 .admin-info{font-size:12px;color:var(--text2);margin-bottom:.75rem;padding:.75rem;background:var(--bg2);border-radius:var(--radius);line-height:1.6;}
-
 .ov-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:1rem;}
 .ov-table th{background:var(--bg2);padding:6px 8px;text-align:left;font-weight:600;border-bottom:.5px solid var(--border2);white-space:nowrap;}
 .ov-table td{padding:5px 8px;border-bottom:.5px solid var(--border);}
 .ov-wrap{overflow-x:auto;border-radius:var(--radius);border:.5px solid var(--border);margin-bottom:1rem;}
-
 .autosave-info{font-size:12px;color:var(--text2);padding:0 .25rem;margin-top:.25rem;min-height:16px;}
+.section-title{font-size:16px;font-weight:700;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border);}
+
+/* ── RANGLIJST ── */
+.rang-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem;margin-bottom:.75rem;transition:all .2s;}
+.rang-card.gold{border-color:var(--gold);background:linear-gradient(135deg,#2A2200 0%,var(--bg) 60%);}
+.rang-card.silver{border-color:var(--silver);background:linear-gradient(135deg,#1A1E22 0%,var(--bg) 60%);}
+.rang-card.bronze{border-color:var(--bronze);background:linear-gradient(135deg,#2A1800 0%,var(--bg) 60%);}
+.rang-hd{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.rang-pos{font-size:20px;font-weight:800;width:32px;text-align:center;flex-shrink:0;}
+.rang-pos.gold{color:var(--gold);}
+.rang-pos.silver{color:var(--silver);}
+.rang-pos.bronze{color:var(--bronze);}
+.rang-name{font-size:15px;font-weight:600;flex:1;}
+.rang-pts{font-size:18px;font-weight:700;color:var(--blue-text);}
+.rang-slogan{font-size:11px;color:var(--text3);font-style:italic;margin-top:2px;}
+.rang-detail{display:none;margin-top:.75rem;padding-top:.75rem;border-top:.5px solid var(--border);}
+.rang-detail.open{display:block;}
+.rang-detail-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:.5px solid var(--border);}
+.rang-detail-row:last-child{border:none;}
+.rang-detail-row .pts{font-weight:600;color:var(--green-text);}
+.rang-detail-row .pts.zero{color:var(--text3);}
+.rang-no-results{text-align:center;padding:2rem;color:var(--text2);font-size:13px;}
+
+/* ── UITSLAGEN ADMIN ── */
+.uitslag-match{display:grid;grid-template-columns:1fr auto 1fr;gap:4px;align-items:center;margin-bottom:.4rem;font-size:12px;}
+.uitslag-home{text-align:right;font-weight:500;}
+.uitslag-away{text-align:left;font-weight:500;}
+.uitslag-score{display:flex;align-items:center;gap:3px;flex-shrink:0;}
+.uitslag-input{width:36px;height:30px;text-align:center;font-size:13px;border:.5px solid var(--border2);border-radius:6px;background:var(--bg2);color:var(--text);}
+.uitslag-input:focus{outline:none;border-color:#378ADD;}
+.admin-section-hd{font-size:13px;font-weight:700;color:var(--text2);margin:1rem 0 .5rem;padding-bottom:.3rem;border-bottom:.5px solid var(--border);text-transform:uppercase;letter-spacing:.5px;}
 </style>
 </head>
 <body>
@@ -165,7 +168,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="pub-banner" id="pub-banner">
   Het overzicht is gepubliceerd &mdash;
-  <a href="#" onclick="showTab('overzicht');return false;">bekijk alle inzendingen</a>
+  <a href="#" onclick="showTab('ranglijst');return false;">bekijk de ranglijst</a>
 </div>
 
 <div class="tab-bar">
@@ -174,6 +177,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="tab" onclick="showTab('knockout')">Knock-out</button>
   <button class="tab" onclick="showTab('extra')">Extra</button>
   <button class="tab" onclick="showTab('inzenden')">Inzenden</button>
+  <button class="tab" id="tab-ranglijst" onclick="showTab('ranglijst')" style="display:none">🏅 Ranglijst</button>
   <button class="tab" id="tab-overzicht" onclick="showTab('overzicht')" style="display:none">Overzicht</button>
   <button class="tab" onclick="showTab('admin')" style="color:var(--text3)">Admin</button>
 </div>
@@ -182,7 +186,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="sec-spelregels" class="section active">
   <div class="card"><h3>Poulefase</h3>
     <div class="rule-row"><span>TOTO goed (win / gelijk / verlies)</span><span class="rule-pts">5 ptn</span></div>
-    <div class="rule-row"><span>Juist aantal goals van een land</span><span class="rule-pts">2 ptn</span></div>
     <div class="rule-row"><span>Exacte uitslag correct</span><span class="rule-pts">15 ptn</span></div>
     <div class="rule-row"><span>Groepswinnaar correct</span><span class="rule-pts">5 bonus</span></div>
     <div class="rule-row"><span>Volledige eindstand groep correct</span><span class="rule-pts">10 bonus</span></div>
@@ -202,7 +205,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <div class="card"><h3>Extra vragen</h3>
     <div class="rule-row"><span>Eerste goalscorer Nederland</span><span class="rule-pts">5 ptn</span></div>
-    <div class="rule-row"><span>Totaal goals WK (exact 5 &middot; dichtst bij 5 bonus)</span><span class="rule-pts">5+5</span></div>
+    <div class="rule-row"><span>Totaal goals WK (exact)</span><span class="rule-pts">5 ptn</span></div>
     <div class="rule-row"><span>Topscorer Nederland</span><span class="rule-pts">5 ptn/goal</span></div>
     <div class="rule-row"><span>Kaartenpakker NL</span><span class="rule-pts">5 geel / 10 rood</span></div>
     <div class="rule-row"><span>Topscorer <span class="type-badge ta">A</span> land</span><span class="rule-pts">5 ptn/goal</span></div>
@@ -254,12 +257,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="btn" id="submit-btn" onclick="submitEntry()">Formulier inzenden ✓</button>
 </div>
 
+<!-- RANGLIJST -->
+<div id="sec-ranglijst" class="section">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+    <div>
+      <h2 style="font-size:18px;font-weight:600">🏅 Ranglijst</h2>
+      <div style="font-size:12px;color:var(--text2)" id="ranglijst-sub">Klik op een naam voor details</div>
+    </div>
+  </div>
+  <div id="ranglijst-container"></div>
+</div>
+
 <!-- OVERZICHT -->
 <div id="sec-overzicht" class="section">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
     <div><h2 style="font-size:18px;font-weight:600">Overzicht inzendingen</h2>
     <div style="font-size:12px;color:var(--text2)">Gepubliceerd door de admin</div></div>
-    <button class="btn btn-blue" style="width:auto;padding:8px 16px;margin:0" onclick="exportPDF()">PDF</button>
+    <button class="btn btn-blue btn-sm" onclick="exportPDF()">PDF</button>
   </div>
   <div id="overzicht-container"></div>
 </div>
@@ -267,26 +281,64 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- ADMIN -->
 <div id="sec-admin" class="section">
   <h2 style="font-size:18px;font-weight:600;margin-bottom:.75rem">Admin</h2>
-  <div class="admin-info">
-    <strong>EmailJS instellen:</strong> vervang in de broncode <code>JOUW_PUBLIC_KEY</code>, <code>JOUW_SERVICE_ID</code> en <code>JOUW_TEMPLATE_ID</code> door jouw eigen EmailJS-gegevens (zie emailjs.com).<br>
-    <strong>Wachtwoord:</strong> het admin-wachtwoord is <code>paarseaars</code> — pas dit aan in de code (zoek op 'paarseaars').<br>
-    <strong>Deadline instellen:</strong> stel hier de deadline in zodat de countdown zichtbaar is voor deelnemers.<br>
-    <strong>Publiceren:</strong> na de deadline klik je op "Publiceer" zodat deelnemers elkaars inzendingen kunnen zien.
-  </div>
+
+  <!-- Deadline -->
   <div class="card">
-    <label class="field-label">Deadline poule (datum &amp; tijd)</label>
+    <h3>Deadline</h3>
     <input type="datetime-local" id="deadline-input" class="text-input" style="font-size:13px">
     <button class="btn btn-green" onclick="saveDeadline()" style="margin-top:.5rem">Deadline opslaan</button>
   </div>
+
+  <!-- Publiceren -->
   <div id="pub-status-box" class="pub-status pub-off">Overzicht is nog niet gepubliceerd</div>
-  <button class="btn btn-green" id="pub-btn" onclick="togglePublish()">✓ Publiceer overzicht voor deelnemers</button>
-  <div style="margin-top:1.5rem;margin-bottom:.5rem;font-size:13px;font-weight:600">Inzendingen (<span id="entry-count">0</span>)</div>
+  <button class="btn btn-green" id="pub-btn" onclick="togglePublish()">✓ Publiceer overzicht & ranglijst</button>
+
+  <!-- Inzendingen importeren -->
+  <div class="card" style="margin-top:1rem">
+    <h3>Inzending importeren via JSON</h3>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:.75rem">Plak hier de JSON uit de e-mail die je hebt ontvangen van een deelnemer.</div>
+    <textarea class="textarea-input" id="json-paste-input" placeholder='Plak JSON hier... {"naam":"...","slogan":"...","groups":{...}}'></textarea>
+    <button class="btn btn-blue" onclick="importFromPaste()" style="margin-top:.5rem">✓ Importeer inzending</button>
+  </div>
+
+  <!-- Inzendingen lijst -->
+  <div style="margin-top:1rem;margin-bottom:.5rem;font-size:13px;font-weight:600">Inzendingen (<span id="entry-count">0</span>)</div>
   <div id="entries-list"></div>
-  <button class="btn btn-blue" onclick="exportExcel()" style="margin-top:.75rem">📊 Exporteer naar Excel (.xlsx)</button>
-  <button class="btn" onclick="exportJSONFile()" style="margin-top:.5rem">Exporteer ruwe data (JSON)</button>
-  <button class="btn btn-red" onclick="importJSON()" style="margin-top:.5rem">Importeer JSON</button>
+  <button class="btn btn-blue" onclick="exportExcel()" style="margin-top:.75rem">📊 Exporteer naar Excel</button>
+  <button class="btn" onclick="exportJSONFile()" style="margin-top:.5rem">Exporteer inzendingen (JSON)</button>
+  <button class="btn btn-red" onclick="importJSON()" style="margin-top:.5rem">Importeer inzendingen (JSON bestand)</button>
   <input type="file" id="json-file-input" accept=".json" style="display:none" onchange="handleImport(this)">
   <button class="btn btn-red" onclick="clearAll()" style="margin-top:.5rem">Alle inzendingen wissen</button>
+
+  <!-- UITSLAGEN SECTIE -->
+  <div style="margin-top:2rem">
+    <div class="section-title">⚽ Werkelijke uitslagen invoeren</div>
+    <div class="admin-info" style="margin-bottom:1rem">
+      Vul hier de echte uitslagen en doorgeplaatste landen in. Na het opslaan worden de punten automatisch berekend en zichtbaar in de ranglijst.
+    </div>
+
+    <!-- Poulefase uitslagen -->
+    <div class="admin-section-hd">Poulefase — uitslagen</div>
+    <div id="admin-groups-container"></div>
+
+    <!-- Groepsstandingen -->
+    <div class="admin-section-hd">Poulefase — eindstanden groepen</div>
+    <div id="admin-standings-container"></div>
+
+    <!-- Knock-out uitslagen -->
+    <div class="admin-section-hd">Knock-out — doorgeplaatste landen</div>
+    <div id="admin-ko-container"></div>
+
+    <!-- Extra vragen antwoorden -->
+    <div class="admin-section-hd">Extra vragen — werkelijke antwoorden</div>
+    <div class="card" id="admin-extra-container"></div>
+
+    <button class="btn btn-green" onclick="saveUitslagen()" style="margin-top:1rem">💾 Uitslagen opslaan & punten berekenen</button>
+    <button class="btn" onclick="exportUitslagenJSON()" style="margin-top:.5rem">Exporteer uitslagen (JSON)</button>
+    <button class="btn btn-red" onclick="importUitslagenJSON()" style="margin-top:.5rem">Importeer uitslagen (JSON)</button>
+    <input type="file" id="uitslagen-file-input" accept=".json" style="display:none" onchange="handleUitslagenImport(this)">
+    <div class="autosave-info" id="uitslagen-save-info" style="margin-top:.5rem"></div>
+  </div>
 </div>
 
 </div>
@@ -306,9 +358,8 @@ const FLAGS={
   'Portugal':'🇵🇹','Colombia':'🇨🇴','Oezbekistan':'🇺🇿','Irak':'🇮🇶',
   'Engeland':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Kroatië':'🇭🇷','Ghana':'🇬🇭','Panama':'🇵🇦'
 };
-const ALL_COUNTRIES = Object.keys(FLAGS);
+const ALL_COUNTRIES=Object.keys(FLAGS);
 const f=t=>FLAGS[t]||'';
-
 const TYPE_A=['Frankrijk','Spanje','Argentinië','Engeland','Portugal','Brazilië','Nederland','Marokko','België','Duitsland','Kroatië'];
 const TYPE_B=['Colombia','Senegal','Mexico','VS','Uruguay','Japan','Zwitserland','Iran','Turkije','Ecuador','Oostenrijk','Zuid-Korea'];
 const TYPE_C=['Australië','Algerije','Egypte','Canada','Noorwegen','Panama','Ivoorkust','Zweden','Paraguay','Tsjechië','Schotland','Tunesië','DR Congo'];
@@ -406,11 +457,11 @@ const GROUPS={
 const PAIRS=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
 
 const KO_ROUNDS=[
-  {label:'Ronde van 32',key:'r32',n:16},
-  {label:'Achtste finales',key:'af',n:8},
-  {label:'Kwartfinales',key:'kf',n:4},
-  {label:'Halve finales',key:'hf',n:2},
-  {label:'Finale (19 juli · MetLife Stadium NJ)',key:'fin',n:1}
+  {label:'Ronde van 32',key:'r32',n:16,pts:5,bonus:5},
+  {label:'Achtste finales',key:'af',n:8,pts:10,bonus:10},
+  {label:'Kwartfinales',key:'kf',n:4,pts:20,bonus:20},
+  {label:'Halve finales',key:'hf',n:2,pts:40,bonus:30},
+  {label:'Finale',key:'fin',n:1,pts:60,bonus:50}
 ];
 const R32_LABELS=[
   {home:'2A',away:'2B'},{home:'1E',away:'3A/B/C/D/F'},{home:'1F',away:'2C'},{home:'1C',away:'2F'},
@@ -431,7 +482,7 @@ const FIN_LABELS=[{home:'W HF1',away:'W HF2'}];
 
 const EXTRA_QS=[
   {id:'eerste_goal',label:'Eerste goalscorer Nederland',pts:'5 punten',type:'text'},
-  {id:'totaal_goals',label:'Totaal goals WK (104 wedstrijden, shootouts tellen niet)',pts:'5 ptn exact · 5 bonus dichtst bij',type:'number'},
+  {id:'totaal_goals',label:'Totaal goals WK (104 wedstrijden, penalties tellen niet)',pts:'5 ptn exact',type:'number'},
   {id:'topscorer_nl',label:'Topscorer Nederland',pts:'5 ptn per doelpunt',type:'text'},
   {id:'kaart_nl',label:'Kaartenpakker Nederland (meeste kaarten)',pts:'5 ptn geel · 10 ptn rood',type:'text'},
   {id:'topscorer_a',label:'Topscorer Type A land',pts:'5 ptn per doelpunt',type:'text'},
@@ -441,119 +492,122 @@ const EXTRA_QS=[
   {id:'winnaar',label:'WK-winnaar 2026',pts:'100 punten',type:'text'}
 ];
 
-const SCORING_NOTES=[
-  ['Poulefase – TOTO goed','5'],['Poulefase – Juist aantal goals land','2'],
-  ['Poulefase – Exacte uitslag','15'],['Poulefase – Groepswinnaar correct','5 bonus'],
-  ['Poulefase – Volledige eindstand correct','10 bonus'],
-  ['Ronde van 32 – per goed land','5'],['Ronde van 32 – volledig correct','5 bonus'],
-  ['Achtste finales – per goed land','10'],['Achtste finales – volledig correct','10 bonus'],
-  ['Kwartfinales – per goed land','20'],['Kwartfinales – volledig correct','20 bonus'],
-  ['Halve finales – per goed land','40'],['Halve finales – volledig correct','30 bonus'],
-  ['Finale – per goed land','60'],['Finale – volledig correct','50 bonus'],
-  ['WK-winnaar correct','100'],
-  ['Eerste goalscorer NL','5'],['Totaal goals WK – exact','5'],['Totaal goals WK – dichtst bij','5 bonus'],
-  ['Topscorer NL','5/goal'],['Kaartenpakker NL','5 geel / 10 rood'],
-  ['Topscorer Type A land','5/goal'],['Topscorer Type B land','10/goal'],
-  ['Topscorer Type C land','20/goal'],['Topscorer Type D land','30/goal'],
-];
+// Extra vragen scoring config
+const EXTRA_SCORING={
+  eerste_goal:{type:'exact',pts:5},
+  totaal_goals:{type:'exact_number',pts:5},
+  topscorer_nl:{type:'per_goal',pts:5},
+  kaart_nl:{type:'kaart',geel:5,rood:10},
+  topscorer_a:{type:'per_goal',pts:5},
+  topscorer_b:{type:'per_goal',pts:10},
+  topscorer_c:{type:'per_goal',pts:20},
+  topscorer_d:{type:'per_goal',pts:30},
+  winnaar:{type:'exact',pts:100}
+};
 
 let state={naam:'',slogan:'',groups:{},ko:{},extra:{}};
+
+// Uitslagen state (admin fills this in)
+let uitslagen={
+  groups:{},     // gk -> {matchKey -> {home, away}}
+  standings:{},  // gk -> [1st,2nd,3rd,4th] country names
+  ko:{},         // roundKey_i -> {home, away} (winner of each match)
+  extra:{
+    eerste_goal:'',
+    totaal_goals:'',
+    topscorer_nl:'',topscorer_nl_goals:0,
+    kaart_nl:'',kaart_nl_type:'geel',
+    topscorer_a:'',topscorer_a_goals:0,
+    topscorer_b:'',topscorer_b_goals:0,
+    topscorer_c:'',topscorer_c_goals:0,
+    topscorer_d:'',topscorer_d_goals:0,
+    winnaar:''
+  }
+};
 
 function initState(){
   state={naam:'',slogan:'',groups:{},ko:{},extra:{}};
   Object.keys(GROUPS).forEach(g=>{
     state.groups[g]={matches:{},standing:['','','','']};
-    PAIRS.forEach(([a,b])=>{ state.groups[g].matches[a+'_'+b]={home:'',away:''}; });
+    PAIRS.forEach(([a,b])=>{state.groups[g].matches[a+'_'+b]={home:'',away:''};});
   });
-  KO_ROUNDS.forEach(r=>{ for(let i=0;i<r.n;i++) state.ko[r.key+'_'+i]={home:'',away:''}; });
-  EXTRA_QS.forEach(q=>{ state.extra[q.id]=''; });
+  KO_ROUNDS.forEach(r=>{for(let i=0;i<r.n;i++) state.ko[r.key+'_'+i]={home:'',away:''};});
+  EXTRA_QS.forEach(q=>{state.extra[q.id]='';});
 }
 
-// ── AUTOCOMPLETE ────────────────────────────────────────────────────────────
-function makeACInput(id, side, placeholder, initialValue) {
-  const wrap = document.createElement('div');
-  wrap.className = 'ac-wrap';
-
-  const input = document.createElement('input');
-  input.className = 'ko-input';
-  input.type = 'text';
-  input.placeholder = placeholder;
-  input.value = initialValue || '';
-  input.autocomplete = 'off';
-
-  const dropdown = document.createElement('div');
-  dropdown.className = 'ac-dropdown';
-  dropdown.style.display = 'none';
-
-  let activeIdx = -1;
-
-  function getMatches(q) {
-    if (!q) return [];
-    const ql = q.toLowerCase();
-    return ALL_COUNTRIES.filter(c => c.toLowerCase().includes(ql)).slice(0, 8);
-  }
-
-  function renderDropdown(matches) {
-    dropdown.innerHTML = '';
-    activeIdx = -1;
-    if (!matches.length) { dropdown.style.display = 'none'; return; }
-    matches.forEach((c, i) => {
-      const item = document.createElement('div');
-      item.className = 'ac-item';
-      item.innerHTML = `<span class="ac-flag">${f(c)}</span><span>${c}</span>`;
-      item.addEventListener('mousedown', e => {
-        e.preventDefault();
-        selectCountry(c);
-      });
-      dropdown.appendChild(item);
+function initUitslagen(){
+  Object.keys(GROUPS).forEach(g=>{
+    if(!uitslagen.groups[g]) uitslagen.groups[g]={};
+    if(!uitslagen.standings[g]) uitslagen.standings[g]=['','','',''];
+    PAIRS.forEach(([a,b])=>{
+      const key=a+'_'+b;
+      if(!uitslagen.groups[g][key]) uitslagen.groups[g][key]={home:'',away:''};
     });
-    dropdown.style.display = 'block';
-  }
-
-  function selectCountry(c) {
-    input.value = c;
-    state.ko[id][side] = c;
-    dropdown.style.display = 'none';
-    activeIdx = -1;
-  }
-
-  input.addEventListener('input', () => {
-    state.ko[id][side] = input.value;
-    renderDropdown(getMatches(input.value));
   });
-
-  input.addEventListener('keydown', e => {
-    const items = dropdown.querySelectorAll('.ac-item');
-    if (!items.length) return;
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      activeIdx = Math.min(activeIdx + 1, items.length - 1);
-      items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      activeIdx = Math.max(activeIdx - 1, 0);
-      items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
-    } else if (e.key === 'Enter' && activeIdx >= 0) {
-      e.preventDefault();
-      selectCountry(ALL_COUNTRIES.filter(c => c.toLowerCase().includes(input.value.toLowerCase()))[activeIdx]);
-    } else if (e.key === 'Escape') {
-      dropdown.style.display = 'none';
+  KO_ROUNDS.forEach(r=>{
+    for(let i=0;i<r.n;i++){
+      const id=r.key+'_'+i;
+      if(!uitslagen.ko[id]) uitslagen.ko[id]={home:'',away:''};
     }
   });
+}
 
-  input.addEventListener('blur', () => {
-    setTimeout(() => { dropdown.style.display = 'none'; }, 150);
+// ── AUTOCOMPLETE ──────────────────────────────────────────────────────────
+function makeACInput(stateObj, id, side, placeholder, initialValue){
+  const wrap=document.createElement('div');
+  wrap.className='ac-wrap';
+  const input=document.createElement('input');
+  input.className='ko-input';
+  input.type='text';
+  input.placeholder=placeholder;
+  input.value=initialValue||'';
+  input.autocomplete='off';
+  const dropdown=document.createElement('div');
+  dropdown.className='ac-dropdown';
+  dropdown.style.display='none';
+  let activeIdx=-1;
+
+  function getMatches(q){
+    if(!q) return [];
+    const ql=q.toLowerCase();
+    return ALL_COUNTRIES.filter(c=>c.toLowerCase().includes(ql)).slice(0,8);
+  }
+  function renderDropdown(matches){
+    dropdown.innerHTML='';activeIdx=-1;
+    if(!matches.length){dropdown.style.display='none';return;}
+    matches.forEach(c=>{
+      const item=document.createElement('div');
+      item.className='ac-item';
+      item.innerHTML=`<span class="ac-flag">${f(c)}</span><span>${c}</span>`;
+      item.addEventListener('mousedown',e=>{e.preventDefault();selectCountry(c);});
+      dropdown.appendChild(item);
+    });
+    dropdown.style.display='block';
+  }
+  function selectCountry(c){
+    input.value=c;
+    if(stateObj&&id&&side) stateObj[id][side]=c;
+    dropdown.style.display='none';activeIdx=-1;
+  }
+  input.addEventListener('input',()=>{
+    if(stateObj&&id&&side) stateObj[id][side]=input.value;
+    renderDropdown(getMatches(input.value));
   });
-
-  input.addEventListener('focus', () => {
-    if (input.value) renderDropdown(getMatches(input.value));
+  input.addEventListener('keydown',e=>{
+    const items=dropdown.querySelectorAll('.ac-item');
+    if(!items.length) return;
+    if(e.key==='ArrowDown'){e.preventDefault();activeIdx=Math.min(activeIdx+1,items.length-1);items.forEach((el,i)=>el.classList.toggle('active',i===activeIdx));}
+    else if(e.key==='ArrowUp'){e.preventDefault();activeIdx=Math.max(activeIdx-1,0);items.forEach((el,i)=>el.classList.toggle('active',i===activeIdx));}
+    else if(e.key==='Enter'&&activeIdx>=0){e.preventDefault();selectCountry(getMatches(input.value)[activeIdx]);}
+    else if(e.key==='Escape'){dropdown.style.display='none';}
   });
-
-  wrap.appendChild(input);
-  wrap.appendChild(dropdown);
+  input.addEventListener('blur',()=>{setTimeout(()=>{dropdown.style.display='none';},150);});
+  input.addEventListener('focus',()=>{if(input.value) renderDropdown(getMatches(input.value));});
+  wrap.appendChild(input);wrap.appendChild(dropdown);
   return wrap;
 }
 
+// ── BUILD DEELNEMER FORMS ──────────────────────────────────────────────────
 function buildGroups(){
   const c=document.getElementById('groups-container');c.innerHTML='';
   Object.keys(GROUPS).forEach(gk=>{
@@ -563,19 +617,17 @@ function buildGroups(){
     groupMatches.forEach(m=>{
       const key=m.a+'_'+m.b;
       const s=state.groups[gk].matches[key]||{home:'',away:''};
-      const ha=teams[m.a], hb=teams[m.b];
+      const ha=teams[m.a],hb=teams[m.b];
       mh+=`<div class="match-block">
         <div class="match-meta">${m.d} · ${m.t} · ${m.stad}</div>
         <div class="match">
           <div class="match-home"><span>${ha}</span><span style="font-size:14px">${f(ha)}</span></div>
           <div class="score-wrap">
             <input class="score-input" type="number" min="0" max="20" placeholder="-"
-              oninput="state.groups['${gk}'].matches['${key}'].home=this.value"
-              value="${s.home}">
+              oninput="state.groups['${gk}'].matches['${key}'].home=this.value" value="${s.home}">
             <span class="sdash">-</span>
             <input class="score-input" type="number" min="0" max="20" placeholder="-"
-              oninput="state.groups['${gk}'].matches['${key}'].away=this.value"
-              value="${s.away}">
+              oninput="state.groups['${gk}'].matches['${key}'].away=this.value" value="${s.away}">
           </div>
           <div class="match-away"><span style="font-size:14px">${f(hb)}</span><span>${hb}</span></div>
         </div>
@@ -609,7 +661,6 @@ function buildKO(){
     const section=document.createElement('div');
     section.className='ko-section';
     section.innerHTML=`<h3>${r.label}</h3>`;
-
     for(let i=0;i<r.n;i++){
       const id=r.key+'_'+i;
       const s=state.ko[id];
@@ -619,36 +670,24 @@ function buildKO(){
       if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
       if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
       if(r.key==='fin'&&FIN_LABELS[i]){lbl_home=FIN_LABELS[i].home;lbl_away=FIN_LABELS[i].away;}
-
       const matchDiv=document.createElement('div');
       matchDiv.className='ko-match';
-
-      // Home side
       const homeDiv=document.createElement('div');
       homeDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
       const homeBracket=document.createElement('div');
-      homeBracket.className='ko-bracket';
-      homeBracket.textContent=lbl_home;
+      homeBracket.className='ko-bracket';homeBracket.textContent=lbl_home;
       homeDiv.appendChild(homeBracket);
-      homeDiv.appendChild(makeACInput(id,'home',lbl_home,s.home));
-
-      // VS label
+      homeDiv.appendChild(makeACInput(state.ko,id,'home',lbl_home,s.home));
       const vsDiv=document.createElement('div');
       vsDiv.className='ko-label';
       vsDiv.innerHTML=`vs${r.key==='r32'?'<br><span style="font-size:9px">M'+(72+i+1)+'</span>':''}`;
-
-      // Away side
       const awayDiv=document.createElement('div');
       awayDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
       const awayBracket=document.createElement('div');
-      awayBracket.className='ko-bracket';
-      awayBracket.textContent=lbl_away;
+      awayBracket.className='ko-bracket';awayBracket.textContent=lbl_away;
       awayDiv.appendChild(awayBracket);
-      awayDiv.appendChild(makeACInput(id,'away',lbl_away,s.away));
-
-      matchDiv.appendChild(homeDiv);
-      matchDiv.appendChild(vsDiv);
-      matchDiv.appendChild(awayDiv);
+      awayDiv.appendChild(makeACInput(state.ko,id,'away',lbl_away,s.away));
+      matchDiv.appendChild(homeDiv);matchDiv.appendChild(vsDiv);matchDiv.appendChild(awayDiv);
       section.appendChild(matchDiv);
     }
     c.appendChild(section);
@@ -668,6 +707,361 @@ function buildExtra(){
   });
 }
 
+// ── BUILD ADMIN UITSLAGEN FORMS ────────────────────────────────────────────
+function buildAdminGroups(){
+  const c=document.getElementById('admin-groups-container');c.innerHTML='';
+  Object.keys(GROUPS).forEach(gk=>{
+    const teams=GROUPS[gk];
+    const groupMatches=GROUP_MATCHES.filter(m=>m.g===gk);
+    const div=document.createElement('div');
+    div.className='card';
+    div.style.marginBottom='.75rem';
+    let html=`<div class="group-title" style="margin-bottom:.5rem">Groep ${gk}</div>`;
+    groupMatches.forEach(m=>{
+      const key=m.a+'_'+m.b;
+      const s=uitslagen.groups[gk]&&uitslagen.groups[gk][key]?uitslagen.groups[gk][key]:{home:'',away:''};
+      const ha=teams[m.a],hb=teams[m.b];
+      html+=`<div class="uitslag-match">
+        <div class="uitslag-home">${f(ha)} ${ha}</div>
+        <div class="uitslag-score">
+          <input class="uitslag-input" type="number" min="0" max="30" placeholder="-"
+            value="${s.home}" oninput="setUitslag('${gk}','${key}','home',this.value)">
+          <span class="sdash">-</span>
+          <input class="uitslag-input" type="number" min="0" max="30" placeholder="-"
+            value="${s.away}" oninput="setUitslag('${gk}','${key}','away',this.value)">
+        </div>
+        <div class="uitslag-away">${f(hb)} ${hb}</div>
+      </div>`;
+    });
+    div.innerHTML=html;
+    c.appendChild(div);
+  });
+}
+
+function buildAdminStandings(){
+  const c=document.getElementById('admin-standings-container');c.innerHTML='';
+  Object.keys(GROUPS).forEach(gk=>{
+    const teams=GROUPS[gk];
+    const div=document.createElement('div');
+    div.className='card';
+    div.style.marginBottom='.75rem';
+    let html=`<div class="group-title" style="margin-bottom:.5rem">Groep ${gk} — eindstand</div>`;
+    [0,1,2,3].forEach(pos=>{
+      const cur=uitslagen.standings[gk]?uitslagen.standings[gk][pos]:'';
+      html+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:12px;">
+        <span style="color:var(--text2);width:20px;font-weight:600">${pos+1}e</span>
+        <select style="flex:1;padding:4px 6px;font-size:12px;border:.5px solid var(--border2);border-radius:4px;background:var(--bg2);color:var(--text);"
+          onchange="setStanding('${gk}',${pos},this.value)">
+          <option value="">— kies land —</option>
+          ${teams.map(t=>`<option value="${t}" ${cur===t?'selected':''}>${f(t)} ${t}</option>`).join('')}
+        </select>
+      </div>`;
+    });
+    div.innerHTML=html;
+    c.appendChild(div);
+  });
+}
+
+function buildAdminKO(){
+  const c=document.getElementById('admin-ko-container');c.innerHTML='';
+  KO_ROUNDS.forEach(r=>{
+    const section=document.createElement('div');
+    section.className='ko-section';
+    section.innerHTML=`<h3>${r.label}</h3>`;
+    for(let i=0;i<r.n;i++){
+      const id=r.key+'_'+i;
+      if(!uitslagen.ko[id]) uitslagen.ko[id]={home:'',away:''};
+      let lbl_home='Land 1',lbl_away='Land 2';
+      if(r.key==='r32'&&R32_LABELS[i]){lbl_home=R32_LABELS[i].home;lbl_away=R32_LABELS[i].away;}
+      if(r.key==='af'&&AF_LABELS[i]){lbl_home=AF_LABELS[i].home;lbl_away=AF_LABELS[i].away;}
+      if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
+      if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
+      if(r.key==='fin'&&FIN_LABELS[i]){lbl_home=FIN_LABELS[i].home;lbl_away=FIN_LABELS[i].away;}
+      const matchDiv=document.createElement('div');
+      matchDiv.className='ko-match';
+      const homeDiv=document.createElement('div');
+      homeDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
+      const homeBracket=document.createElement('div');
+      homeBracket.className='ko-bracket';homeBracket.textContent=lbl_home;
+      homeDiv.appendChild(homeBracket);
+      homeDiv.appendChild(makeACInput(uitslagen.ko,id,'home',lbl_home,uitslagen.ko[id].home));
+      const vsDiv=document.createElement('div');
+      vsDiv.className='ko-label';vsDiv.textContent='vs';
+      const awayDiv=document.createElement('div');
+      awayDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
+      const awayBracket=document.createElement('div');
+      awayBracket.className='ko-bracket';awayBracket.textContent=lbl_away;
+      awayDiv.appendChild(awayBracket);
+      awayDiv.appendChild(makeACInput(uitslagen.ko,id,'away',lbl_away,uitslagen.ko[id].away));
+      matchDiv.appendChild(homeDiv);matchDiv.appendChild(vsDiv);matchDiv.appendChild(awayDiv);
+      section.appendChild(matchDiv);
+    }
+    c.appendChild(section);
+  });
+}
+
+function buildAdminExtra(){
+  const c=document.getElementById('admin-extra-container');
+  const u=uitslagen.extra;
+  c.innerHTML=`
+    <div class="extra-card">
+      <div class="extra-q">Eerste goalscorer Nederland</div>
+      <input class="extra-input" type="text" placeholder="Naam speler..." value="${u.eerste_goal||''}" oninput="uitslagen.extra.eerste_goal=this.value">
+    </div>
+    <div class="extra-card">
+      <div class="extra-q">Totaal goals WK (werkelijk aantal)</div>
+      <input class="extra-input" type="number" placeholder="Aantal goals..." value="${u.totaal_goals||''}" oninput="uitslagen.extra.totaal_goals=this.value">
+    </div>
+    <div class="extra-card">
+      <div class="extra-q">Topscorer Nederland — naam & aantal goals</div>
+      <div style="display:flex;gap:8px">
+        <input class="extra-input" type="text" placeholder="Naam speler..." value="${u.topscorer_nl||''}" oninput="uitslagen.extra.topscorer_nl=this.value" style="flex:2">
+        <input class="extra-input" type="number" min="0" placeholder="Goals" value="${u.topscorer_nl_goals||''}" oninput="uitslagen.extra.topscorer_nl_goals=parseInt(this.value)||0" style="flex:1">
+      </div>
+    </div>
+    <div class="extra-card">
+      <div class="extra-q">Kaartenpakker Nederland — naam & type</div>
+      <div style="display:flex;gap:8px">
+        <input class="extra-input" type="text" placeholder="Naam speler..." value="${u.kaart_nl||''}" oninput="uitslagen.extra.kaart_nl=this.value" style="flex:2">
+        <select class="extra-input" onchange="uitslagen.extra.kaart_nl_type=this.value" style="flex:1">
+          <option value="geel" ${u.kaart_nl_type==='geel'?'selected':''}>Geel</option>
+          <option value="rood" ${u.kaart_nl_type==='rood'?'selected':''}>Rood</option>
+        </select>
+      </div>
+    </div>
+    ${['a','b','c','d'].map(type=>`
+    <div class="extra-card">
+      <div class="extra-q">Topscorer Type ${type.toUpperCase()} land — naam & goals</div>
+      <div style="display:flex;gap:8px">
+        <input class="extra-input" type="text" placeholder="Naam speler..." value="${u['topscorer_'+type]||''}" oninput="uitslagen.extra['topscorer_${type}']=this.value" style="flex:2">
+        <input class="extra-input" type="number" min="0" placeholder="Goals" value="${u['topscorer_'+type+'_goals']||''}" oninput="uitslagen.extra['topscorer_${type}_goals']=parseInt(this.value)||0" style="flex:1">
+      </div>
+    </div>`).join('')}
+    <div class="extra-card">
+      <div class="extra-q">WK-winnaar 2026</div>
+      <input class="extra-input" type="text" placeholder="Land..." value="${u.winnaar||''}" oninput="uitslagen.extra.winnaar=this.value">
+    </div>
+  `;
+}
+
+function setUitslag(gk,key,side,val){
+  if(!uitslagen.groups[gk]) uitslagen.groups[gk]={};
+  if(!uitslagen.groups[gk][key]) uitslagen.groups[gk][key]={home:'',away:''};
+  uitslagen.groups[gk][key][side]=val;
+}
+function setStanding(gk,pos,val){
+  if(!uitslagen.standings[gk]) uitslagen.standings[gk]=['','','',''];
+  uitslagen.standings[gk][pos]=val;
+}
+
+// ── PUNTENTELLING ──────────────────────────────────────────────────────────
+function berekenPunten(entry){
+  const u=uitslagen;
+  let totaal=0;
+  const details=[];
+
+  // POULEFASE
+  let poulePts=0;
+  Object.keys(GROUPS).forEach(gk=>{
+    const teams=GROUPS[gk];
+    const groupMatches=GROUP_MATCHES.filter(m=>m.g===gk);
+    groupMatches.forEach(m=>{
+      const key=m.a+'_'+m.b;
+      const pred=entry.groups&&entry.groups[gk]&&entry.groups[gk].matches&&entry.groups[gk].matches[key];
+      const real=u.groups[gk]&&u.groups[gk][key];
+      if(!pred||!real||real.home===''||real.away==='') return;
+      const ph=parseInt(pred.home),pa=parseInt(pred.away);
+      const rh=parseInt(real.home),ra=parseInt(real.away);
+      if(isNaN(ph)||isNaN(pa)||isNaN(rh)||isNaN(ra)) return;
+      // Exacte uitslag
+      if(ph===rh&&pa===ra){poulePts+=15;return;}
+      // TOTO goed
+      const pToto=ph>pa?'W':ph<pa?'L':'D';
+      const rToto=rh>ra?'W':rh<ra?'L':'D';
+      if(pToto===rToto) poulePts+=5;
+    });
+    // Groepswinnaar bonus
+    const predStanding=entry.groups&&entry.groups[gk]?entry.groups[gk].standing:[];
+    const realStanding=u.standings[gk]||[];
+    const predWinner=teams[predStanding.indexOf('1')]||teams[[...predStanding].map(Number).indexOf(1)];
+    // Find team predicted as 1st
+    let predWinnerTeam='';
+    predStanding.forEach((v,i)=>{if(v==='1'||v===1) predWinnerTeam=teams[i];});
+    if(predWinnerTeam && realStanding[0] && predWinnerTeam===realStanding[0]) poulePts+=5;
+    // Volledige eindstand bonus
+    let fullMatch=true;
+    predStanding.forEach((v,i)=>{
+      const pos=parseInt(v);
+      if(!pos||!realStanding[pos-1]||realStanding[pos-1]!==teams[i]) fullMatch=false;
+    });
+    if(fullMatch&&predStanding.every(v=>v)) poulePts+=10;
+  });
+  if(poulePts>0) details.push({label:'Poulefase',pts:poulePts});
+  totaal+=poulePts;
+
+  // KNOCK-OUT
+  KO_ROUNDS.forEach(r=>{
+    let rondePts=0;
+    for(let i=0;i<r.n;i++){
+      const id=r.key+'_'+i;
+      const pred=entry.ko&&entry.ko[id];
+      const real=u.ko[id];
+      if(!pred||!real) continue;
+      const ph=pred.home?.trim(),pa=pred.away?.trim();
+      const rh=real.home?.trim(),ra=real.away?.trim();
+      if(!rh&&!ra) continue;
+      let correct=0;
+      if(ph&&rh&&ph===rh) correct++;
+      if(pa&&ra&&pa===ra) correct++;
+      rondePts+=correct*r.pts;
+      if(correct===2) rondePts+=r.bonus;
+    }
+    if(rondePts>0) details.push({label:r.label,pts:rondePts});
+    totaal+=rondePts;
+  });
+
+  // WK-winnaar (apart, 100 pts)
+  const predWinnaar=entry.extra?.winnaar?.trim().toLowerCase();
+  const realWinnaar=u.extra?.winnaar?.trim().toLowerCase();
+  if(predWinnaar&&realWinnaar&&predWinnaar===realWinnaar){
+    details.push({label:'WK-winnaar correct',pts:100});
+    totaal+=100;
+  }
+
+  // EXTRA VRAGEN
+  let extraPts=0;
+  // Eerste goalscorer NL
+  if(entry.extra?.eerste_goal&&u.extra?.eerste_goal&&
+     entry.extra.eerste_goal.trim().toLowerCase()===u.extra.eerste_goal.trim().toLowerCase()){
+    extraPts+=5;
+  }
+  // Totaal goals exact
+  if(entry.extra?.totaal_goals&&u.extra?.totaal_goals&&
+     parseInt(entry.extra.totaal_goals)===parseInt(u.extra.totaal_goals)){
+    extraPts+=5;
+  }
+  // Topscorer NL
+  if(entry.extra?.topscorer_nl&&u.extra?.topscorer_nl&&
+     entry.extra.topscorer_nl.trim().toLowerCase()===u.extra.topscorer_nl.trim().toLowerCase()&&
+     u.extra.topscorer_nl_goals>0){
+    extraPts+=5*u.extra.topscorer_nl_goals;
+  }
+  // Kaartenpakker NL
+  if(entry.extra?.kaart_nl&&u.extra?.kaart_nl&&
+     entry.extra.kaart_nl.trim().toLowerCase()===u.extra.kaart_nl.trim().toLowerCase()){
+    extraPts+=u.extra.kaart_nl_type==='rood'?10:5;
+  }
+  // Topscorers type landen
+  ['a','b','c','d'].forEach(type=>{
+    const key='topscorer_'+type;
+    const goalsKey=key+'_goals';
+    const ptsPerGoal={a:5,b:10,c:20,d:30}[type];
+    if(entry.extra?.[key]&&u.extra?.[key]&&
+       entry.extra[key].trim().toLowerCase()===u.extra[key].trim().toLowerCase()&&
+       u.extra[goalsKey]>0){
+      extraPts+=ptsPerGoal*u.extra[goalsKey];
+    }
+  });
+  if(extraPts>0) details.push({label:'Extra vragen',pts:extraPts});
+  totaal+=extraPts;
+
+  return {totaal,details};
+}
+
+// ── RANGLIJST ──────────────────────────────────────────────────────────────
+function buildRanglijst(){
+  const entries=getEntries();
+  const c=document.getElementById('ranglijst-container');
+  if(!entries.length){
+    c.innerHTML=`<div class="rang-no-results">Nog geen inzendingen beschikbaar.</div>`;
+    return;
+  }
+  const hasUitslagen=Object.values(uitslagen.groups).some(g=>Object.values(g).some(m=>m.home!==''));
+  if(!hasUitslagen){
+    c.innerHTML=`<div class="rang-no-results">De admin heeft nog geen uitslagen ingevoerd.<br>Kom later terug!</div>`;
+    return;
+  }
+  const scored=entries.map(e=>({...e,...berekenPunten(e)})).sort((a,b)=>b.totaal-a.totaal);
+  document.getElementById('ranglijst-sub').textContent=`Bijgewerkt · ${scored.length} deelnemer${scored.length!==1?'s':''} · klik voor details`;
+  c.innerHTML='';
+  scored.forEach((e,idx)=>{
+    const pos=idx+1;
+    const medal=pos===1?'gold':pos===2?'silver':pos===3?'bronze':'';
+    const posLabel=pos===1?'🥇':pos===2?'🥈':pos===3?'🥉':pos;
+    const div=document.createElement('div');
+    div.className=`rang-card ${medal}`;
+    div.innerHTML=`
+      <div class="rang-hd" onclick="toggleDetail(this)">
+        <div class="rang-pos ${medal}">${posLabel}</div>
+        <div style="flex:1">
+          <div class="rang-name">${e.naam}</div>
+          ${e.slogan?`<div class="rang-slogan">"${e.slogan}"</div>`:''}
+        </div>
+        <div class="rang-pts">${e.totaal} ptn</div>
+        <div style="color:var(--text3);font-size:11px;margin-left:8px">▼</div>
+      </div>
+      <div class="rang-detail">
+        ${e.details.length?e.details.map(d=>`
+          <div class="rang-detail-row">
+            <span>${d.label}</span>
+            <span class="pts ${d.pts===0?'zero':''}">${d.pts} ptn</span>
+          </div>`).join(''):`<div style="font-size:12px;color:var(--text3)">Nog geen punten gescoord.</div>`}
+        <div class="rang-detail-row" style="font-weight:600;margin-top:4px">
+          <span>Totaal</span>
+          <span class="pts">${e.totaal} ptn</span>
+        </div>
+      </div>`;
+    c.appendChild(div);
+  });
+}
+
+function toggleDetail(hd){
+  const detail=hd.parentElement.querySelector('.rang-detail');
+  const arrow=hd.querySelector('div:last-child');
+  detail.classList.toggle('open');
+  arrow.textContent=detail.classList.contains('open')?'▲':'▼';
+}
+
+// ── OPSLAAN UITSLAGEN ──────────────────────────────────────────────────────
+function saveUitslagen(){
+  localStorage.setItem('wkp26_uitslagen',JSON.stringify(uitslagen));
+  const el=document.getElementById('uitslagen-save-info');
+  el.textContent='Opgeslagen om '+new Date().toLocaleString('nl-NL');
+  el.style.color='var(--green-text)';
+  setTimeout(()=>{el.style.color='var(--text2)';},3000);
+}
+
+function loadUitslagen(){
+  try{
+    const raw=localStorage.getItem('wkp26_uitslagen');
+    if(raw) uitslagen=JSON.parse(raw);
+    initUitslagen();
+  }catch(e){initUitslagen();}
+}
+
+function exportUitslagenJSON(){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(uitslagen,null,2)],{type:'application/json'}));
+  a.download='wk2026_uitslagen.json';
+  a.click();
+}
+function importUitslagenJSON(){document.getElementById('uitslagen-file-input').click();}
+function handleUitslagenImport(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!confirm('Uitslagen overschrijven met importbestand?'))return;
+      uitslagen=data;initUitslagen();
+      buildAdminGroups();buildAdminStandings();buildAdminKO();buildAdminExtra();
+      alert('Uitslagen geïmporteerd!');
+    }catch(err){alert('Fout: '+err.message);}
+  };
+  reader.readAsText(file);input.value='';
+}
+
+// ── TABS ───────────────────────────────────────────────────────────────────
 function showTab(tab){
   if(tab==='admin'){
     if(sessionStorage.getItem('wkp26_admin')!=='ok'){
@@ -675,16 +1069,18 @@ function showTab(tab){
       if(pw!=='paarseaars'){alert('Onjuist wachtwoord.');return;}
       sessionStorage.setItem('wkp26_admin','ok');
     }
+    buildAdminGroups();buildAdminStandings();buildAdminKO();buildAdminExtra();
   }
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('sec-'+tab).classList.add('active');
-  const order=['spelregels','poulefase','knockout','extra','inzenden','overzicht','admin'];
+  const order=['spelregels','poulefase','knockout','extra','inzenden','ranglijst','overzicht','admin'];
   const idx=order.indexOf(tab);
   if(idx>=0) document.querySelectorAll('.tab')[idx].classList.add('active');
   if(tab==='inzenden') updateProgress();
   if(tab==='admin'){loadEntries();loadPubStatus();loadDeadlineInput();}
   if(tab==='overzicht') buildOverzicht();
+  if(tab==='ranglijst') buildRanglijst();
 }
 
 function updateProgress(){
@@ -696,7 +1092,7 @@ function updateProgress(){
   const fill=document.getElementById('progress-fill');
   if(fill) fill.style.width=pct+'%';
   const info=document.getElementById('progress-info');
-  if(info) info.textContent=filled+' van '+total+' uitslagen ingevuld ('+pct+'%)';
+  if(info) info.textContent=filled+' van '+total+' pouleuitslagen ingevuld ('+pct+'%)';
 }
 
 // ── COUNTDOWN ──────────────────────────────────────────────────────────────
@@ -708,27 +1104,23 @@ function updateCountdowns(){
   if(dl){
     const dlDate=new Date(dl);
     updateCD('cd-deadline',now,dlDate,'Deadline verstreken!');
-    document.querySelector('.cd-sub:last-of-type') && (document.querySelectorAll('.cd-sub')[1].textContent=dlDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}));
+    const subs=document.querySelectorAll('.cd-sub');
+    if(subs[1]) subs[1].textContent=dlDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
   }
 }
 function updateCD(id,now,target,doneText){
   const el=document.getElementById(id);if(!el)return;
   const diff=target-now;
   if(diff<=0){el.textContent=doneText;el.classList.add('urgent');return;}
-  const d=Math.floor(diff/86400000);
-  const h=Math.floor((diff%86400000)/3600000);
-  const m=Math.floor((diff%3600000)/60000);
-  const s=Math.floor((diff%60000)/1000);
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
   el.textContent=d>0?d+'d '+h+'u '+m+'m':h>0?h+'u '+m+'m '+s+'s':m+'m '+s+'s';
   if(diff<86400000) el.classList.add('urgent'); else el.classList.remove('urgent');
 }
-
 function saveDeadline(){
   const v=document.getElementById('deadline-input').value;
   if(!v){alert('Kies een datum en tijd.');return;}
   localStorage.setItem('wkp26_deadline',new Date(v).toISOString());
-  updateCountdowns();
-  alert('Deadline opgeslagen!');
+  updateCountdowns();alert('Deadline opgeslagen!');
 }
 function loadDeadlineInput(){
   const dl=localStorage.getItem('wkp26_deadline');
@@ -769,17 +1161,16 @@ function loadProgress(){
   }catch(e){}
 }
 
-// ── EMAIL ──────────────────────────────────────────────────────────────────
+// ── EMAIL & INZENDEN ───────────────────────────────────────────────────────
 function buildEmailTekst(entry){
-  const e=entry;let t='';
-  t+='=== Jouw Aars is Wahed Paars WK POULE 2026 ===\n';
-  t+='Naam: '+e.naam+'\nSlogan: "'+e.slogan+'"\nIngezonden: '+e.tijdstip+'\n\n';
+  let t='=== Jouw Aars is Wahed Paars WK POULE 2026 ===\n';
+  t+='Naam: '+entry.naam+'\nSlogan: "'+entry.slogan+'"\nIngezonden: '+entry.tijdstip+'\n\n';
   t+='--- EXTRA VRAGEN ---\n';
-  EXTRA_QS.forEach(q=>{t+=q.label+': '+(e.extra&&e.extra[q.id]?e.extra[q.id]:'-')+'\n';});
+  EXTRA_QS.forEach(q=>{t+=q.label+': '+(entry.extra&&entry.extra[q.id]?entry.extra[q.id]:'-')+'\n';});
   t+='\n--- KNOCK-OUT VOORSPELLINGEN ---\n';
   KO_ROUNDS.forEach(r=>{
     for(let i=0;i<r.n;i++){
-      const id=r.key+'_'+i;const m=e.ko&&e.ko[id];
+      const id=r.key+'_'+i;const m=entry.ko&&entry.ko[id];
       t+=r.label+(r.n>1?' '+(i+1):'')+': '+(m&&(m.home||m.away)?(m.home||'?')+' vs '+(m.away||'?'):'-')+'\n';
     }
   });
@@ -787,10 +1178,10 @@ function buildEmailTekst(entry){
     const teams=GROUPS[gk];
     t+='\n--- GROEP '+gk+' ---\n';
     PAIRS.forEach(([a,b])=>{
-      const m=e.groups&&e.groups[gk]&&e.groups[gk].matches&&e.groups[gk].matches[a+'_'+b];
+      const m=entry.groups&&entry.groups[gk]&&entry.groups[gk].matches&&entry.groups[gk].matches[a+'_'+b];
       t+=teams[a]+' - '+teams[b]+': '+(m&&(m.home!==''||m.away!=='')?((m.home!==''?m.home:'?')+'-'+(m.away!==''?m.away:'?')):'-')+'\n';
     });
-    const st=e.groups&&e.groups[gk]?e.groups[gk].standing:[];
+    const st=entry.groups&&entry.groups[gk]?entry.groups[gk].standing:[];
     const ord=[...teams].map((tm,i)=>({tm,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);
     t+='Eindstand: '+ord.map(x=>(x.p===9?'?':x.p)+'. '+x.tm).join(' | ')+'\n';
   });
@@ -802,16 +1193,51 @@ function submitEntry(){
   const slogan=document.getElementById('slogan-input').value.trim();
   if(!naam){alert('Vul eerst je naam in!');return;}
   if(!slogan){alert('Vul ook een slogan in!');return;}
-  const entry={naam,slogan,tijdstip:new Date().toLocaleString('nl-NL'),groups:JSON.parse(JSON.stringify(state.groups)),ko:JSON.parse(JSON.stringify(state.ko)),extra:JSON.parse(JSON.stringify(state.extra))};
+  const entry={naam,slogan,tijdstip:new Date().toLocaleString('nl-NL'),
+    groups:JSON.parse(JSON.stringify(state.groups)),
+    ko:JSON.parse(JSON.stringify(state.ko)),
+    extra:JSON.parse(JSON.stringify(state.extra))};
   const entries=getEntries();entries.push(entry);setEntries(entries);
+
+  // Auto-download JSON voor de deelnemer
+  const jsonBlob=new Blob([JSON.stringify(entry,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(jsonBlob);
+  a.download='wkpoule_'+naam.replace(/\s+/g,'_')+'.json';
+  a.click();
+
   const btn=document.getElementById('submit-btn');
   btn.textContent='Versturen...';btn.disabled=true;
-  emailjs.send('service_2bbft1h','template_1df3jsp',{naam,bericht:buildEmailTekst(entry)})
+
+  // Stuur JSON ook mee in de mail als tekst
+  const jsonTekst=JSON.stringify(entry);
+  emailjs.send('service_2bbft1h','template_1df3jsp',{naam,bericht:buildEmailTekst(entry)+'\n\n--- JSON (voor admin) ---\n'+jsonTekst})
     .then(()=>{btn.textContent='Opgeslagen & verstuurd! ✓';btn.classList.add('ok');btn.disabled=false;setTimeout(()=>{btn.textContent='Formulier inzenden ✓';btn.classList.remove('ok');},4000);})
     .catch(()=>{btn.textContent='Opgeslagen (e-mail mislukt)';btn.disabled=false;setTimeout(()=>{btn.textContent='Formulier inzenden ✓';},3000);});
 }
 
-// ── ADMIN ──────────────────────────────────────────────────────────────────
+// ── ADMIN INZENDINGEN ──────────────────────────────────────────────────────
+function importFromPaste(){
+  const raw=document.getElementById('json-paste-input').value.trim();
+  if(!raw){alert('Plak eerst JSON in het tekstvak.');return;}
+  try{
+    const entry=JSON.parse(raw);
+    if(!entry.naam){alert('Ongeldig formaat: geen naam gevonden.');return;}
+    const entries=getEntries();
+    const existing=entries.findIndex(e=>e.naam===entry.naam);
+    if(existing>=0){
+      if(!confirm(`Er bestaat al een inzending van ${entry.naam}. Overschrijven?`))return;
+      entries[existing]=entry;
+    } else {
+      entries.push(entry);
+    }
+    setEntries(entries);
+    loadEntries();
+    document.getElementById('json-paste-input').value='';
+    alert('✓ Inzending van '+entry.naam+' geïmporteerd!');
+  }catch(err){alert('Ongeldige JSON: '+err.message);}
+}
+
 function loadEntries(){
   const entries=getEntries();
   document.getElementById('entry-count').textContent=entries.length;
@@ -827,7 +1253,7 @@ function loadEntries(){
         </div>
       </div>
       <div class="entry-meta" style="font-style:italic;margin-bottom:2px">"${e.slogan||'-'}"</div>
-      <div class="entry-meta">Winnaar: ${e.extra&&e.extra.winnaar?e.extra.winnaar:'-'} · Topscorer NL: ${e.extra&&e.extra.topscorer_nl?e.extra.topscorer_nl:'-'}</div>
+      <div class="entry-meta">Winnaar: ${e.extra?.winnaar||'-'} · Topscorer NL: ${e.extra?.topscorer_nl||'-'}</div>
     </div>`).join('');
 }
 
@@ -839,13 +1265,16 @@ function applyPubStatus(pub){
   const box=document.getElementById('pub-status-box');
   const btn=document.getElementById('pub-btn');
   const tabOv=document.getElementById('tab-overzicht');
+  const tabRang=document.getElementById('tab-ranglijst');
   const banner=document.getElementById('pub-banner');
   if(pub){
-    box.textContent='✓ Overzicht is gepubliceerd';box.className='pub-status pub-on';
-    btn.textContent='↩ Publicatie intrekken';tabOv.style.display='';banner.style.display='block';
+    box.textContent='✓ Overzicht & ranglijst zijn gepubliceerd';box.className='pub-status pub-on';
+    btn.textContent='↩ Publicatie intrekken';
+    tabOv.style.display='';tabRang.style.display='';banner.style.display='block';
   } else {
     box.textContent='Overzicht is nog niet gepubliceerd';box.className='pub-status pub-off';
-    btn.textContent='✓ Publiceer overzicht voor deelnemers';tabOv.style.display='none';banner.style.display='none';
+    btn.textContent='✓ Publiceer overzicht & ranglijst';
+    tabOv.style.display='none';tabRang.style.display='none';banner.style.display='none';
   }
 }
 function togglePublish(){const p=localStorage.getItem('wkp26_published')==='true';localStorage.setItem('wkp26_published',String(!p));applyPubStatus(!p);}
@@ -894,16 +1323,6 @@ function exportPDF(){
   entries.forEach(e=>{html+=`<tr><td><b>${e.naam}</b></td><td><i>${e.slogan||'-'}</i></td></tr>`;});html+='</table>';
   html+=`<h2>Extra vragen</h2><table><tr><th>Vraag</th><th>Punten</th>`;names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
   EXTRA_QS.forEach(q=>{html+=`<tr><td>${q.label}</td><td>${q.pts}</td>`;entries.forEach(e=>{html+=`<td>${e.extra&&e.extra[q.id]?e.extra[q.id]:'-'}</td>`;});html+='</tr>';});html+='</table>';
-  html+=`<h2>Knock-out</h2><table><tr><th>Ronde</th><th>#</th>`;names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
-  KO_ROUNDS.forEach(r=>{for(let i=0;i<r.n;i++){const id=r.key+'_'+i;html+=`<tr><td>${r.label}</td><td>${r.n>1?i+1:'-'}</td>`;entries.forEach(e=>{const m=e.ko&&e.ko[id];html+=`<td>${m&&(m.home||m.away)?(m.home||'?')+' - '+(m.away||'?'):'-'}</td>`;});html+='</tr>';}});html+='</table>';
-  Object.keys(GROUPS).forEach(gk=>{
-    const teams=GROUPS[gk];html+=`<h2>Groep ${gk}</h2><table><tr><th>Wedstrijd</th>`;names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
-    PAIRS.forEach(([a,b])=>{html+=`<tr><td>${teams[a]} – ${teams[b]}</td>`;entries.forEach(e=>{const m=e.groups&&e.groups[gk]&&e.groups[gk].matches&&e.groups[gk].matches[a+'_'+b];html+=`<td>${m&&(m.home!==''||m.away!=='')?((m.home!==''?m.home:'?')+'-'+(m.away!==''?m.away:'?')):'-'}</td>`;});html+='</tr>';});
-    html+=`<tr style="background:#e8f0e8"><td><b>Eindstand</b></td>`;entries.forEach(e=>{const st=e.groups&&e.groups[gk]?e.groups[gk].standing:[];const ord=[...teams].map((t,i)=>({t,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);html+=`<td style="font-size:8px">${ord.map(x=>(x.p===9?'?':x.p)+'. '+x.t).join(' / ')}</td>`;});html+='</tr></table>';
-  });
-  html+=`<h2>Puntenstand — invultemplate</h2><table><tr><th>Onderdeel</th><th>Max. ptn</th>`;names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
-  SCORING_NOTES.forEach(([l,p])=>{html+=`<tr><td>${l}</td><td>${p}</td>${names.map(()=>'<td></td>').join('')}</tr>`;});
-  html+=`<tr class="total-row"><td>TOTAAL</td><td></td>${names.map(()=>'<td></td>').join('')}</tr></table></body></html>`;
   const w=window.open('','_blank');w.document.write(html);w.document.close();w.focus();setTimeout(()=>w.print(),500);
 }
 
@@ -912,33 +1331,23 @@ function exportExcel(){
   const entries=getEntries();if(!entries.length){alert('Geen inzendingen.');return;}
   if(typeof XLSX==='undefined'){alert('XLSX library niet geladen.');return;}
   const wb=XLSX.utils.book_new();const names=entries.map(e=>e.naam);
-  const psData=[['WK Poule 2026 — Puntenstand'],['Gegenereerd: '+new Date().toLocaleString('nl-NL')],[],['Onderdeel','Max. punten',...names],...SCORING_NOTES.map(([l,p])=>[l,p,...names.map(()=>'')]),[] ,['TOTAAL','',...names.map(()=>'')],['Slogan','',...entries.map(e=>e.slogan||'')]];
-  const wsPs=XLSX.utils.aoa_to_sheet(psData);wsPs['!cols']=[{wch:38},{wch:14},...names.map(()=>({wch:18}))];XLSX.utils.book_append_sheet(wb,wsPs,'Puntenstand');
-  const pfRows=[['WK Poule 2026 — Poulefase'],[],['Groep','Wedstrijd','Datum','Tijd',...names]];
-  Object.keys(GROUPS).forEach(gk=>{
-    const teams=GROUPS[gk];
-    const gms=GROUP_MATCHES.filter(m=>m.g===gk);
-    gms.forEach(m=>{
-      const key=m.a+'_'+m.b;const row=['Groep '+gk,teams[m.a]+' – '+teams[m.b],m.d,m.t];
-      entries.forEach(e=>{const mt=e.groups&&e.groups[gk]&&e.groups[gk].matches&&e.groups[gk].matches[key];row.push(mt&&(mt.home!==''||mt.away!=='')?((mt.home!==''?mt.home:'?')+' – '+(mt.away!==''?mt.away:'?')):'–');});
-      pfRows.push(row);
-    });
-    const stRow=['Groep '+gk,'Eindstand','',''];
-    entries.forEach(e=>{const st=e.groups&&e.groups[gk]?e.groups[gk].standing:[];const ord=[...teams].map((t,i)=>({t,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);stRow.push(ord.map(x=>(x.p===9?'?':x.p)+'. '+x.t).join(' | '));});
-    pfRows.push(stRow);pfRows.push([]);
-  });
-  const wsPf=XLSX.utils.aoa_to_sheet(pfRows);wsPf['!cols']=[{wch:10},{wch:24},{wch:12},{wch:8},...names.map(()=>({wch:18}))];XLSX.utils.book_append_sheet(wb,wsPf,'Poulefase');
-  const koRows=[['WK Poule 2026 — Knock-out'],[],['Ronde','#',...names]];
-  KO_ROUNDS.forEach(r=>{for(let i=0;i<r.n;i++){const id=r.key+'_'+i;const row=[r.label,r.n>1?'Match '+(i+1):'Finale'];entries.forEach(e=>{const m=e.ko&&e.ko[id];row.push(m&&(m.home||m.away)?(m.home||'?')+' vs '+(m.away||'?'):'–');});koRows.push(row);}koRows.push([]);});
-  const wsKo=XLSX.utils.aoa_to_sheet(koRows);wsKo['!cols']=[{wch:30},{wch:10},...names.map(()=>({wch:22}))];XLSX.utils.book_append_sheet(wb,wsKo,'Knock-out');
+  // Ranglijst sheet
+  const scored=entries.map(e=>({...e,...berekenPunten(e)})).sort((a,b)=>b.totaal-a.totaal);
+  const rlData=[['WK Poule 2026 — Ranglijst'],['Gegenereerd: '+new Date().toLocaleString('nl-NL')],[],
+    ['Positie','Naam','Totaal punten','Details'],...scored.map((e,i)=>[i+1,e.naam,e.totaal,e.details.map(d=>d.label+': '+d.pts).join(' | ')])];
+  const wsRl=XLSX.utils.aoa_to_sheet(rlData);wsRl['!cols']=[{wch:8},{wch:20},{wch:14},{wch:60}];
+  XLSX.utils.book_append_sheet(wb,wsRl,'Ranglijst');
+  // Inzendingen sheet
   const exRows=[['WK Poule 2026 — Extra vragen'],[],['Vraag','Punten',...names]];
   EXTRA_QS.forEach(q=>{const row=[q.label,q.pts];entries.forEach(e=>row.push(e.extra&&e.extra[q.id]?e.extra[q.id]:'–'));exRows.push(row);});
-  exRows.push([]);exRows.push(['Slogan','(geen ptn)',...entries.map(e=>e.slogan||'–')]);exRows.push(['Ingezonden','',...entries.map(e=>e.tijdstip||'–')]);
-  const wsEx=XLSX.utils.aoa_to_sheet(exRows);wsEx['!cols']=[{wch:36},{wch:14},...names.map(()=>({wch:20}))];XLSX.utils.book_append_sheet(wb,wsEx,'Extra vragen');
+  exRows.push([]);exRows.push(['Slogan','(geen ptn)',...entries.map(e=>e.slogan||'–')]);
+  exRows.push(['Ingezonden','',...entries.map(e=>e.tijdstip||'–')]);
+  const wsEx=XLSX.utils.aoa_to_sheet(exRows);wsEx['!cols']=[{wch:36},{wch:14},...names.map(()=>({wch:20}))];
+  XLSX.utils.book_append_sheet(wb,wsEx,'Extra vragen');
   XLSX.writeFile(wb,'WK_Poule_2026_'+new Date().toLocaleDateString('nl-NL').replace(/\//g,'-')+'.xlsx');
 }
 
-function exportJSONFile(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(getEntries(),null,2)],{type:'application/json'}));a.download='waerden_wk2026_backup.json';a.click();}
+function exportJSONFile(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(getEntries(),null,2)],{type:'application/json'}));a.download='wk2026_inzendingen.json';a.click();}
 function importJSON(){document.getElementById('json-file-input').click();}
 function handleImport(input){
   const file=input.files[0];if(!file)return;
@@ -952,7 +1361,10 @@ function handleImport(input){
 }
 
 // ── INIT ───────────────────────────────────────────────────────────────────
-initState();buildGroups();buildKO();buildExtra();
+localStorage.setItem('wkp26_deadline','2026-06-11T18:00:00.000Z');
+initState();
+loadUitslagen();
+buildGroups();buildKO();buildExtra();
 loadPubStatus();loadProgress();
 updateCountdowns();
 setInterval(updateCountdowns,1000);
