@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WK Poule 2026</title>
+<title>WK Poule 2026 Jouw Aars is Wahed Paars</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>(function(){emailjs.init({publicKey:'Bp2zEMam_Labn-X5G'});})();</script>
@@ -24,7 +24,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .header{text-align:center;padding:1.75rem 1rem 1rem;position:relative;}
 .header h1{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:.2rem;}
 .header .sub{font-size:13px;color:var(--text2);}
-
 
 .countdown-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem;}
 .cd-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:.75rem 1rem;text-align:center;}
@@ -78,8 +77,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ko-section h3{font-size:14px;font-weight:600;margin-bottom:.5rem;color:var(--text2);}
 .ko-match{display:grid;grid-template-columns:1fr 56px 1fr;gap:6px;align-items:center;margin-bottom:.4rem;padding:.45rem .65rem;background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius);}
 .ko-input{width:100%;padding:4px 6px;font-size:12px;border:.5px solid var(--border2);border-radius:5px;background:var(--bg2);color:var(--text);}
+.ko-input:focus{outline:none;border-color:#378ADD;}
 .ko-label{font-size:10px;color:var(--text3);text-align:center;line-height:1.3;}
 .ko-bracket{font-size:9px;color:var(--text3);font-weight:600;text-align:center;margin-bottom:2px;}
+
+/* ── AUTOCOMPLETE ── */
+.ac-wrap{position:relative;width:100%;}
+.ac-dropdown{
+  position:absolute;top:100%;left:0;right:0;
+  background:var(--bg2);border:.5px solid var(--border2);
+  border-radius:var(--radius);margin-top:2px;
+  max-height:180px;overflow-y:auto;z-index:999;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+}
+.ac-item{
+  padding:6px 10px;font-size:12px;cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+  border-bottom:.5px solid var(--border);
+}
+.ac-item:last-child{border:none;}
+.ac-item:hover,.ac-item.active{background:var(--blue-bg);color:var(--blue-text);}
+.ac-flag{font-size:15px;flex-shrink:0;}
 
 .extra-card{margin-bottom:.875rem;}
 .extra-q{font-size:13px;font-weight:500;margin-bottom:.25rem;}
@@ -128,7 +146,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="app">
 
 <div class="header">
-
   <h1>🏆 WK Poule 2026</h1>
   <div class="sub">USA · Canada · Mexico &nbsp;·&nbsp; 11 juni – 19 juli 2026</div>
 </div>
@@ -289,6 +306,7 @@ const FLAGS={
   'Portugal':'🇵🇹','Colombia':'🇨🇴','Oezbekistan':'🇺🇿','Irak':'🇮🇶',
   'Engeland':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Kroatië':'🇭🇷','Ghana':'🇬🇭','Panama':'🇵🇦'
 };
+const ALL_COUNTRIES = Object.keys(FLAGS);
 const f=t=>FLAGS[t]||'';
 
 const TYPE_A=['Frankrijk','Spanje','Argentinië','Engeland','Portugal','Brazilië','Nederland','Marokko','België','Duitsland','Kroatië'];
@@ -296,7 +314,6 @@ const TYPE_B=['Colombia','Senegal','Mexico','VS','Uruguay','Japan','Zwitserland'
 const TYPE_C=['Australië','Algerije','Egypte','Canada','Noorwegen','Panama','Ivoorkust','Zweden','Paraguay','Tsjechië','Schotland','Tunesië','DR Congo'];
 const getType=t=>TYPE_A.includes(t)?'A':TYPE_B.includes(t)?'B':TYPE_C.includes(t)?'C':'D';
 
-// All 72 group matches in chronological order with NL time (ET+6)
 const GROUP_MATCHES=[
   {g:'A',d:'Do 11 jun',t:'21:00',stad:'Mexico City',a:0,b:1},
   {g:'A',d:'Do 11 jun',t:'04:00+',stad:'Zapopan',a:2,b:3},
@@ -452,11 +469,95 @@ function initState(){
   EXTRA_QS.forEach(q=>{ state.extra[q.id]=''; });
 }
 
+// ── AUTOCOMPLETE ────────────────────────────────────────────────────────────
+function makeACInput(id, side, placeholder, initialValue) {
+  const wrap = document.createElement('div');
+  wrap.className = 'ac-wrap';
+
+  const input = document.createElement('input');
+  input.className = 'ko-input';
+  input.type = 'text';
+  input.placeholder = placeholder;
+  input.value = initialValue || '';
+  input.autocomplete = 'off';
+
+  const dropdown = document.createElement('div');
+  dropdown.className = 'ac-dropdown';
+  dropdown.style.display = 'none';
+
+  let activeIdx = -1;
+
+  function getMatches(q) {
+    if (!q) return [];
+    const ql = q.toLowerCase();
+    return ALL_COUNTRIES.filter(c => c.toLowerCase().includes(ql)).slice(0, 8);
+  }
+
+  function renderDropdown(matches) {
+    dropdown.innerHTML = '';
+    activeIdx = -1;
+    if (!matches.length) { dropdown.style.display = 'none'; return; }
+    matches.forEach((c, i) => {
+      const item = document.createElement('div');
+      item.className = 'ac-item';
+      item.innerHTML = `<span class="ac-flag">${f(c)}</span><span>${c}</span>`;
+      item.addEventListener('mousedown', e => {
+        e.preventDefault();
+        selectCountry(c);
+      });
+      dropdown.appendChild(item);
+    });
+    dropdown.style.display = 'block';
+  }
+
+  function selectCountry(c) {
+    input.value = c;
+    state.ko[id][side] = c;
+    dropdown.style.display = 'none';
+    activeIdx = -1;
+  }
+
+  input.addEventListener('input', () => {
+    state.ko[id][side] = input.value;
+    renderDropdown(getMatches(input.value));
+  });
+
+  input.addEventListener('keydown', e => {
+    const items = dropdown.querySelectorAll('.ac-item');
+    if (!items.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIdx = Math.min(activeIdx + 1, items.length - 1);
+      items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIdx = Math.max(activeIdx - 1, 0);
+      items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+    } else if (e.key === 'Enter' && activeIdx >= 0) {
+      e.preventDefault();
+      selectCountry(ALL_COUNTRIES.filter(c => c.toLowerCase().includes(input.value.toLowerCase()))[activeIdx]);
+    } else if (e.key === 'Escape') {
+      dropdown.style.display = 'none';
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    setTimeout(() => { dropdown.style.display = 'none'; }, 150);
+  });
+
+  input.addEventListener('focus', () => {
+    if (input.value) renderDropdown(getMatches(input.value));
+  });
+
+  wrap.appendChild(input);
+  wrap.appendChild(dropdown);
+  return wrap;
+}
+
 function buildGroups(){
   const c=document.getElementById('groups-container');c.innerHTML='';
   Object.keys(GROUPS).forEach(gk=>{
     const teams=GROUPS[gk];
-    // Get matches for this group in chronological order
     const groupMatches=GROUP_MATCHES.filter(m=>m.g===gk);
     let mh='';
     groupMatches.forEach(m=>{
@@ -505,7 +606,10 @@ function buildGroups(){
 function buildKO(){
   const c=document.getElementById('ko-container');c.innerHTML='';
   KO_ROUNDS.forEach(r=>{
-    let html=`<div class="ko-section"><h3>${r.label}</h3>`;
+    const section=document.createElement('div');
+    section.className='ko-section';
+    section.innerHTML=`<h3>${r.label}</h3>`;
+
     for(let i=0;i<r.n;i++){
       const id=r.key+'_'+i;
       const s=state.ko[id];
@@ -515,20 +619,39 @@ function buildKO(){
       if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
       if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
       if(r.key==='fin'&&FIN_LABELS[i]){lbl_home=FIN_LABELS[i].home;lbl_away=FIN_LABELS[i].away;}
-      html+=`<div class="ko-match">
-        <div style="display:flex;flex-direction:column;gap:3px">
-          <div class="ko-bracket">${lbl_home}</div>
-          <input class="ko-input" placeholder="${lbl_home}" value="${s.home}" oninput="state.ko['${id}'].home=this.value">
-        </div>
-        <div class="ko-label">vs${r.key==='r32'?'<br><span style="font-size:9px">M'+(72+i+1)+'</span>':''}</div>
-        <div style="display:flex;flex-direction:column;gap:3px">
-          <div class="ko-bracket">${lbl_away}</div>
-          <input class="ko-input" placeholder="${lbl_away}" value="${s.away}" oninput="state.ko['${id}'].away=this.value">
-        </div>
-      </div>`;
+
+      const matchDiv=document.createElement('div');
+      matchDiv.className='ko-match';
+
+      // Home side
+      const homeDiv=document.createElement('div');
+      homeDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
+      const homeBracket=document.createElement('div');
+      homeBracket.className='ko-bracket';
+      homeBracket.textContent=lbl_home;
+      homeDiv.appendChild(homeBracket);
+      homeDiv.appendChild(makeACInput(id,'home',lbl_home,s.home));
+
+      // VS label
+      const vsDiv=document.createElement('div');
+      vsDiv.className='ko-label';
+      vsDiv.innerHTML=`vs${r.key==='r32'?'<br><span style="font-size:9px">M'+(72+i+1)+'</span>':''}`;
+
+      // Away side
+      const awayDiv=document.createElement('div');
+      awayDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
+      const awayBracket=document.createElement('div');
+      awayBracket.className='ko-bracket';
+      awayBracket.textContent=lbl_away;
+      awayDiv.appendChild(awayBracket);
+      awayDiv.appendChild(makeACInput(id,'away',lbl_away,s.away));
+
+      matchDiv.appendChild(homeDiv);
+      matchDiv.appendChild(vsDiv);
+      matchDiv.appendChild(awayDiv);
+      section.appendChild(matchDiv);
     }
-    html+='</div>';
-    c.innerHTML+=html;
+    c.appendChild(section);
   });
 }
 
@@ -575,8 +698,6 @@ function updateProgress(){
   const info=document.getElementById('progress-info');
   if(info) info.textContent=filled+' van '+total+' uitslagen ingevuld ('+pct+'%)';
 }
-
-
 
 // ── COUNTDOWN ──────────────────────────────────────────────────────────────
 function updateCountdowns(){
@@ -791,7 +912,7 @@ function exportExcel(){
   const entries=getEntries();if(!entries.length){alert('Geen inzendingen.');return;}
   if(typeof XLSX==='undefined'){alert('XLSX library niet geladen.');return;}
   const wb=XLSX.utils.book_new();const names=entries.map(e=>e.naam);
-  const psData=[['WK Poule 2026 — Puntenstand'],['Gegenereerd: '+new Date().toLocaleString('nl-NL')],[],['Onderdeel','Max. punten',...names],...SCORING_NOTES.map(([l,p])=>[l,p,...names.map(()=>'')]),[]  ,['TOTAAL','',...names.map(()=>'')],['Slogan','',...entries.map(e=>e.slogan||'')]];
+  const psData=[['WK Poule 2026 — Puntenstand'],['Gegenereerd: '+new Date().toLocaleString('nl-NL')],[],['Onderdeel','Max. punten',...names],...SCORING_NOTES.map(([l,p])=>[l,p,...names.map(()=>'')]),[] ,['TOTAAL','',...names.map(()=>'')],['Slogan','',...entries.map(e=>e.slogan||'')]];
   const wsPs=XLSX.utils.aoa_to_sheet(psData);wsPs['!cols']=[{wch:38},{wch:14},...names.map(()=>({wch:18}))];XLSX.utils.book_append_sheet(wb,wsPs,'Puntenstand');
   const pfRows=[['WK Poule 2026 — Poulefase'],[],['Groep','Wedstrijd','Datum','Tijd',...names]];
   Object.keys(GROUPS).forEach(gk=>{
