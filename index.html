@@ -366,92 +366,104 @@ const TYPE_C=['Australië','Algerije','Egypte','Canada','Noorwegen','Panama','Iv
 const getType=t=>TYPE_A.includes(t)?'A':TYPE_B.includes(t)?'B':TYPE_C.includes(t)?'C':'D';
 
 const GROUP_MATCHES=[
-  {g:'A',d:'Do 11 jun',t:'21:00',stad:'Mexico City',a:0,b:1},
-  {g:'A',d:'Do 11 jun',t:'04:00+',stad:'Zapopan',a:2,b:3},
-  {g:'B',d:'Vr 12 jun',t:'21:00',stad:'Toronto',a:0,b:3},
-  {g:'D',d:'Vr 12 jun',t:'03:00+',stad:'Inglewood',a:0,b:1},
-  {g:'B',d:'Za 13 jun',t:'21:00',stad:'Santa Clara',a:2,b:1},
-  {g:'C',d:'Za 13 jun',t:'00:00+',stad:'East Rutherford',a:0,b:1},
-  {g:'C',d:'Za 13 jun',t:'03:00+',stad:'Foxborough',a:2,b:3},
-  {g:'D',d:'Za 13 jun',t:'03:00+',stad:'Vancouver',a:2,b:3},
-  {g:'E',d:'Zo 14 jun',t:'19:00',stad:'Houston',a:0,b:3},
-  {g:'F',d:'Zo 14 jun',t:'22:00',stad:'Arlington',a:0,b:1},
-  {g:'E',d:'Zo 14 jun',t:'01:00+',stad:'Philadelphia',a:2,b:1},
-  {g:'F',d:'Zo 14 jun',t:'04:00+',stad:'Guadalupe',a:3,b:2},
-  {g:'H',d:'Ma 15 jun',t:'19:00',stad:'Atlanta',a:0,b:3},
-  {g:'G',d:'Ma 15 jun',t:'00:00+',stad:'Seattle',a:0,b:1},
-  {g:'H',d:'Ma 15 jun',t:'00:00+',stad:'Miami Gardens',a:1,b:2},
-  {g:'G',d:'Ma 15 jun',t:'06:00+',stad:'Inglewood',a:2,b:3},
-  {g:'I',d:'Di 16 jun',t:'21:00',stad:'East Rutherford',a:0,b:1},
-  {g:'I',d:'Di 16 jun',t:'00:00+',stad:'Foxborough',a:3,b:2},
-  {g:'J',d:'Di 16 jun',t:'02:00+',stad:'Kansas City',a:0,b:1},
-  {g:'J',d:'Di 16 jun',t:'06:00+',stad:'Santa Clara',a:2,b:3},
-  {g:'K',d:'Wo 17 jun',t:'19:00',stad:'Houston',a:0,b:3},
-  {g:'L',d:'Wo 17 jun',t:'22:00',stad:'Arlington',a:0,b:1},
-  {g:'L',d:'Wo 17 jun',t:'01:00+',stad:'Toronto',a:2,b:3},
-  {g:'K',d:'Wo 17 jun',t:'04:00+',stad:'Mexico City',a:2,b:1},
-  {g:'A',d:'Do 18 jun',t:'18:00',stad:'Atlanta',a:3,b:1},
-  {g:'B',d:'Do 18 jun',t:'21:00',stad:'Inglewood',a:2,b:3},
-  {g:'B',d:'Do 18 jun',t:'00:00+',stad:'Vancouver',a:0,b:2},
-  {g:'A',d:'Do 18 jun',t:'03:00+',stad:'Zapopan',a:0,b:2},
-  {g:'D',d:'Vr 19 jun',t:'21:00',stad:'Seattle',a:0,b:2},
-  {g:'C',d:'Vr 19 jun',t:'00:00+',stad:'Foxborough',a:3,b:1},
-  {g:'C',d:'Vr 19 jun',t:'03:00+',stad:'Philadelphia',a:0,b:2},
-  {g:'D',d:'Vr 19 jun',t:'06:00+',stad:'Santa Clara',a:3,b:1},
-  {g:'F',d:'Za 20 jun',t:'19:00',stad:'Houston',a:0,b:3},
-  {g:'E',d:'Za 20 jun',t:'22:00',stad:'Toronto',a:0,b:2},
-  {g:'E',d:'Za 20 jun',t:'02:00+',stad:'Kansas City',a:3,b:1},
-  {g:'F',d:'Za 20 jun',t:'04:00+',stad:'Guadalupe',a:2,b:1},
-  {g:'H',d:'Zo 21 jun',t:'18:00',stad:'Atlanta',a:0,b:1},
-  {g:'G',d:'Zo 21 jun',t:'21:00',stad:'Inglewood',a:0,b:2},
-  {g:'H',d:'Zo 21 jun',t:'00:00+',stad:'Miami Gardens',a:2,b:3},
-  {g:'G',d:'Zo 21 jun',t:'03:00+',stad:'Vancouver',a:3,b:1},
-  {g:'J',d:'Ma 22 jun',t:'19:00',stad:'Arlington',a:0,b:2},
-  {g:'I',d:'Ma 22 jun',t:'23:00',stad:'Philadelphia',a:0,b:3},
-  {g:'I',d:'Ma 23 jun',t:'02:00',stad:'East Rutherford',a:2,b:1},
-  {g:'J',d:'Ma 23 jun',t:'05:00',stad:'Santa Clara',a:3,b:1},
-  {g:'K',d:'Di 23 jun',t:'19:00',stad:'Houston',a:0,b:2},
-  {g:'L',d:'Di 23 jun',t:'22:00',stad:'Foxborough',a:0,b:2},
-  {g:'L',d:'Di 23 jun',t:'01:00+',stad:'Toronto',a:3,b:1},
-  {g:'K',d:'Di 23 jun',t:'04:00+',stad:'Zapopan',a:1,b:3},
-  {g:'B',d:'Wo 24 jun',t:'21:00',stad:'Vancouver',a:2,b:0},
-  {g:'B',d:'Wo 24 jun',t:'21:00',stad:'Seattle',a:3,b:2},
-  {g:'C',d:'Wo 24 jun',t:'00:00+',stad:'Miami Gardens',a:3,b:0},
-  {g:'C',d:'Wo 24 jun',t:'00:00+',stad:'Atlanta',a:1,b:2},
-  {g:'A',d:'Wo 24 jun',t:'03:00+',stad:'Mexico City',a:3,b:0},
-  {g:'A',d:'Wo 24 jun',t:'03:00+',stad:'Guadalupe',a:1,b:2},
-  {g:'E',d:'Do 25 jun',t:'22:00',stad:'East Rutherford',a:3,b:0},
-  {g:'E',d:'Do 25 jun',t:'22:00',stad:'Philadelphia',a:2,b:1},
-  {g:'F',d:'Do 25 jun',t:'01:00+',stad:'Arlington',a:1,b:3},
-  {g:'F',d:'Do 25 jun',t:'01:00+',stad:'Kansas City',a:2,b:0},
-  {g:'D',d:'Do 25 jun',t:'04:00+',stad:'Inglewood',a:3,b:0},
-  {g:'D',d:'Do 25 jun',t:'04:00+',stad:'Santa Clara',a:1,b:2},
-  {g:'I',d:'Vr 26 jun',t:'21:00',stad:'Foxborough',a:2,b:0},
-  {g:'I',d:'Vr 26 jun',t:'21:00',stad:'Toronto',a:1,b:3},
-  {g:'H',d:'Vr 26 jun',t:'02:00+',stad:'Houston',a:3,b:1},
-  {g:'H',d:'Vr 26 jun',t:'02:00+',stad:'Zapopan',a:2,b:0},
-  {g:'G',d:'Vr 26 jun',t:'05:00+',stad:'Seattle',a:1,b:2},
-  {g:'G',d:'Vr 26 jun',t:'05:00+',stad:'Vancouver',a:3,b:0},
-  {g:'L',d:'Za 27 jun',t:'23:00',stad:'East Rutherford',a:3,b:0},
-  {g:'L',d:'Za 27 jun',t:'23:00',stad:'Philadelphia',a:1,b:2},
-  {g:'K',d:'Za 27 jun',t:'01:30+',stad:'Miami Gardens',a:1,b:0},
-  {g:'K',d:'Za 27 jun',t:'01:30+',stad:'Atlanta',a:3,b:2},
-  {g:'J',d:'Za 27 jun',t:'04:00+',stad:'Kansas City',a:1,b:2},
-  {g:'J',d:'Za 27 jun',t:'04:00+',stad:'Arlington',a:3,b:0},
+  // Groep A
+  {g:'A',d:'Do 11 jun',t:'21:00',stad:'Mexico City',a:0,b:1},       // Mexico - Zuid-Afrika
+  {g:'A',d:'Vr 12 jun',t:'04:00',stad:'',a:2,b:3},                  // Zuid-Korea - Tsjechië
+  {g:'A',d:'Wo 18 jun',t:'18:00',stad:'',a:3,b:1},                  // Tsjechië - Zuid-Afrika
+  {g:'A',d:'Do 19 jun',t:'03:00',stad:'',a:0,b:2},                  // Mexico - Zuid-Korea
+  {g:'A',d:'Do 25 jun',t:'03:00',stad:'',a:3,b:0},                  // Tsjechië - Mexico
+  {g:'A',d:'Do 25 jun',t:'03:00',stad:'',a:1,b:2},                  // Zuid-Afrika - Zuid-Korea
+  // Groep B
+  {g:'B',d:'Vr 12 jun',t:'21:00',stad:'Toronto',a:0,b:1},           // Canada - Bosnië-Herzegovina
+  {g:'B',d:'Za 13 jun',t:'21:00',stad:'',a:2,b:3},                  // Qatar - Zwitserland
+  {g:'B',d:'Wo 18 jun',t:'21:00',stad:'',a:3,b:1},                  // Zwitserland - Bosnië-Herzegovina
+  {g:'B',d:'Do 19 jun',t:'00:00',stad:'',a:0,b:2},                  // Canada - Qatar
+  {g:'B',d:'Wo 24 jun',t:'21:00',stad:'',a:3,b:0},                  // Zwitserland - Canada
+  {g:'B',d:'Wo 24 jun',t:'21:00',stad:'',a:1,b:2},                  // Bosnië-Herzegovina - Qatar
+  // Groep C
+  {g:'C',d:'Za 14 jun',t:'00:00',stad:'East Rutherford',a:0,b:1},   // Brazilië - Marokko
+  {g:'C',d:'Za 14 jun',t:'03:00',stad:'Foxborough',a:2,b:3},        // Haïti - Schotland
+  {g:'C',d:'Vr 20 jun',t:'00:00',stad:'',a:3,b:1},                  // Schotland - Marokko
+  {g:'C',d:'Vr 20 jun',t:'03:00',stad:'',a:0,b:2},                  // Brazilië - Haïti
+  {g:'C',d:'Do 25 jun',t:'00:00',stad:'',a:3,b:0},                  // Schotland - Brazilië
+  {g:'C',d:'Do 25 jun',t:'00:00',stad:'',a:1,b:2},                  // Marokko - Haïti
+  // Groep D
+  {g:'D',d:'Vr 13 jun',t:'03:00',stad:'Inglewood',a:0,b:1},         // VS - Paraguay
+  {g:'D',d:'Za 14 jun',t:'06:00',stad:'Vancouver',a:2,b:3},         // Australië - Turkije
+  {g:'D',d:'Do 19 jun',t:'21:00',stad:'',a:0,b:2},                  // VS - Australië
+  {g:'D',d:'Vr 20 jun',t:'06:00',stad:'',a:3,b:1},                  // Turkije - Paraguay
+  {g:'D',d:'Vr 26 jun',t:'04:00',stad:'',a:3,b:0},                  // Turkije - VS
+  {g:'D',d:'Vr 26 jun',t:'04:00',stad:'',a:1,b:2},                  // Paraguay - Australië
+  // Groep E
+  {g:'E',d:'Za 14 jun',t:'19:00',stad:'Houston',a:0,b:1},           // Duitsland - Curaçao
+  {g:'E',d:'Zo 15 jun',t:'01:00',stad:'Philadelphia',a:2,b:3},      // Ivoorkust - Ecuador
+  {g:'E',d:'Vr 20 jun',t:'22:00',stad:'',a:0,b:2},                  // Duitsland - Ivoorkust
+  {g:'E',d:'Za 21 jun',t:'02:00',stad:'',a:3,b:1},                  // Ecuador - Curaçao
+  {g:'E',d:'Do 25 jun',t:'22:00',stad:'',a:3,b:0},                  // Ecuador - Duitsland
+  {g:'E',d:'Do 25 jun',t:'22:00',stad:'',a:1,b:2},                  // Curaçao - Ivoorkust
+  // Groep F
+  {g:'F',d:'Za 14 jun',t:'22:00',stad:'Arlington',a:0,b:1},         // Nederland - Japan
+  {g:'F',d:'Zo 15 jun',t:'04:00',stad:'Guadalupe',a:2,b:3},         // Zweden - Tunesië
+  {g:'F',d:'Vr 20 jun',t:'06:00',stad:'',a:3,b:1},                  // Tunesië - Japan
+  {g:'F',d:'Vr 20 jun',t:'19:00',stad:'',a:0,b:2},                  // Nederland - Zweden
+  {g:'F',d:'Vr 26 jun',t:'01:00',stad:'',a:1,b:2},                  // Japan - Zweden
+  {g:'F',d:'Vr 26 jun',t:'01:00',stad:'',a:3,b:0},                  // Tunesië - Nederland
+  // Groep G
+  {g:'G',d:'Zo 15 jun',t:'21:00',stad:'Seattle',a:0,b:1},           // België - Egypte
+  {g:'G',d:'Ma 16 jun',t:'03:00',stad:'Inglewood',a:2,b:3},         // Iran - Nieuw-Zeeland
+  {g:'G',d:'Za 21 jun',t:'21:00',stad:'',a:0,b:2},                  // België - Iran
+  {g:'G',d:'Zo 22 jun',t:'03:00',stad:'',a:3,b:1},                  // Nieuw-Zeeland - Egypte
+  {g:'G',d:'Vr 27 jun',t:'05:00',stad:'',a:1,b:2},                  // Egypte - Iran
+  {g:'G',d:'Vr 27 jun',t:'05:00',stad:'',a:3,b:0},                  // Nieuw-Zeeland - België
+  // Groep H
+  {g:'H',d:'Zo 15 jun',t:'18:00',stad:'Atlanta',a:0,b:1},           // Spanje - Kaap Verdië
+  {g:'H',d:'Ma 16 jun',t:'00:00',stad:'Miami Gardens',a:2,b:3},     // Saudi-Arabië - Uruguay
+  {g:'H',d:'Za 21 jun',t:'18:00',stad:'',a:0,b:2},                  // Spanje - Saudi-Arabië
+  {g:'H',d:'Zo 22 jun',t:'00:00',stad:'',a:3,b:1},                  // Uruguay - Kaap Verdië
+  {g:'H',d:'Vr 27 jun',t:'02:00',stad:'',a:1,b:2},                  // Kaap Verdië - Saudi-Arabië
+  {g:'H',d:'Vr 27 jun',t:'02:00',stad:'',a:3,b:0},                  // Uruguay - Spanje
+  // Groep I
+  {g:'I',d:'Ma 16 jun',t:'21:00',stad:'East Rutherford',a:0,b:1},   // Frankrijk - Senegal
+  {g:'I',d:'Di 17 jun',t:'00:00',stad:'Foxborough',a:2,b:3},        // Irak - Noorwegen
+  {g:'I',d:'Zo 22 jun',t:'23:00',stad:'',a:0,b:2},                  // Frankrijk - Irak
+  {g:'I',d:'Ma 23 jun',t:'02:00',stad:'',a:3,b:1},                  // Noorwegen - Senegal
+  {g:'I',d:'Do 26 jun',t:'21:00',stad:'',a:3,b:0},                  // Noorwegen - Frankrijk
+  {g:'I',d:'Do 26 jun',t:'21:00',stad:'',a:1,b:2},                  // Senegal - Irak
+  // Groep J
+  {g:'J',d:'Di 17 jun',t:'03:00',stad:'Kansas City',a:0,b:1},       // Argentinië - Algerije
+  {g:'J',d:'Di 16 jun',t:'06:00',stad:'Santa Clara',a:2,b:3},       // Oostenrijk - Jordanië
+  {g:'J',d:'Zo 22 jun',t:'19:00',stad:'',a:0,b:2},                  // Argentinië - Oostenrijk
+  {g:'J',d:'Ma 23 jun',t:'05:00',stad:'',a:3,b:1},                  // Jordanië - Algerije
+  {g:'J',d:'Za 28 jun',t:'04:00',stad:'',a:1,b:2},                  // Algerije - Oostenrijk
+  {g:'J',d:'Za 28 jun',t:'04:00',stad:'',a:3,b:0},                  // Jordanië - Argentinië
+  // Groep K
+  {g:'K',d:'Di 17 jun',t:'19:00',stad:'Houston',a:0,b:1},           // Portugal - Congo
+  {g:'K',d:'Wo 18 jun',t:'04:00',stad:'Zapopan',a:2,b:3},           // Oezbekistan - Colombia
+  {g:'K',d:'Ma 23 jun',t:'19:00',stad:'',a:0,b:2},                  // Portugal - Oezbekistan
+  {g:'K',d:'Di 24 jun',t:'04:00',stad:'',a:3,b:1},                  // Colombia - Congo
+  {g:'K',d:'Za 28 jun',t:'01:30',stad:'',a:3,b:0},                  // Colombia - Portugal
+  {g:'K',d:'Za 28 jun',t:'01:30',stad:'',a:1,b:2},                  // Congo - Oezbekistan
+  // Groep L
+  {g:'L',d:'Di 17 jun',t:'22:00',stad:'Foxborough',a:0,b:1},        // Engeland - Kroatië
+  {g:'L',d:'Wo 18 jun',t:'01:00',stad:'Toronto',a:2,b:3},           // Ghana - Panama
+  {g:'L',d:'Ma 23 jun',t:'22:00',stad:'',a:0,b:2},                  // Engeland - Ghana
+  {g:'L',d:'Di 24 jun',t:'01:00',stad:'',a:3,b:1},                  // Panama - Kroatië
+  {g:'L',d:'Za 27 jun',t:'23:00',stad:'',a:3,b:0},                  // Panama - Engeland
+  {g:'L',d:'Za 27 jun',t:'23:00',stad:'',a:1,b:2},                  // Kroatië - Ghana
 ];
 
 const GROUPS={
-  A:['Mexico','Zuid-Korea','Zuid-Afrika','Tsjechië'],
-  B:['Canada','Qatar','Zwitserland','Bosnië-Herzegovina'],
+  A:['Mexico','Zuid-Afrika','Zuid-Korea','Tsjechië'],
+  B:['Canada','Bosnië-Herzegovina','Qatar','Zwitserland'],
   C:['Brazilië','Marokko','Haïti','Schotland'],
-  D:['VS','Paraguay','Australië','Zweden'],
-  E:['Duitsland','Ivoorkust','Ecuador','Curaçao'],
-  F:['Nederland','Japan','Tunesië','Turkije'],
-  G:['België','Iran','Nieuw-Zeeland','Egypte'],
-  H:['Spanje','Saudi-Arabië','Uruguay','Kaap Verdië'],
-  I:['Frankrijk','Senegal','Noorwegen','DR Congo'],
+  D:['VS','Paraguay','Australië','Turkije'],
+  E:['Duitsland','Curaçao','Ivoorkust','Ecuador'],
+  F:['Nederland','Japan','Zweden','Tunesië'],
+  G:['België','Egypte','Iran','Nieuw-Zeeland'],
+  H:['Spanje','Kaap Verdië','Saudi-Arabië','Uruguay'],
+  I:['Frankrijk','Senegal','Irak','Noorwegen'],
   J:['Argentinië','Algerije','Oostenrijk','Jordanië'],
-  K:['Portugal','Colombia','Oezbekistan','Irak'],
+  K:['Portugal','DR Congo','Oezbekistan','Colombia'],
   L:['Engeland','Kroatië','Ghana','Panama']
 };
 const PAIRS=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
