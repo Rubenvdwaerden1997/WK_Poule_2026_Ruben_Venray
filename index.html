@@ -569,7 +569,9 @@ function initState(){
   state={naam:'',slogan:'',groups:{},ko:{},extra:{}};
   Object.keys(GROUPS).forEach(g=>{
     state.groups[g]={matches:{},standing:['','','','']};
-    PAIRS.forEach(([a,b])=>{state.groups[g].matches[a+'_'+b]={home:'',away:''};});
+    GROUP_MATCHES.filter(m=>m.g===g).forEach(m=>{
+      state.groups[g].matches[m.a+'_'+m.b]={home:'',away:''};
+    });
   });
   KO_ROUNDS.forEach(r=>{for(let i=0;i<r.n;i++) state.ko[r.key+'_'+i]={home:'',away:''};});
   EXTRA_QS.forEach(q=>{state.extra[q.id]='';});
@@ -579,8 +581,8 @@ function initUitslagen(){
   Object.keys(GROUPS).forEach(g=>{
     if(!uitslagen.groups[g]) uitslagen.groups[g]={};
     if(!uitslagen.standings[g]) uitslagen.standings[g]=['','','',''];
-    PAIRS.forEach(([a,b])=>{
-      const key=a+'_'+b;
+    GROUP_MATCHES.filter(m=>m.g===g).forEach(m=>{
+      const key=m.a+'_'+m.b;
       if(!uitslagen.groups[g][key]) uitslagen.groups[g][key]={home:'',away:''};
     });
   });
