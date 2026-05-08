@@ -1404,13 +1404,74 @@ function exportPDF(){
   const entries=getEntries();if(!entries.length){alert('Geen inzendingen.');return;}
   const names=entries.map(e=>e.naam);const date=new Date().toLocaleDateString('nl-NL');
   let html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>WK Poule 2026</title>
-  <style>body{font-family:Arial,sans-serif;font-size:9.5px;color:#111;margin:15px}h1{font-size:15px;margin-bottom:2px}h2{font-size:11.5px;margin:14px 0 5px;border-bottom:1.5px solid #1a3a5c;padding-bottom:3px;color:#1a3a5c}.sub{font-size:9px;color:#666;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin-bottom:10px}th{background:#1a3a5c;color:#fff;padding:4px 6px;text-align:left;font-size:9px}td{padding:3px 6px;border-bottom:1px solid #e8e8e8;font-size:9px}tr:nth-child(even) td{background:#f9f9f9}.total-row td{background:#1a3a5c;color:#fff;font-weight:bold}</style>
+  <style>body{font-family:Arial,sans-serif;font-size:9.5px;color:#111;margin:15px}h1{font-size:15px;margin-bottom:2px}h2{font-size:11.5px;margin:14px 0 5px;border-bottom:1.5px solid #1a3a5c;padding-bottom:3px;color:#1a3a5c}.sub{font-size:9px;color:#666;margin-bottom:14px}table{width:100%;border-collapse:collapse;margin-bottom:10px}th{background:#1a3a5c;color:#fff;padding:4px 6px;text-align:left;font-size:9px}td{padding:3px 6px;border-bottom:1px solid #e8e8e8;font-size:9px}tr:nth-child(even) td{background:#f9f9f9}.uitslag{background:#0C2A4A;color:#85B7EB;font-weight:bold}</style>
   </head><body><h1>WK Poule 2026 — Inzendingenoverzicht</h1>
   <div class="sub">Gegenereerd op ${date} · ${entries.length} deelnemer${entries.length!==1?'s':''}: ${names.join(', ')}</div>`;
+
+  // Slogans
   html+=`<h2>Slogans</h2><table><tr><th>Naam</th><th>Slogan</th></tr>`;
-  entries.forEach(e=>{html+=`<tr><td><b>${e.naam}</b></td><td><i>${e.slogan||'-'}</i></td></tr>`;});html+='</table>';
-  html+=`<h2>Extra vragen</h2><table><tr><th>Vraag</th><th>Punten</th>`;names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
-  EXTRA_QS.forEach(q=>{html+=`<tr><td>${q.label}</td><td>${q.pts}</td>`;entries.forEach(e=>{html+=`<td>${e.extra&&e.extra[q.id]?e.extra[q.id]:'-'}</td>`;});html+='</tr>';});html+='</table>';
+  entries.forEach(e=>{html+=`<tr><td><b>${e.naam}</b></td><td><i>${e.slogan||'-'}</i></td></tr>`;});
+  html+='</table>';
+
+  // Extra vragen
+  html+=`<h2>Extra vragen</h2><table><tr><th>Vraag</th><th class="uitslag">✓ Uitslag</th>`;
+  names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
+  EXTRA_QS.forEach(q=>{
+    const realVal=uitslagen.extra&&uitslagen.extra[q.id]?uitslagen.extra[q.id]:'–';
+    html+=`<tr><td>${q.label}</td><td class="uitslag">${realVal}</td>`;
+    entries.forEach(e=>{html+=`<td>${e.extra&&e.extra[q.id]?e.extra[q.id]:'-'}</td>`;});
+    html+='</tr>';
+  });
+  html+='</table>';
+
+  // Knock-out
+  html+=`<h2>Knock-out</h2><table><tr><th>Ronde</th><th>#</th><th class="uitslag">✓ Uitslag</th>`;
+  names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
+  KO_ROUNDS.forEach(r=>{
+    for(let i=0;i<r.n;i++){
+      const id=r.key+'_'+i;
+      const real=uitslagen.ko&&uitslagen.ko[id];
+      const realStr=real&&(real.home||real.away)?(real.home||'?')+'-'+(real.away||'?'):'–';
+      html+=`<tr><td>${r.label}</td><td>${r.n>1?i+1:'-'}</td><td class="uitslag">${realStr}</td>`;
+      entries.forEach(e=>{const m=e.ko&&e.ko[id];html+=`<td>${m&&(m.home||m.away)?(m.home||'?')+'-'+(m.away||'?'):'-'}</td>`;});
+      html+='</tr>';
+    }
+  });
+  html+='</table>';
+
+  // Groepen
+  Object.keys(GROUPS).forEach(gk=>{
+    const teams=GROUPS[gk];
+    html+=`<h2>Groep ${gk}</h2><table><tr><th>Wedstrijd</th><th class="uitslag">✓ Uitslag</th>`;
+    names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
+    GROUP_MATCHES.filter(m=>m.g===gk).forEach(m=>{
+      const a=m.a,b=m.b;
+      const normKey=a<b?a+'_'+b:b+'_'+a;
+      const realMatch=uitslagen.groups[gk]&&uitslagen.groups[gk][normKey];
+      const realHome=a<b?realMatch?.home:realMatch?.away;
+      const realAway=a<b?realMatch?.away:realMatch?.home;
+      const realStr=realMatch&&(realMatch.home!==''||realMatch.away!=='')?`${realHome}-${realAway}`:'–';
+      html+=`<tr><td>${teams[a]} – ${teams[b]}</td><td class="uitslag">${realStr}</td>`;
+      entries.forEach(e=>{
+        const match=e.groups&&e.groups[gk]&&e.groups[gk].matches&&e.groups[gk].matches[normKey];
+        const home=a<b?match?.home:match?.away;
+        const away=a<b?match?.away:match?.home;
+        html+=`<td>${match&&(match.home!==''||match.away!=='')?((home!==''?home:'?')+'-'+(away!==''?away:'?')):'-'}</td>`;
+      });
+      html+='</tr>';
+    });
+    const realStanding=uitslagen.standings[gk]||[];
+    const realStandStr=realStanding.filter(t=>t).length?realStanding.map((t,i)=>(i+1)+'. '+t).join(' | '):'–';
+    html+=`<tr style="background:#e8f0f8"><td><b>Eindstand</b></td><td class="uitslag">${realStandStr}</td>`;
+    entries.forEach(e=>{
+      const st=e.groups&&e.groups[gk]?e.groups[gk].standing:[];
+      const ord=[...teams].map((t,i)=>({t,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);
+      html+=`<td>${ord.map(x=>(x.p===9?'?':x.p)+'. '+x.t).join(' | ')}</td>`;
+    });
+    html+='</tr></table>';
+  });
+
+  html+='</body></html>';
   const w=window.open('','_blank');w.document.write(html);w.document.close();w.focus();setTimeout(()=>w.print(),500);
 }
 
