@@ -186,7 +186,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- WELKOM -->
 <div id="sec-welkom" class="section active">
   <div class="card">
-    <h3>👋 Welkom bij de WK Poule 2026!!</h3>
+    <h3>👋 Welkom bij de WK Poule 2026!!!</h3>
     <p style="font-size:13px;line-height:1.8;color:var(--text2);margin-bottom:1rem">
       Jouw Aars is Wahed Paars — en dit jaar gaan we er écht voor. Het WK 2026 wordt gespeeld in de VS, Canada en Mexico, met maar liefst 48 landen en 104 wedstrijden. Grootser dan ooit dus, en dat betekent ook: meer kansen op punten, meer drama, en meer reden om elkaar af te troeven.
     </p>
@@ -1224,9 +1224,13 @@ function buildEmailTekst(entry){
   Object.keys(GROUPS).forEach(gk=>{
     const teams=GROUPS[gk];
     t+='\n--- GROEP '+gk+' ---\n';
-    PAIRS.forEach(([a,b])=>{
-      const m=entry.groups&&entry.groups[gk]&&entry.groups[gk].matches&&entry.groups[gk].matches[a+'_'+b];
-      t+=teams[a]+' - '+teams[b]+': '+(m&&(m.home!==''||m.away!=='')?((m.home!==''?m.home:'?')+'-'+(m.away!==''?m.away:'?')):'-')+'\n';
+    GROUP_MATCHES.filter(m=>m.g===gk).forEach(m=>{
+      const a=m.a,b=m.b;
+      const normKey=a<b?a+'_'+b:b+'_'+a;
+      const match=entry.groups&&entry.groups[gk]&&entry.groups[gk].matches&&entry.groups[gk].matches[normKey];
+      const home=a<b?match?.home:match?.away;
+      const away=a<b?match?.away:match?.home;
+      t+=teams[a]+' - '+teams[b]+': '+(match&&(match.home!==''||match.away!=='')?((home!==''?home:'?')+'-'+(away!==''?away:'?')):'-')+'\n';
     });
     const st=entry.groups&&entry.groups[gk]?entry.groups[gk].standing:[];
     const ord=[...teams].map((tm,i)=>({tm,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);
@@ -1350,9 +1354,16 @@ function buildOverzicht(){
     const teams=GROUPS[gk];
     html+=`<div class="card"><h3>Groep ${gk}</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Wedstrijd</th>`;
     names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
-    PAIRS.forEach(([a,b])=>{
+    GROUP_MATCHES.filter(m=>m.g===gk).forEach(m=>{
+      const a=m.a,b=m.b;
+      const normKey=a<b?a+'_'+b:b+'_'+a;
       html+=`<tr><td style="white-space:nowrap;color:var(--text2)">${f(teams[a])} ${teams[a]} – ${f(teams[b])} ${teams[b]}</td>`;
-      entries.forEach(e=>{const m=e.groups&&e.groups[gk]&&e.groups[gk].matches&&e.groups[gk].matches[a+'_'+b];html+=`<td style="text-align:center">${m&&(m.home!==''||m.away!=='')?((m.home!==''?m.home:'?')+'-'+(m.away!==''?m.away:'?')):'-'}</td>`;});
+      entries.forEach(e=>{
+        const match=e.groups&&e.groups[gk]&&e.groups[gk].matches&&e.groups[gk].matches[normKey];
+        const home=a<b?match?.home:match?.away;
+        const away=a<b?match?.away:match?.home;
+        html+=`<td style="text-align:center">${match&&(match.home!==''||match.away!=='')?((home!==''?home:'?')+'-'+(away!==''?away:'?')):'-'}</td>`;
+      });
       html+='</tr>';
     });
     html+=`<tr style="background:var(--bg2)"><td style="font-weight:600">Eindstand</td>`;
