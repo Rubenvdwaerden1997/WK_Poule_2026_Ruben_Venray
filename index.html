@@ -186,7 +186,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- WELKOM -->
 <div id="sec-welkom" class="section active">
   <div class="card">
-    <h3>👋 Welkom bij de WK Poule 2026!</h3>
+    <h3>👋 Welkom bij de WK Poule 2026!!</h3>
     <p style="font-size:13px;line-height:1.8;color:var(--text2);margin-bottom:1rem">
       Jouw Aars is Wahed Paars — en dit jaar gaan we er écht voor. Het WK 2026 wordt gespeeld in de VS, Canada en Mexico, met maar liefst 48 landen en 104 wedstrijden. Grootser dan ooit dus, en dat betekent ook: meer kansen op punten, meer drama, en meer reden om elkaar af te troeven.
     </p>
@@ -666,10 +666,10 @@ function buildGroups(){
           <div class="match-home"><span>${ha}</span><span style="font-size:14px">${f(ha)}</span></div>
           <div class="score-wrap">
             <input class="score-input" type="number" min="0" max="20" placeholder="-"
-              oninput="state.groups['${gk}'].matches['${key}'].home=this.value" value="${s.home}">
+              value="${s.home}" oninput="setMatch('${gk}','${key}','home',this.value)">
             <span class="sdash">-</span>
             <input class="score-input" type="number" min="0" max="20" placeholder="-"
-              oninput="state.groups['${gk}'].matches['${key}'].away=this.value" value="${s.away}">
+              value="${s.away}" oninput="setMatch('${gk}','${key}','away',this.value)">
           </div>
           <div class="match-away"><span style="font-size:14px">${f(hb)}</span><span>${hb}</span></div>
         </div>
@@ -886,6 +886,11 @@ function buildAdminExtra(){
   `;
 }
 
+function setMatch(gk,key,side,val){
+  if(!state.groups[gk]) state.groups[gk]={matches:{},standing:['','','','']};
+  if(!state.groups[gk].matches[key]) state.groups[gk].matches[key]={home:'',away:''};
+  state.groups[gk].matches[key][side]=val;
+}
 function setUitslag(gk,key,side,val){
   if(!uitslagen.groups[gk]) uitslagen.groups[gk]={};
   if(!uitslagen.groups[gk][key]) uitslagen.groups[gk][key]={home:'',away:''};
