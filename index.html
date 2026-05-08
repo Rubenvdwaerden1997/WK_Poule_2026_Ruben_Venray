@@ -1224,7 +1224,11 @@ function submitEntry(){
   // Stuur JSON ook mee in de mail als tekst
   const jsonTekst=JSON.stringify(entry);
   emailjs.send('service_2bbft1h','template_1df3jsp',{naam,bericht:buildEmailTekst(entry)+'\n\n--- JSON (voor admin) ---\n'+jsonTekst})
-    .then(()=>{btn.textContent='Opgeslagen & verstuurd! ✓';btn.classList.add('ok');btn.disabled=false;setTimeout(()=>{btn.textContent='Formulier inzenden ✓';btn.classList.remove('ok');},4000);})
+    .then(()=>{
+    btn.textContent='Opgeslagen & verstuurd! ✓';btn.classList.add('ok');btn.disabled=false;
+    setTimeout(()=>{btn.textContent='Formulier inzenden ✓';btn.classList.remove('ok');},4000);
+    alert('✅ Inzending opgeslagen!\n\nEr is automatisch een JSON-bestandje gedownload op jouw apparaat.\n\nStuur dit bestandje naar Ruben via:\n📱 WhatsApp\n📧 rubenvdwaerden@hotmail.com\n\nZonder dit bestandje kan Ruben jouw inzending niet verwerken!');
+    })
     .catch(()=>{btn.textContent='Opgeslagen (e-mail mislukt)';btn.disabled=false;setTimeout(()=>{btn.textContent='Formulier inzenden ✓';},3000);});
 }
 
