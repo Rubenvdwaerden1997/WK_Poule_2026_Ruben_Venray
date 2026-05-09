@@ -600,7 +600,7 @@ function initUitslagen(){
 }
 
 // ── AUTOCOMPLETE ──────────────────────────────────────────────────────────
-function makeACInput(stateObj, id, side, placeholder, initialValue){
+function makeACInput(stateObj, id, side, placeholder, initialValue, onChange){
   const wrap=document.createElement('div');
   wrap.className='ac-wrap';
   const input=document.createElement('input');
@@ -609,6 +609,7 @@ function makeACInput(stateObj, id, side, placeholder, initialValue){
   input.placeholder=placeholder;
   input.value=initialValue||'';
   input.autocomplete='off';
+  if(id&&side){input.dataset.kid=id;input.dataset.kside=side;}
   const dropdown=document.createElement('div');
   dropdown.className='ac-dropdown';
   dropdown.style.display='none';
@@ -635,10 +636,13 @@ function makeACInput(stateObj, id, side, placeholder, initialValue){
     input.value=c;
     if(stateObj&&id&&side) stateObj[id][side]=c;
     dropdown.style.display='none';activeIdx=-1;
+    if(onChange) onChange(c,id,side);
   }
   input.addEventListener('input',()=>{
-    if(stateObj&&id&&side) stateObj[id][side]=input.value;
-    renderDropdown(getMatches(input.value));
+    const val=input.value;
+    if(stateObj&&id&&side) stateObj[id][side]=val;
+    renderDropdown(getMatches(val));
+    if(onChange&&ALL_COUNTRIES.includes(val)) onChange(val,id,side);
   });
   input.addEventListener('keydown',e=>{
     const items=dropdown.querySelectorAll('.ac-item');
@@ -740,6 +744,20 @@ function buildKO(){
     } else {
       section.innerHTML=`<h3>${r.label}</h3>`;
     }
+    const onKOChange=(val,changedId,changedSide)=>{
+      if(!val) return;
+      for(let j=0;j<r.n;j++){
+        const otherId=r.key+'_'+j;
+        ['home','away'].forEach(s=>{
+          if(otherId===changedId&&s===changedSide) return;
+          if(state.ko[otherId]&&state.ko[otherId][s]===val){
+            state.ko[otherId][s]='';
+            const el=document.querySelector(`[data-kid="${otherId}"][data-kside="${s}"]`);
+            if(el) el.value='';
+          }
+        });
+      }
+    };
     for(let i=0;i<r.n;i++){
       const id=r.key+'_'+i;
       const s=state.ko[id];
@@ -756,7 +774,7 @@ function buildKO(){
       const homeBracket=document.createElement('div');
       homeBracket.className='ko-bracket';homeBracket.textContent=lbl_home;
       homeDiv.appendChild(homeBracket);
-      homeDiv.appendChild(makeACInput(state.ko,id,'home',lbl_home,s.home));
+      homeDiv.appendChild(makeACInput(state.ko,id,'home',lbl_home,s.home,onKOChange));
       const vsDiv=document.createElement('div');
       vsDiv.className='ko-label';
       vsDiv.innerHTML=`vs${r.key==='r32'?'<br><span style="font-size:9px">M'+(72+i+1)+'</span>':''}`;
@@ -765,7 +783,7 @@ function buildKO(){
       const awayBracket=document.createElement('div');
       awayBracket.className='ko-bracket';awayBracket.textContent=lbl_away;
       awayDiv.appendChild(awayBracket);
-      awayDiv.appendChild(makeACInput(state.ko,id,'away',lbl_away,s.away));
+      awayDiv.appendChild(makeACInput(state.ko,id,'away',lbl_away,s.away,onKOChange));
       matchDiv.appendChild(homeDiv);matchDiv.appendChild(vsDiv);matchDiv.appendChild(awayDiv);
       section.appendChild(matchDiv);
     }
