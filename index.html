@@ -681,7 +681,7 @@ function buildGroups(){
     let sh=`<div class="standings-section"><div class="standings-label">Voorspelde eindstand groep ${gk}</div>`;
     teams.forEach((t,i)=>{
       sh+=`<div class="standings-row">
-        <select class="st-select" onchange="state.groups['${gk}'].standing[${i}]=this.value">
+        <select class="st-select" id="st_${gk}_${i}" onchange="setStandingPos('${gk}',${i},this.value)">
           <option value="">-</option>
           <option value="1" ${state.groups[gk].standing[i]=='1'?'selected':''}>1e</option>
           <option value="2" ${state.groups[gk].standing[i]=='2'?'selected':''}>2e</option>
@@ -893,6 +893,19 @@ function setMatch(gk,key,side,val){
   if(!state.groups[gk]) state.groups[gk]={matches:{},standing:['','','','']};
   if(!state.groups[gk].matches[key]) state.groups[gk].matches[key]={home:'',away:''};
   state.groups[gk].matches[key][side]=val;
+}
+function setStandingPos(gk,teamIndex,newPos){
+  const st=state.groups[gk].standing;
+  const oldPos=st[teamIndex];
+  if(newPos!==''&&newPos!==oldPos){
+    const conflictIdx=st.findIndex((p,i)=>p===newPos&&i!==teamIndex);
+    if(conflictIdx!==-1){
+      st[conflictIdx]=oldPos;
+      const conflictSel=document.getElementById('st_'+gk+'_'+conflictIdx);
+      if(conflictSel) conflictSel.value=oldPos;
+    }
+  }
+  st[teamIndex]=newPos;
 }
 function setUitslag(gk,key,side,val){
   if(!uitslagen.groups[gk]) uitslagen.groups[gk]={};
