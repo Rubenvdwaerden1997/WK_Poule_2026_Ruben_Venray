@@ -112,7 +112,8 @@ body.deadline-locked .lock-banner{display:block;}
 .pub-off{background:var(--amber-bg);color:var(--amber-text);border-color:var(--amber-border);}
 .admin-info{font-size:12px;color:var(--text2);margin-bottom:.75rem;padding:.75rem;background:var(--bg2);border-radius:var(--radius);line-height:1.6;}
 .ov-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:1rem;}
-.ov-table th{background:var(--bg2);padding:6px 8px;text-align:left;font-weight:600;border-bottom:.5px solid var(--border2);white-space:nowrap;}
+.ov-table th{background:var(--bg2);padding:6px 8px;text-align:center;font-weight:600;border-bottom:.5px solid var(--border2);white-space:nowrap;}
+.ov-table th:first-child{text-align:left;}
 .ov-table td{padding:5px 8px;border-bottom:.5px solid var(--border);}
 .ov-wrap{overflow-x:auto;border-radius:var(--radius);border:.5px solid var(--border);margin-bottom:1rem;}
 .autosave-info{font-size:12px;color:var(--text2);padding:0 .25rem;margin-top:.25rem;min-height:16px;}
@@ -1439,6 +1440,64 @@ function applyPubStatus(pub){
 }
 function togglePublish(){const p=localStorage.getItem('wkp26_published')==='true';localStorage.setItem('wkp26_published',String(!p));applyPubStatus(!p);}
 
+// ── OVERZICHT PUNTEN HELPERS ───────────────────────────────────────────────
+function _ptsBadge(pts){
+  if(pts===null) return '';
+  if(pts===0) return '<br><span style="font-size:9px;color:var(--text3)">0 pt</span>';
+  return '<br><span style="font-size:9px;color:var(--green-text)">+'+pts+' pt</span>';
+}
+function _ptsGroupMatch(entry,gk,normKey){
+  const real=uitslagen.groups?.[gk]?.[normKey];
+  if(!real||real.home===''||real.away==='') return null;
+  const pred=entry.groups?.[gk]?.matches?.[normKey];
+  if(!pred) return 0;
+  const ph=parseInt(pred.home),pa=parseInt(pred.away),rh=parseInt(real.home),ra=parseInt(real.away);
+  if(isNaN(ph)||isNaN(pa)||isNaN(rh)||isNaN(ra)) return 0;
+  const pT=ph>pa?'W':ph<pa?'L':'D',rT=rh>ra?'W':rh<ra?'L':'D';
+  if(pT===rT) return(ph===rh&&pa===ra)?15:5;
+  return 0;
+}
+function _ptsGroupStanding(entry,gk){
+  const teams=GROUPS[gk];
+  const realStanding=uitslagen.standings[gk]||[];
+  if(!realStanding.filter(t=>t).length) return null;
+  const predStanding=entry.groups?.[gk]?.standing||[];
+  let pts=0,predWinner='';
+  predStanding.forEach((v,i)=>{if(v==='1'||v===1) predWinner=teams[i];});
+  if(predWinner&&realStanding[0]&&predWinner===realStanding[0]) pts+=5;
+  let full=true;
+  predStanding.forEach((v,i)=>{const pos=parseInt(v);if(!pos||!realStanding[pos-1]||realStanding[pos-1]!==teams[i]) full=false;});
+  if(full&&predStanding.every(v=>v)) pts+=10;
+  return pts;
+}
+function _ptsKOMatch(entry,r,i){
+  const id=r.key+'_'+i;
+  const real=uitslagen.ko?.[id];
+  if(!real||(!real.home&&!real.away)) return null;
+  const pred=entry.ko?.[id];
+  if(!pred) return 0;
+  const ph=pred.home?.trim(),pa=pred.away?.trim(),rh=real.home?.trim(),ra=real.away?.trim();
+  let c=0;if(ph&&rh&&ph===rh)c++;if(pa&&ra&&pa===ra)c++;
+  return c*r.pts+(c===2?r.bonus:0);
+}
+function _ptsExtraQ(entry,qid){
+  const u=uitslagen.extra;if(!u) return null;
+  const ev=entry.extra?.[qid]?.trim().toLowerCase();
+  const uv=u[qid]?.toString().trim().toLowerCase();
+  if(!uv) return null;
+  if(qid==='eerste_goal') return ev===uv?5:0;
+  if(qid==='totaal_goals') return parseInt(entry.extra?.[qid])===parseInt(u[qid])?5:0;
+  if(qid==='topscorer_nl') return(ev===uv&&u.topscorer_nl_goals>0)?5*u.topscorer_nl_goals:0;
+  if(qid==='kaart_nl') return ev===uv?(u.kaart_nl_type==='rood'?10:5):0;
+  if(qid==='winnaar') return ev===uv?100:0;
+  if(qid.startsWith('topscorer_')){
+    const type=qid.replace('topscorer_','');
+    const g=u[qid+'_goals'];const ppt={a:5,b:10,c:20,d:30}[type];
+    return(ev===uv&&g>0)?ppt*g:0;
+  }
+  return null;
+}
+
 // ── OVERZICHT ──────────────────────────────────────────────────────────────
 function buildOverzicht(){
   const entries=getEntries();const c=document.getElementById('overzicht-container');
@@ -1452,11 +1511,11 @@ function buildOverzicht(){
   EXTRA_QS.forEach(q=>{
     const realVal=uitslagen.extra&&uitslagen.extra[q.id]?uitslagen.extra[q.id]:'–';
     html+=`<tr><td style="color:var(--text2)">${q.label}</td><td style="text-align:center;font-weight:600;color:var(--blue-text)">${realVal}</td>`;
-    entries.forEach(e=>{html+=`<td style="text-align:center">${e.extra&&e.extra[q.id]?e.extra[q.id]:'-'}</td>`;});
+    entries.forEach(e=>{const pts=_ptsExtraQ(e,q.id);html+=`<td style="text-align:center">${e.extra&&e.extra[q.id]?e.extra[q.id]:'-'}${_ptsBadge(pts)}</td>`;});
     html+='</tr>';
   });
   html+='</table></div></div>';
-  html+=`<div class="card"><h3>Knock-out</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Ronde</th><th>#</th><th style="background:var(--blue-bg);color:var(--blue-text)">✓ Uitslag</th>`;
+  html+=`<div class="card"><h3>Knock-out</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Ronde</th><th style="text-align:center">#</th><th style="background:var(--blue-bg);color:var(--blue-text)">✓ Uitslag</th>`;
   names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
   KO_ROUNDS.forEach(r=>{
     for(let i=0;i<r.n;i++){
@@ -1465,7 +1524,7 @@ function buildOverzicht(){
       const realStr=real&&(real.home||real.away)?(real.home||'?')+'-'+(real.away||'?'):'–';
       html+=`<tr><td style="color:var(--text2)">${r.label}</td><td>${r.n>1?i+1:'-'}</td>`;
       html+=`<td style="text-align:center;font-weight:600;color:var(--blue-text)">${realStr}</td>`;
-      entries.forEach(e=>{const m=e.ko&&e.ko[id];html+=`<td style="text-align:center">${m&&(m.home||m.away)?(m.home||'?')+'-'+(m.away||'?'):'-'}</td>`;});
+      entries.forEach(e=>{const m=e.ko&&e.ko[id];const pts=_ptsKOMatch(e,r,i);html+=`<td style="text-align:center">${m&&(m.home||m.away)?(m.home||'?')+'-'+(m.away||'?'):'-'}${_ptsBadge(pts)}</td>`;});
       html+='</tr>';
     }
   });
@@ -1487,15 +1546,16 @@ function buildOverzicht(){
         const match=e.groups&&e.groups[gk]&&e.groups[gk].matches&&e.groups[gk].matches[normKey];
         const home=a<b?match?.home:match?.away;
         const away=a<b?match?.away:match?.home;
-        html+=`<td style="text-align:center">${match&&(match.home!==''||match.away!=='')?((home!==''?home:'?')+'-'+(away!==''?away:'?')):'-'}</td>`;
+        const pts=_ptsGroupMatch(e,gk,normKey);
+        html+=`<td style="text-align:center">${match&&(match.home!==''||match.away!=='')?((home!==''?home:'?')+'-'+(away!==''?away:'?')):'-'}${_ptsBadge(pts)}</td>`;
       });
       html+='</tr>';
     });
     const realStanding=uitslagen.standings[gk]||[];
     const realStandStr=realStanding.filter(t=>t).length?realStanding.map((t,i)=>(i+1)+'. '+f(t)+t).join('<br>'):'–';
     html+=`<tr style="background:var(--bg2)"><td style="font-weight:600">Eindstand</td>`;
-    html+=`<td style="font-size:10px;line-height:1.6;font-weight:600;color:var(--blue-text)">${realStandStr}</td>`;
-    entries.forEach(e=>{const st=e.groups&&e.groups[gk]?e.groups[gk].standing:[];const ord=[...teams].map((t,i)=>({t,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);html+=`<td style="font-size:10px;line-height:1.6">${ord.map(x=>(x.p===9?'?':x.p)+'. '+f(x.t)+x.t).join('<br>')}</td>`;});
+    html+=`<td style="font-size:10px;line-height:1.6;font-weight:600;color:var(--blue-text);text-align:center">${realStandStr}</td>`;
+    entries.forEach(e=>{const st=e.groups&&e.groups[gk]?e.groups[gk].standing:[];const ord=[...teams].map((t,i)=>({t,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);const pts=_ptsGroupStanding(e,gk);html+=`<td style="font-size:10px;line-height:1.6;text-align:center">${ord.map(x=>(x.p===9?'?':x.p)+'. '+f(x.t)+x.t).join('<br>')}${_ptsBadge(pts)}</td>`;});
     html+='</tr></table></div></div>';
   });
   c.innerHTML=html;
