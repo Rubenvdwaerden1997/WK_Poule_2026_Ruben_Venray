@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WK Poule 2026 · Jouw Aars is Wahed Paars</title>
+<title>DE WK POULE 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>(function(){emailjs.init({publicKey:'Bp2zEMam_Labn-X5G'});})();</script>
@@ -192,7 +192,7 @@ body.deadline-locked .lock-banner{display:block;}
   <div class="card">
     <h3>👋 Welkom bij de WK Poule 2026!!</h3>
     <p style="font-size:13px;line-height:1.8;color:var(--text2);margin-bottom:1rem">
-      Jouw Aars is Wahed Paars — en dit jaar gaan we er écht voor. Het WK 2026 wordt gespeeld in de VS, Canada en Mexico, met maar liefst 48 landen en 104 wedstrijden. Grootser dan ooit dus, en dat betekent ook: meer kansen op punten, meer drama, en meer reden om elkaar af te troeven.
+      Dit jaar gaan we er écht voor. Het WK 2026 wordt gespeeld in de VS, Canada en Mexico, met maar liefst 48 landen en 104 wedstrijden. Grootser dan ooit dus, en dat betekent ook: meer kansen op punten, meer drama, en meer reden om elkaar af te troeven.
     </p>
     <p style="font-size:13px;line-height:1.8;color:var(--text2);margin-bottom:1rem">
       Of je nou een voetbalkenner bent of gewoon je buikgevoel volgt — iedereen maakt kans. Vul je voorspellingen in, kies je topscorers, en bid dat Oranje ver komt. Als je klaar bent en op inzenden drukt, wordt er automatisch een bestandje gedownload op je telefoon of computer. Stuur dat bestandje even door naar Ruben via WhatsApp of via rubenvdwaerden@hotmail.com — zonder dat bestandje kan hij je inzending niet verwerken!
@@ -777,7 +777,8 @@ function buildKO(){
       homeDiv.appendChild(makeACInput(state.ko,id,'home',lbl_home,s.home,onKOChange));
       const vsDiv=document.createElement('div');
       vsDiv.className='ko-label';
-      vsDiv.innerHTML=`vs${r.key==='r32'?'<br><span style="font-size:9px">M'+(72+i+1)+'</span>':''}`;
+      const _mOff={r32:72,af:88,kf:96,hf:100,fin:102}[r.key];
+      vsDiv.innerHTML=`vs<br><span style="font-size:9px">M${_mOff+i+1}</span>`;
       const awayDiv=document.createElement('div');
       awayDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
       const awayBracket=document.createElement('div');
@@ -1296,7 +1297,7 @@ function loadProgress(){
 
 // ── EMAIL & INZENDEN ───────────────────────────────────────────────────────
 function buildEmailTekst(entry){
-  let t='=== Jouw Aars is Wahed Paars WK POULE 2026 ===\n';
+  let t='=== DE WK POULE 2026 ===\n';
   t+='Naam: '+entry.naam+'\nSlogan: "'+entry.slogan+'"\nIngezonden: '+entry.tijdstip+'\n\n';
   t+='--- EXTRA VRAGEN ---\n';
   EXTRA_QS.forEach(q=>{t+=q.label+': '+(entry.extra&&entry.extra[q.id]?entry.extra[q.id]:'-')+'\n';});
