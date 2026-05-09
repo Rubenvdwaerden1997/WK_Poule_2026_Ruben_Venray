@@ -703,12 +703,43 @@ function buildGroups(){
   });
 }
 
+function resolveR32Label(label){
+  const m=label.match(/^([12])([A-Z])$/);
+  if(!m) return '';
+  const pos=m[1],gk=m[2];
+  const standing=state.groups[gk]&&state.groups[gk].standing;
+  if(!standing||!GROUPS[gk]) return '';
+  const idx=standing.findIndex(p=>p===pos);
+  return idx===-1?'':(GROUPS[gk][idx]||'');
+}
+function refreshR32(){
+  R32_LABELS.forEach((lbl,i)=>{
+    const id='r32_'+i;
+    if(!state.ko[id]) state.ko[id]={home:'',away:''};
+    const rh=resolveR32Label(lbl.home);
+    const ra=resolveR32Label(lbl.away);
+    if(rh) state.ko[id].home=rh;
+    if(ra) state.ko[id].away=ra;
+  });
+  buildKO();lockForm();
+}
 function buildKO(){
   const c=document.getElementById('ko-container');c.innerHTML='';
   KO_ROUNDS.forEach(r=>{
     const section=document.createElement('div');
     section.className='ko-section';
-    section.innerHTML=`<h3>${r.label}</h3>`;
+    if(r.key==='r32'){
+      // Auto-fill empty R32 slots from group standings
+      R32_LABELS.forEach((lbl,i)=>{
+        const id='r32_'+i;
+        if(!state.ko[id]) state.ko[id]={home:'',away:''};
+        if(!state.ko[id].home){const v=resolveR32Label(lbl.home);if(v) state.ko[id].home=v;}
+        if(!state.ko[id].away){const v=resolveR32Label(lbl.away);if(v) state.ko[id].away=v;}
+      });
+      section.innerHTML=`<h3>${r.label} <button id="refresh-r32-btn" onclick="refreshR32()" style="font-size:10px;padding:2px 8px;border:.5px solid var(--border2);border-radius:4px;background:var(--bg2);color:var(--text2);cursor:pointer;margin-left:6px">↻ Ververs vanuit groepsfase</button></h3>`;
+    } else {
+      section.innerHTML=`<h3>${r.label}</h3>`;
+    }
     for(let i=0;i<r.n;i++){
       const id=r.key+'_'+i;
       const s=state.ko[id];
@@ -1176,6 +1207,8 @@ function lockForm(){
   if(btn){btn.disabled=true;btn.textContent='Deadline verstreken — inzenden niet meer mogelijk';}
   const saveBtn=document.getElementById('save-progress-btn');
   if(saveBtn) saveBtn.disabled=true;
+  const refreshBtn=document.getElementById('refresh-r32-btn');
+  if(refreshBtn) refreshBtn.disabled=true;
 }
 function updateCountdowns(){
   const now=new Date();
