@@ -1439,9 +1439,9 @@ function applyPubStatus(pub){
   }
 }
 // ── FIREBASE ───────────────────────────────────────────────────────────────
-function getFirebaseUrl(){return(localStorage.getItem('wkp26_firebase_url')||'').replace(//$/,'');}
+function getFirebaseUrl(){const u=localStorage.getItem('wkp26_firebase_url')||'';return u.endsWith('/')?u.slice(0,-1):u;}
 function saveFirebaseUrl(){
-  const v=document.getElementById('firebase-url-input').value.trim().replace(//$/,'');
+  let v=document.getElementById('firebase-url-input').value.trim();if(v.endsWith('/'))v=v.slice(0,-1);
   if(!v){alert('Vul een URL in.');return;}
   localStorage.setItem('wkp26_firebase_url',v);
   const el=document.getElementById('firebase-status');
