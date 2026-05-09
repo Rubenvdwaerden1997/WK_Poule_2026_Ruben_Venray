@@ -33,6 +33,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cd-sub{font-size:10px;color:var(--text3);margin-top:2px;}
 .pub-banner{background:var(--green-bg);border:.5px solid var(--green-border);border-radius:var(--radius);padding:.65rem 1rem;font-size:13px;color:var(--green-text);margin-bottom:1rem;text-align:center;display:none;}
 .pub-banner a{color:var(--green-text);font-weight:600;}
+.lock-banner{background:#2A0A0A;border:.5px solid #7A3030;border-radius:var(--radius);padding:.75rem 1rem;font-size:13px;color:#F09595;margin-bottom:1rem;text-align:center;display:none;}
+body.deadline-locked .lock-banner{display:block;}
 .tab-bar{display:flex;gap:3px;margin-bottom:1.25rem;background:var(--bg2);border-radius:var(--radius-lg);padding:4px;border:.5px solid var(--border);overflow-x:auto;}
 .tab{flex:1;min-width:fit-content;padding:8px 6px;text-align:center;font-size:11px;font-weight:500;border:none;background:transparent;cursor:pointer;border-radius:8px;color:var(--text2);transition:all .15s;white-space:nowrap;}
 .tab.active{background:var(--amber-bg);color:var(--orange);border:.5px solid var(--amber-border);}
@@ -171,6 +173,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   Het overzicht is gepubliceerd &mdash;
   <a href="#" onclick="showTab('ranglijst');return false;">bekijk de ranglijst</a>
 </div>
+<div class="lock-banner" id="lock-banner">🔒 De deadline is verstreken — het formulier is gesloten en kan niet meer worden ingevuld of ingestuurd.</div>
 
 <div class="tab-bar">
   <button class="tab active" onclick="showTab('welkom')">Welkom</button>
@@ -237,10 +240,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="rule-row"><span>Totaal goals WK (exact)</span><span class="rule-pts">5 ptn</span></div>
     <div class="rule-row"><span>Topscorer Nederland</span><span class="rule-pts">5 ptn/goal</span></div>
     <div class="rule-row"><span>Kaartenpakker NL</span><span class="rule-pts">5 geel / 10 rood</span></div>
-    <div class="rule-row"><span>Topscorer <span class="type-badge ta">A</span> land</span><span class="rule-pts">5 ptn/goal</span></div>
-    <div class="rule-row"><span>Topscorer <span class="type-badge tb">B</span> land</span><span class="rule-pts">10 ptn/goal</span></div>
-    <div class="rule-row"><span>Topscorer <span class="type-badge tc">C</span> land</span><span class="rule-pts">20 ptn/goal</span></div>
-    <div class="rule-row"><span>Topscorer <span class="type-badge td">D</span> land</span><span class="rule-pts">30 ptn/goal</span></div>
+    <div class="rule-row"><span>Topscorer <span class="type-badge ta">A</span> land (welk land)</span><span class="rule-pts">5 ptn/goal</span></div>
+    <div class="rule-row"><span>Topscorer <span class="type-badge tb">B</span> land (welk land)</span><span class="rule-pts">10 ptn/goal</span></div>
+    <div class="rule-row"><span>Topscorer <span class="type-badge tc">C</span> land (welk land)</span><span class="rule-pts">20 ptn/goal</span></div>
+    <div class="rule-row"><span>Topscorer <span class="type-badge td">D</span> land (welk land)</span><span class="rule-pts">30 ptn/goal</span></div>
   </div>
   <div class="card"><h3>Type-indeling (FIFA-ranking april 2026)</h3>
     <div style="font-size:12px;line-height:2.1">
@@ -282,7 +285,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="progress-text" id="progress-info"></div>
   </div>
   <div class="autosave-info" id="autosave-info"></div>
-  <button class="btn btn-green" onclick="saveProgress()">💾 Tussentijds opslaan</button>
+  <button class="btn btn-green" id="save-progress-btn" onclick="saveProgress()">💾 Tussentijds opslaan</button>
   <button class="btn" id="submit-btn" onclick="submitEntry()">Formulier inzenden ✓</button>
 </div>
 
@@ -1160,6 +1163,20 @@ function updateProgress(){
 }
 
 // ── COUNTDOWN ──────────────────────────────────────────────────────────────
+function isDeadlinePassed(){
+  const dl=localStorage.getItem('wkp26_deadline');
+  if(!dl) return false;
+  return new Date()>new Date(dl);
+}
+function lockForm(){
+  if(!isDeadlinePassed()) return;
+  document.body.classList.add('deadline-locked');
+  document.querySelectorAll('.score-input,.st-select,.ko-input,.extra-input,#naam-input,#slogan-input').forEach(el=>{el.disabled=true;});
+  const btn=document.getElementById('submit-btn');
+  if(btn){btn.disabled=true;btn.textContent='Deadline verstreken — inzenden niet meer mogelijk';}
+  const saveBtn=document.getElementById('save-progress-btn');
+  if(saveBtn) saveBtn.disabled=true;
+}
 function updateCountdowns(){
   const now=new Date();
   const wk=new Date('2026-06-11T21:00:00+02:00');
@@ -1171,6 +1188,7 @@ function updateCountdowns(){
     const subs=document.querySelectorAll('.cd-sub');
     if(subs[1]) subs[1].textContent=dlDate.toLocaleDateString('nl-NL',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
   }
+  lockForm();
 }
 function updateCD(id,now,target,doneText){
   const el=document.getElementById(id);if(!el)return;
@@ -1219,7 +1237,7 @@ function loadProgress(){
     if(draft.groups) state.groups=draft.groups;
     if(draft.ko) state.ko=draft.ko;
     if(draft.extra) state.extra=draft.extra;
-    buildGroups();buildKO();buildExtra();
+    buildGroups();buildKO();buildExtra();lockForm();
     const el=document.getElementById('autosave-info');
     if(el&&draft.opgeslagen) el.textContent='Concept hersteld van '+draft.opgeslagen;
   }catch(e){}
@@ -1257,6 +1275,7 @@ function buildEmailTekst(entry){
 }
 
 function submitEntry(){
+  if(isDeadlinePassed()){alert('De deadline is verstreken. Je kunt niet meer inzenden.');return;}
   const naam=document.getElementById('naam-input').value.trim();
   const slogan=document.getElementById('slogan-input').value.trim();
   if(!naam){alert('Vul eerst je naam in!');return;}
