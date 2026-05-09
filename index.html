@@ -1213,7 +1213,7 @@ function showTab(tab){
   const idx=order.indexOf(tab);
   if(idx>=0) document.querySelectorAll('.tab')[idx].classList.add('active');
   if(tab==='inzenden') updateProgress();
-  if(tab==='admin'){loadEntries();loadPubStatus();loadDeadlineInput();}
+  if(tab==='admin'){loadEntries();loadPubStatus();loadDeadlineInput();loadFirebaseUrlInput();}
   if(tab==='overzicht') buildOverzicht();
   if(tab==='ranglijst') buildRanglijst();
 }
@@ -1438,7 +1438,72 @@ function applyPubStatus(pub){
     tabOv.style.display='none';tabRang.style.display='none';banner.style.display='none';
   }
 }
-function togglePublish(){const p=localStorage.getItem('wkp26_published')==='true';localStorage.setItem('wkp26_published',String(!p));applyPubStatus(!p);}
+// ── FIREBASE ───────────────────────────────────────────────────────────────
+function getFirebaseUrl(){return(localStorage.getItem('wkp26_firebase_url')||'').replace(//$/,'');}
+function saveFirebaseUrl(){
+  const v=document.getElementById('firebase-url-input').value.trim().replace(//$/,'');
+  if(!v){alert('Vul een URL in.');return;}
+  localStorage.setItem('wkp26_firebase_url',v);
+  const el=document.getElementById('firebase-status');
+  el.textContent='Opgeslagen. Verbinding testen...';el.style.color='var(--text2)';
+  testFirebase();
+}
+function loadFirebaseUrlInput(){
+  const url=getFirebaseUrl();
+  const inp=document.getElementById('firebase-url-input');
+  if(inp&&url) inp.value=url;
+}
+async function testFirebase(){
+  const url=getFirebaseUrl();const el=document.getElementById('firebase-status');
+  if(!url){if(el)el.textContent='';return;}
+  try{
+    const r=await fetch(url+'/wkp26_ping.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:'"ok"'});
+    if(el){el.textContent=r.ok?'✓ Verbinding OK':'✗ Fout '+r.status;el.style.color=r.ok?'var(--green-text)':'var(--red-text)';}
+  }catch(e){if(el){el.textContent='✗ Kan niet verbinden';el.style.color='var(--red-text)';}}
+}
+async function pushToFirebase(){
+  const url=getFirebaseUrl();if(!url) return false;
+  try{
+    const r=await fetch(url+'/wkpoule26.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({published:true,gepubliceerd_op:new Date().toLocaleString('nl-NL'),uitslagen:JSON.parse(JSON.stringify(uitslagen)),entries:getEntries()})});
+    return r.ok;
+  }catch(e){return false;}
+}
+async function syncToFirebase(){
+  const btn=document.getElementById('sync-btn');
+  const orig=btn.textContent;btn.disabled=true;btn.textContent='Bezig...';
+  const ok=await pushToFirebase();
+  btn.disabled=false;btn.textContent=orig;
+  alert(ok?'✅ Data bijgewerkt op Firebase!':'❌ Firebase sync mislukt. Controleer de URL.');
+}
+async function loadFromFirebase(){
+  const url=getFirebaseUrl();if(!url) return null;
+  try{const r=await fetch(url+'/wkpoule26.json');if(!r.ok)return null;return await r.json();}catch(e){return null;}
+}
+async function initFromFirebase(){
+  const data=await loadFromFirebase();
+  if(!data||!data.published) return;
+  if(data.uitslagen){
+    if(data.uitslagen.groups) Object.assign(uitslagen.groups,data.uitslagen.groups);
+    if(data.uitslagen.standings) Object.assign(uitslagen.standings,data.uitslagen.standings);
+    if(data.uitslagen.ko) Object.assign(uitslagen.ko,data.uitslagen.ko);
+    if(data.uitslagen.extra) Object.assign(uitslagen.extra,data.uitslagen.extra);
+  }
+  if(data.entries&&data.entries.length) setEntries(data.entries);
+  applyPubStatus(true);
+}
+async function togglePublish(){
+  const p=localStorage.getItem('wkp26_published')==='true';const newPub=!p;
+  localStorage.setItem('wkp26_published',String(newPub));applyPubStatus(newPub);
+  const fbUrl=getFirebaseUrl();if(!fbUrl) return;
+  const btn=document.getElementById('pub-btn');const orig=btn.textContent;btn.disabled=true;btn.textContent='Bezig...';
+  if(newPub){
+    const ok=await pushToFirebase();
+    alert(ok?'✅ Gepubliceerd! Iedereen kan nu de ranglijst bekijken op elk apparaat.':'❌ Lokaal gepubliceerd maar Firebase sync mislukt. Controleer de database URL in Admin.');
+  } else {
+    try{await fetch(fbUrl+'/wkpoule26.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({published:false})});}catch(e){}
+  }
+  btn.disabled=false;btn.textContent=orig;
+}
 
 // ── OVERZICHT PUNTEN HELPERS ───────────────────────────────────────────────
 function _ptsBadge(pts){
@@ -1673,6 +1738,7 @@ function handleImport(input){
 
 // ── INIT ───────────────────────────────────────────────────────────────────
 localStorage.setItem('wkp26_deadline','2026-06-11T18:30:00.000Z');
+localStorage.setItem('wkp26_firebase_url','https://wk-poule-2026-ruben-default-rtdb.europe-west1.firebasedatabase.app');
 initState();
 loadUitslagen();
 buildGroups();buildKO();buildExtra();
