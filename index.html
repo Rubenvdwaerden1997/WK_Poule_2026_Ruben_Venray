@@ -70,6 +70,7 @@ body.deadline-locked .lock-banner{display:block;}
 .ko-match{display:grid;grid-template-columns:1fr 56px 1fr;gap:6px;align-items:center;margin-bottom:.4rem;padding:.45rem .65rem;background:var(--bg);border:.5px solid var(--border);border-radius:var(--radius);}
 .ko-input{width:100%;padding:4px 6px;font-size:12px;border:.5px solid var(--border2);border-radius:5px;background:var(--bg2);color:var(--text);}
 .ko-input:focus{outline:none;border-color:var(--orange);}
+.ko-input::placeholder{color:var(--text2);opacity:1;}
 .ko-label{font-size:10px;color:var(--text3);text-align:center;line-height:1.3;}
 .ko-bracket{font-size:9px;color:var(--text3);font-weight:600;text-align:center;margin-bottom:2px;}
 .ac-wrap{position:relative;width:100%;}
@@ -866,6 +867,20 @@ function buildAdminKO(){
     const section=document.createElement('div');
     section.className='ko-section';
     section.innerHTML=`<h3>${r.label}</h3>`;
+    const onAdminKOChange=(val,changedId,changedSide)=>{
+      if(!val) return;
+      for(let j=0;j<r.n;j++){
+        const otherId=r.key+'_'+j;
+        ['home','away'].forEach(s=>{
+          if(otherId===changedId&&s===changedSide) return;
+          if(uitslagen.ko[otherId]&&uitslagen.ko[otherId][s]===val){
+            uitslagen.ko[otherId][s]='';
+            const el=document.querySelector('[data-kid="'+otherId+'"][data-kside="'+s+'"]');
+            if(el) el.value='';
+          }
+        });
+      }
+    };
     for(let i=0;i<r.n;i++){
       const id=r.key+'_'+i;
       if(!uitslagen.ko[id]) uitslagen.ko[id]={home:'',away:''};
@@ -882,15 +897,17 @@ function buildAdminKO(){
       const homeBracket=document.createElement('div');
       homeBracket.className='ko-bracket';homeBracket.textContent=lbl_home;
       homeDiv.appendChild(homeBracket);
-      homeDiv.appendChild(makeACInput(uitslagen.ko,id,'home',lbl_home,uitslagen.ko[id].home));
+      homeDiv.appendChild(makeACInput(uitslagen.ko,id,'home',lbl_home,uitslagen.ko[id].home,onAdminKOChange));
       const vsDiv=document.createElement('div');
-      vsDiv.className='ko-label';vsDiv.textContent='vs';
+      vsDiv.className='ko-label';
+      const _aMOff={r32:72,af:88,kf:96,hf:100,fin:102}[r.key];
+      vsDiv.innerHTML='vs<br><span style="font-size:9px">M'+(_aMOff+i+1)+'</span>';
       const awayDiv=document.createElement('div');
       awayDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
       const awayBracket=document.createElement('div');
       awayBracket.className='ko-bracket';awayBracket.textContent=lbl_away;
       awayDiv.appendChild(awayBracket);
-      awayDiv.appendChild(makeACInput(uitslagen.ko,id,'away',lbl_away,uitslagen.ko[id].away));
+      awayDiv.appendChild(makeACInput(uitslagen.ko,id,'away',lbl_away,uitslagen.ko[id].away,onAdminKOChange));
       matchDiv.appendChild(homeDiv);matchDiv.appendChild(vsDiv);matchDiv.appendChild(awayDiv);
       section.appendChild(matchDiv);
     }
