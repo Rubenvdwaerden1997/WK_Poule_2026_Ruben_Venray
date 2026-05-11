@@ -322,6 +322,16 @@ body.deadline-locked .lock-banner{display:block;}
     <input type="datetime-local" id="deadline-input" class="text-input" style="font-size:13px">
     <button class="btn btn-green" onclick="saveDeadline()" style="margin-top:.5rem">Deadline opslaan</button>
   </div>
+  
+  <!-- Firebase -->
+  <div class="card">
+    <h3>🔥 Firebase sync</h3>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:.5rem">Database URL voor cross-apparaat synchronisatie van uitslagen en publicatiestatus.</div>
+    <input class="text-input" id="firebase-url-input" type="url" placeholder="https://xxx.firebasedatabase.app" style="font-size:12px">
+    <button class="btn btn-blue" onclick="saveFirebaseUrl()" style="margin-top:.5rem">Opslaan & testen</button>
+    <button class="btn" id="sync-btn" onclick="syncToFirebase()" style="margin-top:.5rem">↑ Nu synchroniseren naar Firebase</button>
+    <div id="firebase-status" style="font-size:12px;margin-top:.4rem;color:var(--text2)"></div>
+  </div>
 
   <!-- Publiceren -->
   <div id="pub-status-box" class="pub-status pub-off">Overzicht is nog niet gepubliceerd</div>
