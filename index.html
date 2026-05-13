@@ -604,7 +604,7 @@ let uitslagen={
   groups:{},
   standings:{},
   ko:{},
-  extra:{eerste_goal:'',totaal_goals:'',topscorer_nl:'',topscorer_nl_goals:0,kaart_nl:'',kaart_nl_type:'geel',winnaar:''},
+  extra:{eerste_goal:'',totaal_goals:'',topscorer_nl:'',topscorer_nl_goals:0,kaart_nl:'',kaart_nl_geel:0,kaart_nl_rood:0,winnaar:''},
   topscorers_poule:{},
   topscorers_ko:{}
 };
@@ -1139,14 +1139,48 @@ function buildExtra(){
   const c=document.getElementById('extra-container');c.innerHTML='';
   const locked=isDeadline1Passed();
   EXTRA_QS.forEach(q=>{
-    c.innerHTML+=`<div class="extra-card">
-      <div class="extra-q">${q.label}</div>
-      <div class="extra-pts">${q.pts}</div>
-      ${q.type==='number'
-        ?`<input class="extra-input" type="number" min="0" max="600" placeholder="Aantal goals..." ${locked?'disabled':''} value="${state.extra[q.id]}" oninput="state.extra['${q.id}']=this.value">`
-        :`<input class="extra-input" type="text" placeholder="Naam speler / land..." ${locked?'disabled':''} value="${state.extra[q.id]}" oninput="state.extra['${q.id}']=this.value">`}
-    </div>`;
+    const div=document.createElement('div');div.className='extra-card';
+    div.innerHTML=`<div class="extra-q">${q.label}</div><div class="extra-pts">${q.pts}</div>`;
+    if(q.type==='number'){
+      div.innerHTML+=`<input class="extra-input" type="number" min="0" max="600" placeholder="Aantal goals..." ${locked?'disabled':''} value="${state.extra[q.id]}" oninput="state.extra['${q.id}']=this.value">`;
+    } else if(q.id==='winnaar'){
+      if(locked){
+        div.innerHTML+=`<input class="extra-input" type="text" disabled value="${state.extra[q.id]}">`;
+      } else {
+        const acWrap=makeCountryACInput_state(q.id,state.extra[q.id]||'');
+        div.appendChild(acWrap);
+      }
+    } else {
+      div.innerHTML+=`<input class="extra-input" type="text" placeholder="Naam speler / land..." ${locked?'disabled':''} value="${state.extra[q.id]}" oninput="state.extra['${q.id}']=this.value">`;
+    }
+    c.appendChild(div);
   });
+}
+
+function makeCountryACInput_state(field,initialValue){
+  const wrap=document.createElement('div');wrap.style.position='relative';
+  const input=document.createElement('input');
+  input.className='extra-input';input.type='text';input.autocomplete='off';
+  input.placeholder='Zoek land...';input.value=initialValue;
+  const dropdown=document.createElement('div');
+  dropdown.className='ac-dropdown';dropdown.style.display='none';
+  function getMatches(q){if(!q)return[];const ql=q.toLowerCase();return ALL_COUNTRIES.filter(c=>c.toLowerCase().includes(ql)).slice(0,8);}
+  function renderDropdown(matches){
+    dropdown.innerHTML='';
+    if(!matches.length){dropdown.style.display='none';return;}
+    matches.forEach(c=>{
+      const item=document.createElement('div');item.className='ac-item';
+      item.innerHTML=`<span class="ac-flag">${f(c)}</span><span>${c}</span>`;
+      item.addEventListener('mousedown',e=>{e.preventDefault();input.value=c;state.extra[field]=c;dropdown.style.display='none';});
+      dropdown.appendChild(item);
+    });
+    dropdown.style.display='block';
+  }
+  input.addEventListener('input',()=>{state.extra[field]=input.value;renderDropdown(getMatches(input.value));});
+  input.addEventListener('blur',()=>{setTimeout(()=>{dropdown.style.display='none';},150);});
+  input.addEventListener('focus',()=>{if(input.value)renderDropdown(getMatches(input.value));});
+  wrap.appendChild(input);wrap.appendChild(dropdown);
+  return wrap;
 }
 
 // ── ADMIN FORMS ───────────────────────────────────────────────────────────
@@ -1273,34 +1307,113 @@ function buildAdminTopscorers(){
   });
 }
 
+function makePlayerACInput_admin(field,initialValue){
+  const wrap=document.createElement('div');wrap.style.position='relative';
+  const input=document.createElement('input');
+  input.className='extra-input';input.type='text';input.autocomplete='off';
+  input.placeholder='Zoek speler...';input.value=initialValue;
+  const dropdown=document.createElement('div');
+  dropdown.className='ac-dropdown';dropdown.style.display='none';
+  let activeIdx=-1;
+  function getMatches(q){if(!q||q.length<1)return[];const ql=q.toLowerCase();return WK_PLAYERS.filter(p=>p.name.toLowerCase().includes(ql)).slice(0,10);}
+  function renderDropdown(matches){
+    dropdown.innerHTML='';activeIdx=-1;
+    if(!matches.length){dropdown.style.display='none';return;}
+    matches.forEach(p=>{
+      const item=document.createElement('div');item.className='ac-item';
+      const flag=FLAGS[p.team]||'';
+      item.innerHTML=`${playerBadge(p.position)}<span style="flex:1">${p.name}</span><span style="font-size:11px;color:var(--text2)">${flag} ${p.team}</span>`;
+      item.style.cssText='display:flex;align-items:center;gap:4px';
+      item.addEventListener('mousedown',e=>{e.preventDefault();input.value=p.name;uitslagen.extra[field]=p.name;dropdown.style.display='none';});
+      dropdown.appendChild(item);
+    });
+    dropdown.style.display='block';
+  }
+  input.addEventListener('input',()=>{uitslagen.extra[field]=input.value;renderDropdown(getMatches(input.value));});
+  input.addEventListener('blur',()=>{setTimeout(()=>{dropdown.style.display='none';},150);});
+  input.addEventListener('focus',()=>{if(input.value)renderDropdown(getMatches(input.value));});
+  wrap.appendChild(input);wrap.appendChild(dropdown);
+  return wrap;
+}
+
+function makeCountryACInput_admin(field,initialValue){
+  const wrap=document.createElement('div');wrap.style.position='relative';
+  const input=document.createElement('input');
+  input.className='extra-input';input.type='text';input.autocomplete='off';
+  input.placeholder='Zoek land...';input.value=initialValue;
+  const dropdown=document.createElement('div');
+  dropdown.className='ac-dropdown';dropdown.style.display='none';
+  function getMatches(q){if(!q)return[];const ql=q.toLowerCase();return ALL_COUNTRIES.filter(c=>c.toLowerCase().includes(ql)).slice(0,8);}
+  function renderDropdown(matches){
+    dropdown.innerHTML='';
+    if(!matches.length){dropdown.style.display='none';return;}
+    matches.forEach(c=>{
+      const item=document.createElement('div');item.className='ac-item';
+      item.innerHTML=`<span class="ac-flag">${f(c)}</span><span>${c}</span>`;
+      item.addEventListener('mousedown',e=>{e.preventDefault();input.value=c;uitslagen.extra[field]=c;dropdown.style.display='none';});
+      dropdown.appendChild(item);
+    });
+    dropdown.style.display='block';
+  }
+  input.addEventListener('input',()=>{uitslagen.extra[field]=input.value;renderDropdown(getMatches(input.value));});
+  input.addEventListener('blur',()=>{setTimeout(()=>{dropdown.style.display='none';},150);});
+  input.addEventListener('focus',()=>{if(input.value)renderDropdown(getMatches(input.value));});
+  wrap.appendChild(input);wrap.appendChild(dropdown);
+  return wrap;
+}
+
 function buildAdminExtra(){
   const c=document.getElementById('admin-extra-container');
   const u=uitslagen.extra;
-  c.innerHTML=`
-    <div class="extra-card"><div class="extra-q">Eerste goalscorer Nederland</div>
-      <input class="extra-input" type="text" placeholder="Naam speler..." value="${u.eerste_goal||''}" oninput="uitslagen.extra.eerste_goal=this.value">
+  c.innerHTML='';
+
+  // Eerste goalscorer NL
+  const w1=document.createElement('div');w1.className='extra-card';
+  w1.innerHTML='<div class="extra-q">Eerste goalscorer Nederland</div>';
+  w1.appendChild(makePlayerACInput_admin('eerste_goal',u.eerste_goal||''));
+  c.appendChild(w1);
+
+  // Totaal goals WK
+  const w2=document.createElement('div');w2.className='extra-card';
+  w2.innerHTML=`<div class="extra-q">Totaal goals WK</div>
+    <input class="extra-input" type="number" placeholder="Aantal..." value="${u.totaal_goals||''}" oninput="uitslagen.extra.totaal_goals=this.value">`;
+  c.appendChild(w2);
+
+  // Topscorer NL
+  const w3=document.createElement('div');w3.className='extra-card';
+  w3.innerHTML='<div class="extra-q">Topscorer Nederland — naam & goals</div>';
+  const w3inner=document.createElement('div');w3inner.style.cssText='display:flex;gap:8px;align-items:center';
+  const w3ac=makePlayerACInput_admin('topscorer_nl',u.topscorer_nl||'');
+  w3ac.style.flex='2';
+  w3inner.appendChild(w3ac);
+  w3inner.innerHTML+=`<input class="extra-input" type="number" min="0" placeholder="Goals" value="${u.topscorer_nl_goals||''}" oninput="uitslagen.extra.topscorer_nl_goals=parseInt(this.value)||0" style="flex:1">`;
+  w3.appendChild(w3inner);
+  c.appendChild(w3);
+
+  // Kaartenpakker NL
+  const w4=document.createElement('div');w4.className='extra-card';
+  w4.innerHTML='<div class="extra-q">Kaartenpakker Nederland — naam, geel & rood</div>';
+  const w4inner=document.createElement('div');w4inner.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap';
+  const w4ac=makePlayerACInput_admin('kaart_nl',u.kaart_nl||'');
+  w4ac.style.flex='2';w4ac.style.minWidth='150px';
+  w4inner.appendChild(w4ac);
+  w4inner.innerHTML+=`
+    <div style="display:flex;gap:4px;align-items:center;flex:1">
+      <span style="font-size:11px;color:var(--text2)">🟨 Geel:</span>
+      <input class="extra-input" type="number" min="0" placeholder="0" value="${u.kaart_nl_geel||0}" oninput="uitslagen.extra.kaart_nl_geel=parseInt(this.value)||0" style="width:60px">
     </div>
-    <div class="extra-card"><div class="extra-q">Totaal goals WK</div>
-      <input class="extra-input" type="number" placeholder="Aantal..." value="${u.totaal_goals||''}" oninput="uitslagen.extra.totaal_goals=this.value">
-    </div>
-    <div class="extra-card"><div class="extra-q">Topscorer Nederland — naam & goals</div>
-      <div style="display:flex;gap:8px">
-        <input class="extra-input" type="text" placeholder="Naam..." value="${u.topscorer_nl||''}" oninput="uitslagen.extra.topscorer_nl=this.value" style="flex:2">
-        <input class="extra-input" type="number" min="0" placeholder="Goals" value="${u.topscorer_nl_goals||''}" oninput="uitslagen.extra.topscorer_nl_goals=parseInt(this.value)||0" style="flex:1">
-      </div>
-    </div>
-    <div class="extra-card"><div class="extra-q">Kaartenpakker Nederland — naam & type</div>
-      <div style="display:flex;gap:8px">
-        <input class="extra-input" type="text" placeholder="Naam..." value="${u.kaart_nl||''}" oninput="uitslagen.extra.kaart_nl=this.value" style="flex:2">
-        <select class="extra-input" onchange="uitslagen.extra.kaart_nl_type=this.value" style="flex:1">
-          <option value="geel" ${u.kaart_nl_type==='geel'?'selected':''}>Geel</option>
-          <option value="rood" ${u.kaart_nl_type==='rood'?'selected':''}>Rood</option>
-        </select>
-      </div>
-    </div>
-    <div class="extra-card"><div class="extra-q">WK-winnaar 2026</div>
-      <input class="extra-input" type="text" placeholder="Land..." value="${u.winnaar||''}" oninput="uitslagen.extra.winnaar=this.value">
+    <div style="display:flex;gap:4px;align-items:center;flex:1">
+      <span style="font-size:11px;color:var(--text2)">🟥 Rood:</span>
+      <input class="extra-input" type="number" min="0" placeholder="0" value="${u.kaart_nl_rood||0}" oninput="uitslagen.extra.kaart_nl_rood=parseInt(this.value)||0" style="width:60px">
     </div>`;
+  w4.appendChild(w4inner);
+  c.appendChild(w4);
+
+  // WK-winnaar
+  const w5=document.createElement('div');w5.className='extra-card';
+  w5.innerHTML='<div class="extra-q">WK-winnaar 2026</div>';
+  w5.appendChild(makeCountryACInput_admin('winnaar',u.winnaar||''));
+  c.appendChild(w5);
 }
 
 function setMatch(gk,key,side,val){
@@ -1404,7 +1517,9 @@ function berekenPunten(entry){
   if(entry.extra?.eerste_goal&&u.extra?.eerste_goal&&entry.extra.eerste_goal.trim().toLowerCase()===u.extra.eerste_goal.trim().toLowerCase()) extraPts+=48;
   if(entry.extra?.totaal_goals&&u.extra?.totaal_goals&&parseInt(entry.extra.totaal_goals)===parseInt(u.extra.totaal_goals)) extraPts+=152;
   if(entry.extra?.topscorer_nl&&u.extra?.topscorer_nl&&entry.extra.topscorer_nl.trim().toLowerCase()===u.extra.topscorer_nl.trim().toLowerCase()&&u.extra.topscorer_nl_goals>0) extraPts+=12*u.extra.topscorer_nl_goals;
-  if(entry.extra?.kaart_nl&&u.extra?.kaart_nl&&entry.extra.kaart_nl.trim().toLowerCase()===u.extra.kaart_nl.trim().toLowerCase()) extraPts+=u.extra.kaart_nl_type==='rood'?54:18;
+  if(entry.extra?.kaart_nl&&u.extra?.kaart_nl&&entry.extra.kaart_nl.trim().toLowerCase()===u.extra.kaart_nl.trim().toLowerCase()){
+  extraPts+=(u.extra.kaart_nl_geel||0)*18+(u.extra.kaart_nl_rood||0)*54;
+  }
   if(extraPts>0) details.push({label:'Extra vragen',pts:extraPts});
   totaal+=extraPts;
 
