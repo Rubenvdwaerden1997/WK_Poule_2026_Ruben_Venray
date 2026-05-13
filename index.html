@@ -267,11 +267,11 @@ body.deadline-locked .lock-banner{display:block;}
       <div class="rule-row"><span>⚽ Aanvaller scoort</span><span class="rule-pts">48 ptn/goal</span></div>
   </div>
   <div class="card"><h3>Extra vragen</h3>
-    <div class="rule-row"><span>Eerste goalscorer Nederland</span><span class="rule-pts">5 ptn</span></div>
-    <div class="rule-row"><span>Totaal goals WK (exact)</span><span class="rule-pts">5 ptn</span></div>
-    <div class="rule-row"><span>Topscorer Nederland</span><span class="rule-pts">5 ptn/goal</span></div>
-    <div class="rule-row"><span>Kaartenpakker NL</span><span class="rule-pts">5 geel / 10 rood</span></div>
-    <div class="rule-row"><span>WK-winnaar</span><span class="rule-pts">100 ptn</span></div>
+    <div class="rule-row"><span>Eerste goalscorer Nederland</span><span class="rule-pts">48 ptn</span></div>
+    <div class="rule-row"><span>Totaal goals WK (exact)</span><span class="rule-pts">152 ptn</span></div>
+    <div class="rule-row"><span>Topscorer Nederland (heel toernooi)</span><span class="rule-pts">12 ptn/goal</span></div>
+    <div class="rule-row"><span>Kaartenpakker NL</span><span class="rule-pts">18 geel / 54 rood</span></div>
+    <div class="rule-row"><span>WK-winnaar</span><span class="rule-pts">300 ptn</span></div>
   </div>
 </div>
 
@@ -1361,14 +1361,14 @@ function berekenPunten(entry){
   // WK-winnaar
   const predW=entry.extra?.winnaar?.trim().toLowerCase();
   const realW=u.extra?.winnaar?.trim().toLowerCase();
-  if(predW&&realW&&predW===realW){details.push({label:'WK-winnaar correct',pts:100});totaal+=100;}
+    if(predW&&realW&&predW===realW){details.push({label:'WK-winnaar correct',pts:300});totaal+=300;}
 
   // EXTRA VRAGEN
   let extraPts=0;
-  if(entry.extra?.eerste_goal&&u.extra?.eerste_goal&&entry.extra.eerste_goal.trim().toLowerCase()===u.extra.eerste_goal.trim().toLowerCase()) extraPts+=5;
-  if(entry.extra?.totaal_goals&&u.extra?.totaal_goals&&parseInt(entry.extra.totaal_goals)===parseInt(u.extra.totaal_goals)) extraPts+=5;
-  if(entry.extra?.topscorer_nl&&u.extra?.topscorer_nl&&entry.extra.topscorer_nl.trim().toLowerCase()===u.extra.topscorer_nl.trim().toLowerCase()&&u.extra.topscorer_nl_goals>0) extraPts+=5*u.extra.topscorer_nl_goals;
-  if(entry.extra?.kaart_nl&&u.extra?.kaart_nl&&entry.extra.kaart_nl.trim().toLowerCase()===u.extra.kaart_nl.trim().toLowerCase()) extraPts+=u.extra.kaart_nl_type==='rood'?10:5;
+  if(entry.extra?.eerste_goal&&u.extra?.eerste_goal&&entry.extra.eerste_goal.trim().toLowerCase()===u.extra.eerste_goal.trim().toLowerCase()) extraPts+=48;
+  if(entry.extra?.totaal_goals&&u.extra?.totaal_goals&&parseInt(entry.extra.totaal_goals)===parseInt(u.extra.totaal_goals)) extraPts+=152;
+  if(entry.extra?.topscorer_nl&&u.extra?.topscorer_nl&&entry.extra.topscorer_nl.trim().toLowerCase()===u.extra.topscorer_nl.trim().toLowerCase()&&u.extra.topscorer_nl_goals>0) extraPts+=12*u.extra.topscorer_nl_goals;
+  if(entry.extra?.kaart_nl&&u.extra?.kaart_nl&&entry.extra.kaart_nl.trim().toLowerCase()===u.extra.kaart_nl.trim().toLowerCase()) extraPts+=u.extra.kaart_nl_type==='rood'?54:18;
   if(extraPts>0) details.push({label:'Extra vragen',pts:extraPts});
   totaal+=extraPts;
 
