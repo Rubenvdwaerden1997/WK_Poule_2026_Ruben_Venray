@@ -1719,7 +1719,11 @@ function submitEntry(){
   emailTekst+='\n--- EXTRA ---\n';
   EXTRA_QS.forEach(q=>{emailTekst+=q.label+': '+(entry.extra[q.id]||'-')+'\n';});
 
-  emailjs.send('service_2bbft1h','template_1df3jsp',{naam,bericht:emailTekst+'\n\n--- JSON ---\n'+jsonTekst})
+ emailjs.send('service_2bbft1h','template_1df3jsp',{
+  name:naam,
+  message:emailTekst+'\n\n--- JSON ---\n'+jsonTekst,
+  time:new Date().toLocaleString('nl-NL')
+  })
     .then(()=>{
       btn.textContent='Opgeslagen & verstuurd! ✓';btn.classList.add('ok');btn.disabled=false;
       setTimeout(()=>{btn.textContent='Formulier inzenden ✓';btn.classList.remove('ok');},4000);
