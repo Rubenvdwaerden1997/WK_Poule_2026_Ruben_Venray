@@ -254,7 +254,7 @@ body.deadline-locked .lock-banner{display:block;}
     <div class="rule-row"><span>Exact correct &ndash; Finale</span><span class="rule-pts">270 bonus</span></div>
   </div>
   <div class="card"><h3>⚽ Topscorers</h3>
-    <p style="font-size:12px;color:var(--text2);margin-bottom:.75rem">Je kiest per fase 4 spelers (één per positie). Voor elk doelpunt dat jouw speler scoort krijg je punten — hoe moeilijker de positie, hoe meer punten.</p>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:.75rem">Je kiest per fase 4 spelers (één per positie). Voor elk doelpunt dat jouw speler scoort krijg je punten — hoe moeilijker de positie, hoe meer punten.</p>
       <p style="font-size:12px;color:var(--text2);margin-bottom:.5rem;font-weight:600">Poulefase:</p>
       <div class="rule-row"><span>🥅 Keeper scoort</span><span class="rule-pts">100 ptn/goal</span></div>
       <div class="rule-row"><span>🛡 Verdediger scoort</span><span class="rule-pts">32 ptn/goal</span></div>
@@ -823,7 +823,7 @@ function buildGroupsViewer(entry){
         const ph=parseInt(hv),pa=parseInt(av),rh=parseInt(real.home),ra=parseInt(real.away);
         if(!isNaN(ph)&&!isNaN(pa)&&!isNaN(rh)&&!isNaN(ra)){
           const pT=ph>pa?'W':ph<pa?'L':'D',rT=rh>ra?'W':rh<ra?'L':'D';
-          pts=pT===rT?(ph===rh&&pa===ra?15:5):0;
+          if(pT===rT){pts=30;if(ph===rh&&pa===ra) pts+=45;} else pts=0;
         }
       }
       const ptsHtml=pts!==null?`<span style="font-size:10px;margin-left:6px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
@@ -846,12 +846,10 @@ function buildGroupsViewer(entry){
     let standPts=null;
     if(realStanding.filter(t=>t).length){
       standPts=0;
-      let predWinner='';
-      st.forEach((v,i)=>{if(v==='1'||v===1) predWinner=teams[i];});
-      if(predWinner&&realStanding[0]&&predWinner===realStanding[0]) standPts+=5;
-      let fullMatch=true;
-      st.forEach((v,i)=>{const pos=parseInt(v);if(!pos||!realStanding[pos-1]||realStanding[pos-1]!==teams[i]) fullMatch=false;});
-      if(fullMatch&&st.every(v=>v)) standPts+=10;
+      st.forEach((v,i)=>{
+        const pos=parseInt(v);
+        if(pos&&realStanding[pos-1]&&realStanding[pos-1]===teams[i]) standPts+=25;
+      });
     }
     const standPtsHtml=standPts!==null?` <span style="font-size:10px;color:${standPts>0?'var(--green-text)':'var(--text3)'}">${standPts>0?'+'+standPts+'pt':'0pt'}</span>`:'';
     let sh=`<div class="standings-section"><div class="standings-label">Voorspelde eindstand groep ${gk}${standPtsHtml}</div>`;
@@ -1083,7 +1081,7 @@ function buildTopscorersViewer(entry){
         const player=WK_PLAYERS.find(p=>p.name.toLowerCase()===name.toLowerCase());
         const pos=player?.position||'?';
         const goals=(uitslagen['topscorers_'+fase]?.[name])||0;
-        const ptsPerGoal={K:100,D:40,M:20,A:10}[pos]||10;
+        const ptsPerGoal=(fase==='poule'?{K:100,D:32,M:16,A:8}:{K:400,D:154,M:96,A:48})[pos]||(fase==='poule'?8:48);
         const pts=goals?ptsPerGoal*goals:null;
         const flag=FLAGS[player?.team]||'';
         const ptsHtml=pts!==null?`<span style="font-size:10px;color:${pts>0?'var(--green-text)':'var(--text3)'};margin-left:6px">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
