@@ -1835,8 +1835,10 @@ async function initFromFirebase(){
     if(data.uitslagen.topscorers_ko) uitslagen.topscorers_ko=data.uitslagen.topscorers_ko;
   }
   if(data.entries&&data.entries.length) setEntries(data.entries);
-  if(data.published){localStorage.setItem('wkp26_published','true');applyPubStatus(1,true);}
-  if(data.published2){localStorage.setItem('wkp26_published2','true');applyPubStatus(2,true);}
+  localStorage.setItem('wkp26_published',data.published?'true':'false');
+  applyPubStatus(1,data.published===true);
+  localStorage.setItem('wkp26_published2',data.published2?'true':'false');
+  applyPubStatus(2,data.published2===true);
   updateViewerBars();
 }
 async function togglePublish(n){
