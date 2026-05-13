@@ -242,16 +242,11 @@ body.deadline-locked .lock-banner{display:block;}
     <div class="rule-row"><span>Correcte positie in eindstand per land</span><span class="rule-pts">25 ptn</span></div>
   </div>
   <div class="card"><h3>Knock-outfase</h3>
-    <div class="rule-row"><span>TOTO correct &ndash; Ronde van 32</span><span class="rule-pts">60 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Ronde van 32</span><span class="rule-pts">30 bonus</span></div>
-    <div class="rule-row"><span>TOTO correct &ndash; Achtste finales</span><span class="rule-pts">90 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Achtste finales</span><span class="rule-pts">45 bonus</span></div>
-    <div class="rule-row"><span>TOTO correct &ndash; Kwartfinales</span><span class="rule-pts">120 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Kwartfinales</span><span class="rule-pts">60 bonus</span></div>
-    <div class="rule-row"><span>TOTO correct &ndash; Halve finales</span><span class="rule-pts">150 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Halve finales</span><span class="rule-pts">75 bonus</span></div>
-    <div class="rule-row"><span>TOTO correct &ndash; Finale</span><span class="rule-pts">180 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Finale</span><span class="rule-pts">90 bonus</span></div>
+    <div class="rule-row"><span>Correct land – Achtste finales</span><span class="rule-pts">90 ptn</span></div>
+    <div class="rule-row"><span>Correct land – Kwartfinales</span><span class="rule-pts">120 ptn</span></div>
+    <div class="rule-row"><span>Correct land – Halve finales</span><span class="rule-pts">150 ptn</span></div>
+    <div class="rule-row"><span>Correct land – Finale</span><span class="rule-pts">180 ptn</span></div>
+    <div style="margin-top:.5rem;font-size:11px;color:var(--text3)">Ronde van 32 wordt ingevuld door de admin</div>
   </div>
   <div class="card"><h3>⚽ Topscorers</h3>
     <p style="font-size:14px;color:var(--text2);margin-bottom:.75rem">Je kiest per fase 4 spelers (één per positie). Voor elk doelpunt dat jouw speler scoort krijg je punten — hoe moeilijker de positie, hoe meer punten.</p>
@@ -547,11 +542,11 @@ const GROUPS={
 const PAIRS=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
 
 const KO_ROUNDS=[
-  {label:'Ronde van 32',key:'r32',n:16,pts:60,bonus:30},
-  {label:'Achtste finales',key:'af',n:8,pts:90,bonus:45},
-  {label:'Kwartfinales',key:'kf',n:4,pts:120,bonus:60},
-  {label:'Halve finales',key:'hf',n:2,pts:150,bonus:75},
-  {label:'Finale',key:'fin',n:1,pts:180,bonus:90}
+  {label:'Ronde van 32',key:'r32',n:16,pts:0,bonus:0},
+  {label:'Achtste finales',key:'af',n:8,pts:90,bonus:0},
+  {label:'Kwartfinales',key:'kf',n:4,pts:120,bonus:0},
+  {label:'Halve finales',key:'hf',n:2,pts:150,bonus:0},
+  {label:'Finale',key:'fin',n:1,pts:180,bonus:0}
 ];
 const R32_LABELS=[
   {home:'2A',away:'2B'},{home:'1E',away:'3A/B/C/D/F'},{home:'1F',away:'2C'},{home:'1C',away:'2F'},
@@ -885,14 +880,35 @@ function buildKO(){
   const locked=isDeadline2Passed();
   KO_ROUNDS.forEach(r=>{
     const section=document.createElement('div');section.className='ko-section';
+
+    // R32 is read-only for users — admin fills this in
     if(r.key==='r32'){
       R32_LABELS.forEach((lbl,i)=>{
         const id='r32_'+i;if(!state.ko[id]) state.ko[id]={home:'',away:''};
         if(!state.ko[id].home){const v=resolveR32Label(lbl.home);if(v) state.ko[id].home=v;}
         if(!state.ko[id].away){const v=resolveR32Label(lbl.away);if(v) state.ko[id].away=v;}
       });
-      section.innerHTML=`<h3>${r.label} <button id="refresh-r32-btn" onclick="refreshR32()" ${locked?'disabled':''} style="font-size:10px;padding:2px 8px;border:.5px solid var(--border2);border-radius:4px;background:var(--bg2);color:var(--text2);cursor:pointer;margin-left:6px">↻ Ververs vanuit groepsfase</button></h3>`;
-    } else {section.innerHTML=`<h3>${r.label}</h3>`;}
+      section.innerHTML=`<h3>${r.label} <span style="font-size:11px;font-weight:400;color:var(--text3)">— ingevuld door admin</span></h3>`;
+      for(let i=0;i<r.n;i++){
+        const id='r32_'+i;const s=state.ko[id];
+        const matchDiv=document.createElement('div');matchDiv.className='ko-match';
+        matchDiv.innerHTML=`
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <div class="ko-bracket">${R32_LABELS[i].home}</div>
+            <div style="font-size:12px;padding:4px 6px;background:var(--bg2);border-radius:5px;border:.5px solid var(--border)">${s.home||'—'}</div>
+          </div>
+          <div class="ko-label">vs<br><span style="font-size:9px">M${73+i}</span></div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <div class="ko-bracket">${R32_LABELS[i].away}</div>
+            <div style="font-size:12px;padding:4px 6px;background:var(--bg2);border-radius:5px;border:.5px solid var(--border)">${s.away||'—'}</div>
+          </div>`;
+        section.appendChild(matchDiv);
+      }
+      c.appendChild(section);
+      return;
+    }
+
+    section.innerHTML=`<h3>${r.label}</h3>`;
     const onKOChange=(val,changedId,changedSide)=>{
       if(!val)return;
       for(let j=0;j<r.n;j++){
@@ -910,7 +926,6 @@ function buildKO(){
     for(let i=0;i<r.n;i++){
       const id=r.key+'_'+i;const s=state.ko[id];
       let lbl_home='Land 1',lbl_away='Land 2';
-      if(r.key==='r32'&&R32_LABELS[i]){lbl_home=R32_LABELS[i].home;lbl_away=R32_LABELS[i].away;}
       if(r.key==='af'&&AF_LABELS[i]){lbl_home=AF_LABELS[i].home;lbl_away=AF_LABELS[i].away;}
       if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
       if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
@@ -923,7 +938,7 @@ function buildKO(){
       homeAC.querySelector('input').disabled=locked;
       homeDiv.appendChild(homeAC);
       const vsDiv=document.createElement('div');vsDiv.className='ko-label';
-      const _mOff={r32:72,af:88,kf:96,hf:100,fin:102}[r.key];
+      const _mOff={af:88,kf:96,hf:100,fin:102}[r.key];
       vsDiv.innerHTML=`vs<br><span style="font-size:9px">M${_mOff+i+1}</span>`;
       const awayDiv=document.createElement('div');awayDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
       const awayBracket=document.createElement('div');awayBracket.className='ko-bracket';awayBracket.textContent=lbl_away;
@@ -942,13 +957,34 @@ function buildKOViewer(entry){
   const c=document.getElementById('ko-container');c.innerHTML='';
   KO_ROUNDS.forEach(r=>{
     const section=document.createElement('div');section.className='ko-section';
-    section.innerHTML=`<h3>${r.label}</h3>`;
+    section.innerHTML=`<h3>${r.label}${r.key==='r32'?' <span style="font-size:11px;font-weight:400;color:var(--text3)">— ingevuld door admin</span>':''}</h3>`;
+
+    // R32 read-only display
+    if(r.key==='r32'){
+      for(let i=0;i<r.n;i++){
+        const real=uitslagen.ko?.[`r32_${i}`];
+        const matchDiv=document.createElement('div');matchDiv.className='ko-match';
+        matchDiv.innerHTML=`
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <div class="ko-bracket">${R32_LABELS[i].home}</div>
+            <div style="font-size:12px;padding:4px 6px;background:var(--bg2);border-radius:5px;border:.5px solid var(--border)">${real?.home||'—'}</div>
+          </div>
+          <div class="ko-label">vs<br><span style="font-size:9px">M${73+i}</span></div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <div class="ko-bracket">${R32_LABELS[i].away}</div>
+            <div style="font-size:12px;padding:4px 6px;background:var(--bg2);border-radius:5px;border:.5px solid var(--border)">${real?.away||'—'}</div>
+          </div>`;
+        section.appendChild(matchDiv);
+      }
+      c.appendChild(section);
+      return;
+    }
+
     for(let i=0;i<r.n;i++){
       const id=r.key+'_'+i;
       const pred=entry.ko?.[id];
       const real=uitslagen.ko?.[id];
       let lbl_home='Land 1',lbl_away='Land 2';
-      if(r.key==='r32'&&R32_LABELS[i]){lbl_home=R32_LABELS[i].home;lbl_away=R32_LABELS[i].away;}
       if(r.key==='af'&&AF_LABELS[i]){lbl_home=AF_LABELS[i].home;lbl_away=AF_LABELS[i].away;}
       if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
       if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
@@ -958,7 +994,7 @@ function buildKOViewer(entry){
         let c2=0;
         if(pred.home?.trim()&&real.home?.trim()&&pred.home.trim()===real.home.trim()) c2++;
         if(pred.away?.trim()&&real.away?.trim()&&pred.away.trim()===real.away.trim()) c2++;
-        pts=c2*r.pts+(c2===2?r.bonus:0);
+        pts=c2*r.pts;
       }
       const ptsHtml=pts!==null?`<span style="font-size:10px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
       const matchDiv=document.createElement('div');matchDiv.className='ko-match';
@@ -967,7 +1003,7 @@ function buildKOViewer(entry){
           <div class="ko-bracket">${lbl_home}</div>
           <input class="ko-input" disabled value="${pred?.home||''}" style="opacity:.7">
         </div>
-        <div class="ko-label">vs<br><span style="font-size:9px">M${{r32:72,af:88,kf:96,hf:100,fin:102}[r.key]+i+1}</span><br>${ptsHtml}</div>
+        <div class="ko-label">vs<br><span style="font-size:9px">M${{af:88,kf:96,hf:100,fin:102}[r.key]+i+1}</span><br>${ptsHtml}</div>
         <div style="display:flex;flex-direction:column;gap:3px">
           <div class="ko-bracket">${lbl_away}</div>
           <input class="ko-input" disabled value="${pred?.away||''}" style="opacity:.7">
@@ -1333,8 +1369,9 @@ function berekenPunten(entry){
       const ph=pred.home?.trim(),pa=pred.away?.trim(),rh=real.home?.trim(),ra=real.away?.trim();
       if(!rh&&!ra)continue;
       let correct=0;
-      if(ph&&rh&&ph===rh) correct++;if(pa&&ra&&pa===ra) correct++;
-      rondePts+=correct*r.pts;if(correct===2) rondePts+=r.bonus;
+      if(ph&&rh&&ph===rh) correct++;
+      if(pa&&ra&&pa===ra) correct++;
+      rondePts+=correct*r.pts;
     }
     if(rondePts>0) details.push({label:r.label,pts:rondePts});
     totaal+=rondePts;
