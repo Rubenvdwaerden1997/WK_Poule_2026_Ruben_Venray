@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DE WK POULE 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -888,7 +889,7 @@ function buildKO(){
       });
       section.innerHTML=`<h3>${r.label} <span style="font-size:11px;font-weight:400;color:var(--text3)">— ingevuld door admin</span></h3>`;
       for(let i=0;i<r.n;i++){
-        const id='r32_'+i;const s=state.ko[id];
+        const id='r32_'+i;const s=uitslagen.ko?.[id]||{home:'',away:''};
         const matchDiv=document.createElement('div');matchDiv.className='ko-match';
         matchDiv.innerHTML=`
           <div style="display:flex;flex-direction:column;gap:3px">
