@@ -1719,7 +1719,7 @@ function submitEntry(){
   emailTekst+='\n--- EXTRA ---\n';
   EXTRA_QS.forEach(q=>{emailTekst+=q.label+': '+(entry.extra[q.id]||'-')+'\n';});
 
- emailjs.send('service_2bbft1h','template_1df3jsp',{
+ emailjs.send('service_1liqgli','template_1df3jsp',{
   name:naam,
   message:emailTekst+'\n\n--- JSON ---\n'+jsonTekst,
   time:new Date().toLocaleString('nl-NL')
