@@ -238,20 +238,20 @@ body.deadline-locked .lock-banner{display:block;}
 <div id="sec-spelregels" class="section">
   <div class="card"><h3>Poulefase</h3>
     <div class="rule-row"><span>TOTO goed (win / gelijk / verlies)</span><span class="rule-pts">30 ptn</span></div>
-    <div class="rule-row"><span>Exacte uitslag correct (bonus bovenop TOTO)</span><span class="rule-pts">45 bonus</span></div>
+    <div class="rule-row"><span>Exacte uitslag correct (bonus bovenop TOTO)</span><span class="rule-pts">15 bonus</span></div>
     <div class="rule-row"><span>Correcte positie in eindstand per land</span><span class="rule-pts">25 ptn</span></div>
   </div>
   <div class="card"><h3>Knock-outfase</h3>
     <div class="rule-row"><span>TOTO correct &ndash; Ronde van 32</span><span class="rule-pts">60 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Ronde van 32</span><span class="rule-pts">90 bonus</span></div>
+    <div class="rule-row"><span>Exact correct &ndash; Ronde van 32</span><span class="rule-pts">30 bonus</span></div>
     <div class="rule-row"><span>TOTO correct &ndash; Achtste finales</span><span class="rule-pts">90 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Achtste finales</span><span class="rule-pts">135 bonus</span></div>
+    <div class="rule-row"><span>Exact correct &ndash; Achtste finales</span><span class="rule-pts">45 bonus</span></div>
     <div class="rule-row"><span>TOTO correct &ndash; Kwartfinales</span><span class="rule-pts">120 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Kwartfinales</span><span class="rule-pts">180 bonus</span></div>
+    <div class="rule-row"><span>Exact correct &ndash; Kwartfinales</span><span class="rule-pts">60 bonus</span></div>
     <div class="rule-row"><span>TOTO correct &ndash; Halve finales</span><span class="rule-pts">150 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Halve finales</span><span class="rule-pts">225 bonus</span></div>
+    <div class="rule-row"><span>Exact correct &ndash; Halve finales</span><span class="rule-pts">75 bonus</span></div>
     <div class="rule-row"><span>TOTO correct &ndash; Finale</span><span class="rule-pts">180 ptn</span></div>
-    <div class="rule-row"><span>Exact correct &ndash; Finale</span><span class="rule-pts">270 bonus</span></div>
+    <div class="rule-row"><span>Exact correct &ndash; Finale</span><span class="rule-pts">90 bonus</span></div>
   </div>
   <div class="card"><h3>⚽ Topscorers</h3>
     <p style="font-size:14px;color:var(--text2);margin-bottom:.75rem">Je kiest per fase 4 spelers (één per positie). Voor elk doelpunt dat jouw speler scoort krijg je punten — hoe moeilijker de positie, hoe meer punten.</p>
@@ -547,11 +547,11 @@ const GROUPS={
 const PAIRS=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
 
 const KO_ROUNDS=[
-  {label:'Ronde van 32',key:'r32',n:16,pts:60,bonus:90},
-  {label:'Achtste finales',key:'af',n:8,pts:90,bonus:135},
-  {label:'Kwartfinales',key:'kf',n:4,pts:120,bonus:180},
-  {label:'Halve finales',key:'hf',n:2,pts:150,bonus:225},
-  {label:'Finale',key:'fin',n:1,pts:180,bonus:270}
+  {label:'Ronde van 32',key:'r32',n:16,pts:60,bonus:30},
+  {label:'Achtste finales',key:'af',n:8,pts:90,bonus:45},
+  {label:'Kwartfinales',key:'kf',n:4,pts:120,bonus:60},
+  {label:'Halve finales',key:'hf',n:2,pts:150,bonus:75},
+  {label:'Finale',key:'fin',n:1,pts:180,bonus:90}
 ];
 const R32_LABELS=[
   {home:'2A',away:'2B'},{home:'1E',away:'3A/B/C/D/F'},{home:'1F',away:'2C'},{home:'1C',away:'2F'},
@@ -823,7 +823,7 @@ function buildGroupsViewer(entry){
         const ph=parseInt(hv),pa=parseInt(av),rh=parseInt(real.home),ra=parseInt(real.away);
         if(!isNaN(ph)&&!isNaN(pa)&&!isNaN(rh)&&!isNaN(ra)){
           const pT=ph>pa?'W':ph<pa?'L':'D',rT=rh>ra?'W':rh<ra?'L':'D';
-          if(pT===rT){pts=30;if(ph===rh&&pa===ra) pts+=45;} else pts=0;
+          pts=pT===rT?(ph===rh&&pa===ra?45:30):0;
         }
       }
       const ptsHtml=pts!==null?`<span style="font-size:10px;margin-left:6px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
@@ -1308,7 +1308,7 @@ function berekenPunten(entry){
       if(isNaN(ph)||isNaN(pa)||isNaN(rh)||isNaN(ra))return;
       // Match scoring
       const pT=ph>pa?'W':ph<pa?'L':'D',rT=rh>ra?'W':rh<ra?'L':'D';
-      if(pT===rT){poulePts+=30;if(ph===rh&&pa===ra) poulePts+=45;}
+      if(pT===rT){poulePts+=30;if(ph===rh&&pa===ra) poulePts+=15;}
     });
     // Standings: 25 pts per correctly placed team
     const predStanding=entry.groups?.[gk]?.standing||[];
@@ -1858,7 +1858,7 @@ function handleImport(input){
     localStorage.setItem('wkp26_deadline','2026-06-11T18:30:00.000Z');
   }
   if(!localStorage.getItem('wkp26_deadline2')){
-    localStorage.setItem('wkp26_deadline2',localStorage.getItem('wkp26_deadline')||'2026-06-11T18:30:00.000Z');
+    localStorage.setItem('wkp26_deadline2','2026-06-28T18:30:00.000Z');
   }
   localStorage.setItem('wkp26_firebase_url','https://wk-poule-2026-ruben-default-rtdb.europe-west1.firebasedatabase.app');
   await loadPlayers();
