@@ -839,18 +839,17 @@ function buildGroupsViewer(entry){
     });
     const st=entry.groups?.[gk]?.standing||[];
     const realStanding=uitslagen.standings[gk]||[];
-    let standPts=null;
-    if(realStanding.filter(t=>t).length){
-      standPts=0;
-      st.forEach((v,i)=>{
-        const pos=parseInt(v);
-        if(pos&&realStanding[pos-1]&&realStanding[pos-1]===teams[i]) standPts+=25;
-      });
-    }
-    const standPtsHtml=standPts!==null?` <span style="font-size:10px;color:${standPts>0?'var(--green-text)':'var(--text3)'}">${standPts>0?'+'+standPts+'pt':'0pt'}</span>`:'';
-    let sh=`<div class="standings-section"><div class="standings-label">Voorspelde eindstand groep ${gk}${standPtsHtml}</div>`;
+    let sh=`<div class="standings-section"><div class="standings-label">Voorspelde eindstand groep ${gk}</div>`;
     const ord=[...teams].map((t,i)=>({t,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);
-    ord.forEach(x=>{sh+=`<div style="font-size:12px;padding:3px 0;color:var(--text2)">${x.p===9?'?':x.p}. ${f(x.t)} ${x.t}</div>`;});
+    ord.forEach(x=>{
+      let landPts=null;
+      if(realStanding.filter(t=>t).length){
+        const pos=x.p;
+        landPts=(!isNaN(pos)&&pos>=1&&pos<=4&&realStanding[pos-1]===x.t)?25:0;
+      }
+      const landPtsHtml=landPts!==null?` <span style="font-size:10px;color:${landPts>0?'var(--green-text)':'var(--text3)'}">${landPts>0?'+'+landPts+'pt':'0pt'}</span>`:'';
+      sh+=`<div style="font-size:12px;padding:3px 0;color:var(--text2);display:flex;justify-content:space-between">${x.p===9?'?':x.p}. ${f(x.t)} ${x.t}${landPtsHtml}</div>`;
+    });
     sh+='</div>';
     const div=document.createElement('div');div.className='group-card';
     div.innerHTML=`<div class="group-title">Groep ${gk} <span style="font-weight:400;color:var(--text3);font-size:10px;text-transform:none">${teams.map(t=>f(t)).join(' ')}</span></div>${mh}${sh}`;
@@ -1886,13 +1885,13 @@ function buildOverzicht(){
   html+='</div>';
 
   // Topscorers overzicht
-  html+=`<div class="card"><h3>⚽ Topscorers</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Speler</th><th style="background:var(--blue-bg);color:var(--blue-text)">✓ Uitslag</th>`;
+  html+=`<div class="card"><h3>⚽ Topscorers</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Speler</th>`;
   names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
   ['poule','ko'].forEach(fase=>{
       const ts=uitslagen['topscorers_'+fase];
-      html+=`<tr><td colspan="${names.length+2}" style="font-weight:600;color:var(--orange);padding-top:8px">${fase==='poule'?'Poulefase':'KO-fase'}</td></tr>`;
+      html+=`<tr><td colspan="${names.length+1}" style="font-weight:600;color:var(--orange);padding-top:8px">${fase==='poule'?'Poulefase':'KO-fase'}</td></tr>`;
       for(let i=0;i<4;i++){
-        html+=`<tr><td style="color:var(--text2)">Speler ${i+1}</td><td style="text-align:center;font-weight:600;color:var(--blue-text)">—</td>`;
+        html+=`<tr><td style="color:var(--text2)">Speler ${i+1}</td>`;
         entries.forEach(e=>{
           const name=(e['topscorers_'+fase]||[])[i]||'';
           const player=WK_PLAYERS.find(p=>p.name.toLowerCase()===name.toLowerCase());
