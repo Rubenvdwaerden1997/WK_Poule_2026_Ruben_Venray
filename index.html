@@ -210,7 +210,7 @@ body.deadline-locked .lock-banner{display:block;}
 <!-- WELKOM -->
 <div id="sec-welkom" class="section active">
   <div class="card">
-    <h3>👋 Welkom bij de WK Poule 2026!!</h3>
+    <h3>👋 Welkom bij de WK Poule 2026!</h3>
     <p style="font-size:13px;line-height:1.8;color:var(--text2);margin-bottom:1rem">
       Dit jaar gaan we er écht voor. Het WK 2026 wordt gespeeld in de VS, Canada en Mexico, met maar liefst 48 landen en 104 wedstrijden. Grootser dan ooit dus, en dat betekent ook: meer kansen op punten, meer drama, en meer reden om elkaar af te troeven.
     </p>
@@ -319,8 +319,8 @@ body.deadline-locked .lock-banner{display:block;}
     <input class="text-input" id="naam-input" type="text" placeholder="Naam deelnemer...">
   </div>
   <div class="card">
-    <label class="field-label">Jouw slogan <span style="font-size:11px;font-weight:400;color:var(--text2)">(verplicht, geen punten 😄)</span></label>
-    <input class="text-input" id="slogan-input" type="text" placeholder="Bijv. 'Oranje boven, altijd!'">
+    <label class="field-label">Met welke voetballer vergelijk jij jezelf (huidige voetballers, of een voetballer uit het verleden)? <span style="font-size:11px;font-weight:400;color:var(--text2)">(verplicht, geen punten 😄)</span></label>
+    <input class="text-input" id="slogan-input" type="text" placeholder="Bijv. 'Cruijff, want ik heb altijd gelijk!'">
   </div>
   <div class="progress-wrap">
     <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
@@ -1697,7 +1697,7 @@ function submitEntry(){
   const naam=document.getElementById('naam-input').value.trim();
   const slogan=document.getElementById('slogan-input').value.trim();
   if(!naam){alert('Vul eerst je naam in!');return;}
-  if(!slogan){alert('Vul ook een slogan in!');return;}
+  if(!slogan){alert('Vul ook in met welke voetballer jij jezelf vergelijkt!');return;}
   const entry={naam,slogan,tijdstip:new Date().toLocaleString('nl-NL'),
     groups:JSON.parse(JSON.stringify(state.groups)),
     ko:JSON.parse(JSON.stringify(state.ko)),
