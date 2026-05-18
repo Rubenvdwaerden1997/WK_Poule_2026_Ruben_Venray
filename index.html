@@ -678,6 +678,7 @@ function updateViewerBars(){
 
 function loadViewer(type,slot,naam){
   const entries=getEntries();
+  viewerEntry[type] ??= [null, null];
   viewerEntry[type][slot-1]=naam?entries.find(e=>e.naam===naam)||null:null;
   const e1=viewerEntry[type][0];
   const e2=viewerEntry[type][1];
@@ -1590,9 +1591,9 @@ function showTab(tab){
   if(tab==='admin'){loadEntries();loadPubStatus();loadDeadlineInput();loadFirebaseUrlInput();}
   if(tab==='overzicht') buildOverzicht();
   if(tab==='ranglijst') buildRanglijst();
-  if(tab==='poulefase'){updateViewerBars();const[e1,e2]=viewerEntry.poule;e1||e2?buildGroupsViewer(e1,e2):buildGroups();}
-  if(tab==='knockout'){updateViewerBars();const[e1,e2]=viewerEntry.ko;e1||e2?buildKOViewer(e1,e2):buildKO();}
-  if(tab==='topscorers'){updateViewerBars();const[e1,e2]=viewerEntry.ts;e1||e2?buildTopscorersViewer(e1,e2):buildTopscorers();}
+  if(tab==='poulefase'){updateViewerBars();const[e1,e2]=viewerEntry.poule || [null, null];e1||e2?buildGroupsViewer(e1,e2):buildGroups();}
+  if(tab==='knockout'){updateViewerBars();const[e1,e2]=viewerEntry.ko || [null, null];e1||e2?buildKOViewer(e1,e2):buildKO();}
+  if(tab==='topscorers'){updateViewerBars();const[e1,e2]=viewerEntry.ts || [null, null];e1||e2?buildTopscorersViewer(e1,e2):buildTopscorers();}
   if(tab==='extra') buildExtra();
 }
 
@@ -1733,7 +1734,7 @@ function submitEntry(){
     .then(()=>{
       btn.textContent='Opgeslagen & verstuurd! ✓';btn.classList.add('ok');btn.disabled=false;
       setTimeout(()=>{btn.textContent='Formulier inzenden ✓';btn.classList.remove('ok');},4000);
-      alert('✅ Inzending opgeslagen!\n\nEr is automatisch een JSON-bestandje gedownload.\n\nStuur dit naar Ruben via:\n📱 WhatsApp\n📧 voetbalpoules.ruben@gmail.com');
+      alert('✅ Inzending opgeslagen!\n\nEr is automatisch een JSON-bestandje gedownload.\n\nStuur dit naar Ruben via: \n📧 voetbalpoules.ruben@gmail.com');
     })
     .catch(()=>{btn.textContent='Opgeslagen (e-mail mislukt)';btn.disabled=false;setTimeout(()=>{btn.textContent='Formulier inzenden ✓';},3000);});
 }
