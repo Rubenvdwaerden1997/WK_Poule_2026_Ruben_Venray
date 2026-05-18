@@ -271,40 +271,49 @@ body.deadline-locked .lock-banner{display:block;}
   </div>
 </div>
 
-<!-- POULEFASE viewer bar -->
-<div class="viewer-bar" id="viewer-bar-poule">
-  <label>👁 1:</label>
-  <select class="viewer-select" id="viewer-select-poule-1" onchange="loadViewer('poule',1,this.value)">
-    <option value="">— kies —</option>
-  </select>
-  <label>👁 2:</label>
-  <select class="viewer-select" id="viewer-select-poule-2" onchange="loadViewer('poule',2,this.value)">
-    <option value="">— kies —</option>
-  </select>
+<!-- POULEFASE -->
+<div id="sec-poulefase" class="section">
+  <div class="viewer-bar" id="viewer-bar-poule">
+    <label>👁 1:</label>
+    <select class="viewer-select" id="viewer-select-poule-1" onchange="loadViewer('poule',1,this.value)">
+      <option value="">— kies —</option>
+    </select>
+    <label>👁 2:</label>
+    <select class="viewer-select" id="viewer-select-poule-2" onchange="loadViewer('poule',2,this.value)">
+      <option value="">— kies —</option>
+    </select>
+  </div>
+  <div id="groups-container"></div>
 </div>
 
-<!-- KNOCKOUT viewer bar -->
-<div class="viewer-bar" id="viewer-bar-ko">
-  <label>👁 1:</label>
-  <select class="viewer-select" id="viewer-select-ko-1" onchange="loadViewer('ko',1,this.value)">
-    <option value="">— kies —</option>
-  </select>
-  <label>👁 2:</label>
-  <select class="viewer-select" id="viewer-select-ko-2" onchange="loadViewer('ko',2,this.value)">
-    <option value="">— kies —</option>
-  </select>
+<!-- KNOCKOUT -->
+<div id="sec-knockout" class="section">
+  <div class="viewer-bar" id="viewer-bar-ko">
+    <label>👁 1:</label>
+    <select class="viewer-select" id="viewer-select-ko-1" onchange="loadViewer('ko',1,this.value)">
+      <option value="">— kies —</option>
+    </select>
+    <label>👁 2:</label>
+    <select class="viewer-select" id="viewer-select-ko-2" onchange="loadViewer('ko',2,this.value)">
+      <option value="">— kies —</option>
+    </select>
+  </div>
+  <div id="ko-container"></div>
 </div>
 
-<!-- TOPSCORERS viewer bar -->
-<div class="viewer-bar" id="viewer-bar-ts">
-  <label>👁 1:</label>
-  <select class="viewer-select" id="viewer-select-ts-1" onchange="loadViewer('ts',1,this.value)">
-    <option value="">— kies —</option>
-  </select>
-  <label>👁 2:</label>
-  <select class="viewer-select" id="viewer-select-ts-2" onchange="loadViewer('ts',2,this.value)">
-    <option value="">— kies —</option>
-  </select>
+<!-- TOPSCORERS -->
+<div id="sec-topscorers" class="section">
+  <div class="viewer-bar" id="viewer-bar-ts">
+    <label>👁 1:</label>
+    <select class="viewer-select" id="viewer-select-ts-1" onchange="loadViewer('ts',1,this.value)">
+      <option value="">— kies —</option>
+    </select>
+    <label>👁 2:</label>
+    <select class="viewer-select" id="viewer-select-ts-2" onchange="loadViewer('ts',2,this.value)">
+      <option value="">— kies —</option>
+    </select>
+  </div>
+  <div id="topscorers-container"></div>
 </div>
 
 <!-- EXTRA -->
