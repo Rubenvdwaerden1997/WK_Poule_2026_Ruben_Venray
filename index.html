@@ -271,40 +271,40 @@ body.deadline-locked .lock-banner{display:block;}
   </div>
 </div>
 
-<!-- POULEFASE viewer bar -->
-<div class="viewer-bar" id="viewer-bar-poule">
-  <label>👁 1:</label>
-  <select class="viewer-select" id="viewer-select-poule-1" onchange="loadViewer('poule',1,this.value)">
-    <option value="">— kies —</option>
-  </select>
-  <label>👁 2:</label>
-  <select class="viewer-select" id="viewer-select-poule-2" onchange="loadViewer('poule',2,this.value)">
-    <option value="">— kies —</option>
-  </select>
+<!-- POULEFASE -->
+<div id="sec-poulefase" class="section">
+  <div class="viewer-bar" id="viewer-bar-poule">
+    <label>👁 Bekijk inzending:</label>
+    <select class="viewer-select" id="viewer-select-poule" onchange="loadViewer('poule',this.value)">
+      <option value="">— kies deelnemer —</option>
+    </select>
+    <span class="viewer-badge" id="viewer-badge-poule"></span>
+  </div>
+  <div id="groups-container"></div>
 </div>
 
-<!-- KNOCKOUT viewer bar -->
-<div class="viewer-bar" id="viewer-bar-ko">
-  <label>👁 1:</label>
-  <select class="viewer-select" id="viewer-select-ko-1" onchange="loadViewer('ko',1,this.value)">
-    <option value="">— kies —</option>
-  </select>
-  <label>👁 2:</label>
-  <select class="viewer-select" id="viewer-select-ko-2" onchange="loadViewer('ko',2,this.value)">
-    <option value="">— kies —</option>
-  </select>
+<!-- KNOCKOUT -->
+<div id="sec-knockout" class="section">
+  <div class="viewer-bar" id="viewer-bar-ko">
+    <label>👁 Bekijk inzending:</label>
+    <select class="viewer-select" id="viewer-select-ko" onchange="loadViewer('ko',this.value)">
+      <option value="">— kies deelnemer —</option>
+    </select>
+    <span class="viewer-badge" id="viewer-badge-ko"></span>
+  </div>
+  <div id="ko-container"></div>
 </div>
 
-<!-- TOPSCORERS viewer bar -->
-<div class="viewer-bar" id="viewer-bar-ts">
-  <label>👁 1:</label>
-  <select class="viewer-select" id="viewer-select-ts-1" onchange="loadViewer('ts',1,this.value)">
-    <option value="">— kies —</option>
-  </select>
-  <label>👁 2:</label>
-  <select class="viewer-select" id="viewer-select-ts-2" onchange="loadViewer('ts',2,this.value)">
-    <option value="">— kies —</option>
-  </select>
+<!-- TOPSCORERS -->
+<div id="sec-topscorers" class="section">
+  <div class="viewer-bar" id="viewer-bar-ts">
+    <label>👁 Bekijk inzending:</label>
+    <select class="viewer-select" id="viewer-select-ts" onchange="loadViewer('ts',this.value)">
+      <option value="">— kies deelnemer —</option>
+    </select>
+    <span class="viewer-badge" id="viewer-badge-ts"></span>
+  </div>
+  <div id="topscorers-container"></div>
 </div>
 
 <!-- EXTRA -->
@@ -610,7 +610,8 @@ let uitslagen={
 };
 
 // Viewer state
-let viewerEntry={poule:[null,null],ko:[null,null],ts:[null,null]};
+let viewerMode={poule:false,ko:false,ts:false};
+let viewerEntry={poule:null,ko:null,ts:null};
 
 function initState(){
   state={naam:'',slogan:'',groups:{},ko:{},extra:{},topscorers_poule:['','','',''],topscorers_ko:['','','','']};
@@ -654,36 +655,53 @@ function updateViewerBars(){
   const pub1=localStorage.getItem('wkp26_published')==='true';
   const pub2=localStorage.getItem('wkp26_published2')==='true';
   const entries=getEntries();
+
+  // Poule viewer: zichtbaar na pub1
   const barPoule=document.getElementById('viewer-bar-poule');
   if(barPoule) barPoule.classList.toggle('visible',pub1&&entries.length>0);
+
+  // KO viewer: zichtbaar na pub2
   const barKO=document.getElementById('viewer-bar-ko');
   if(barKO) barKO.classList.toggle('visible',pub2&&entries.length>0);
+
+  // TS viewer: zichtbaar na pub1 (poule sectie) of pub2 (ko sectie)
   const barTS=document.getElementById('viewer-bar-ts');
   if(barTS) barTS.classList.toggle('visible',(pub1||pub2)&&entries.length>0);
+
+  // Populate selects
   ['poule','ko','ts'].forEach(type=>{
-    [1,2].forEach(n=>{
-      const sel=document.getElementById(`viewer-select-${type}-${n}`);
-      if(!sel) return;
-      const cur=sel.value;
-      sel.innerHTML='<option value="">— kies —</option>';
-      entries.forEach(e=>{
-        const opt=document.createElement('option');
-        opt.value=e.naam;opt.textContent=e.naam;
-        if(e.naam===cur) opt.selected=true;
-        sel.appendChild(opt);
-      });
+    const sel=document.getElementById('viewer-select-'+type);
+    if(!sel) return;
+    const cur=sel.value;
+    sel.innerHTML='<option value="">— kies deelnemer —</option>';
+    entries.forEach(e=>{
+      const opt=document.createElement('option');
+      opt.value=e.naam;opt.textContent=e.naam;
+      if(e.naam===cur) opt.selected=true;
+      sel.appendChild(opt);
     });
   });
 }
 
-function loadViewer(type,slot,naam){
+function loadViewer(type,naam){
+  if(!naam){
+    viewerMode[type]=false;viewerEntry[type]=null;
+    const badge=document.getElementById('viewer-badge-'+type);
+    if(badge) badge.textContent='';
+    if(type==='poule') buildGroups();
+    if(type==='ko') buildKO();
+    if(type==='ts') buildTopscorers();
+    return;
+  }
   const entries=getEntries();
-  viewerEntry[type][slot-1]=naam?entries.find(e=>e.naam===naam)||null:null;
-  const e1=viewerEntry[type][0];
-  const e2=viewerEntry[type][1];
-  if(type==='poule') e1||e2?buildGroupsViewer(e1,e2):buildGroups();
-  if(type==='ko') e1||e2?buildKOViewer(e1,e2):buildKO();
-  if(type==='ts') e1||e2?buildTopscorersViewer(e1,e2):buildTopscorers();
+  const entry=entries.find(e=>e.naam===naam);
+  if(!entry) return;
+  viewerMode[type]=true;viewerEntry[type]=entry;
+  const badge=document.getElementById('viewer-badge-'+type);
+  if(badge) badge.textContent='👁 '+naam;
+  if(type==='poule') buildGroupsViewer(entry);
+  if(type==='ko') buildKOViewer(entry);
+  if(type==='ts') buildTopscorersViewer(entry);
 }
 
 // ── AUTOCOMPLETE ──────────────────────────────────────────────────────────
@@ -782,73 +800,59 @@ function buildGroups(){
 }
 
 // ── BUILD GROUPS VIEWER ───────────────────────────────────────────────────
-function buildGroupsViewer(entry1,entry2){
+function buildGroupsViewer(entry){
   const c=document.getElementById('groups-container');c.innerHTML='';
-  const entries=[entry1,entry2].filter(Boolean);
   Object.keys(GROUPS).forEach(gk=>{
     const teams=GROUPS[gk];
     const groupMatches=GROUP_MATCHES.filter(m=>m.g===gk);
     let mh='';
     groupMatches.forEach(m=>{
       const normKey=m.a<m.b?m.a+'_'+m.b:m.b+'_'+m.a;
+      const s=entry.groups?.[gk]?.matches?.[normKey]||{home:'',away:''};
       const ha=teams[m.a],hb=teams[m.b];
       const isFlipped=m.a>m.b;
+      const hv=isFlipped?s.away:s.home,av=isFlipped?s.home:s.away;
+      // Real result for coloring
       const real=uitslagen.groups?.[gk]?.[normKey];
-      // Build score cells for each entry
-      let scoreCells='';
-      entries.forEach(entry=>{
-        const s=entry?.groups?.[gk]?.matches?.[normKey]||{home:'',away:''};
-        const hv=isFlipped?s.away:s.home,av=isFlipped?s.home:s.away;
-        let pts=null;
-        if(real&&real.home!==''&&real.away!==''){
-          const ph=parseInt(hv),pa=parseInt(av),rh=parseInt(real.home),ra=parseInt(real.away);
-          if(!isNaN(ph)&&!isNaN(pa)&&!isNaN(rh)&&!isNaN(ra)){
-            const pT=ph>pa?'W':ph<pa?'L':'D',rT=rh>ra?'W':rh<ra?'L':'D';
-            pts=pT===rT?(ph===rh&&pa===ra?45:30):0;
-          }
+      let pts=null;
+      if(real&&real.home!==''&&real.away!==''){
+        const ph=parseInt(hv),pa=parseInt(av),rh=parseInt(real.home),ra=parseInt(real.away);
+        if(!isNaN(ph)&&!isNaN(pa)&&!isNaN(rh)&&!isNaN(ra)){
+          const pT=ph>pa?'W':ph<pa?'L':'D',rT=rh>ra?'W':rh<ra?'L':'D';
+          pts=pT===rT?(ph===rh&&pa===ra?45:30):0;
         }
-        const ptsHtml=pts!==null?`<span style="font-size:9px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
-        scoreCells+=`<div style="text-align:center;min-width:60px">
-          <div style="font-size:12px">${hv!==''?hv:'-'} - ${av!==''?av:'-'}</div>
-          ${ptsHtml}
-        </div>`;
-      });
+      }
+      const ptsHtml=pts!==null?`<span style="font-size:10px;margin-left:6px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
       mh+=`<div class="match-block">
         <div class="match-meta">${m.d} · ${m.t}${m.stad?' · '+m.stad:''}</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:12.5px;margin-bottom:.5rem">
-          <div class="match-home" style="flex:1"><span>${ha}</span><span style="font-size:14px">${f(ha)}</span></div>
-          <div style="display:flex;gap:8px;flex-shrink:0">${scoreCells}</div>
-          <div class="match-away" style="flex:1"><span style="font-size:14px">${f(hb)}</span><span>${hb}</span></div>
+        <div class="match">
+          <div class="match-home"><span>${ha}</span><span style="font-size:14px">${f(ha)}</span></div>
+          <div class="score-wrap">
+            <input class="score-input" type="number" disabled value="${hv!==''?hv:''}" style="opacity:.7">
+            <span class="sdash">-</span>
+            <input class="score-input" type="number" disabled value="${av!==''?av:''}" style="opacity:.7">
+            ${ptsHtml}
+          </div>
+          <div class="match-away"><span style="font-size:14px">${f(hb)}</span><span>${hb}</span></div>
         </div>
       </div>`;
     });
-    // Standings
+    const st=entry.groups?.[gk]?.standing||[];
     const realStanding=uitslagen.standings[gk]||[];
     let sh=`<div class="standings-section"><div class="standings-label">Voorspelde eindstand groep ${gk}</div>`;
-    // Collect all team positions from both entries
-    teams.forEach((t,ti)=>{
-      let cellsHtml='';
-      entries.forEach(entry=>{
-        const st=entry?.groups?.[gk]?.standing||[];
-        const pos=parseInt(st[ti])||9;
-        let landPts=null;
-        if(realStanding.filter(x=>x).length){
-          landPts=(!isNaN(pos)&&pos>=1&&pos<=4&&realStanding[pos-1]===t)?25:0;
-        }
-        const landPtsHtml=landPts!==null?`<span style="font-size:9px;color:${landPts>0?'var(--green-text)':'var(--text3)'}">${landPts>0?'+'+landPts+'pt':'0pt'}</span>`:'';
-        cellsHtml+=`<div style="text-align:center;min-width:50px">${pos===9?'?':pos}e ${landPtsHtml}</div>`;
-      });
-      sh+=`<div style="font-size:12px;padding:3px 0;color:var(--text2);display:flex;align-items:center;gap:6px;border-bottom:.5px solid var(--border)">
-        <span style="flex:1">${f(t)} ${t}</span>
-        ${cellsHtml}
-      </div>`;
+    const ord=[...teams].map((t,i)=>({t,p:parseInt(st[i])||9})).sort((a,b)=>a.p-b.p);
+    ord.forEach(x=>{
+      let landPts=null;
+      if(realStanding.filter(t=>t).length){
+        const pos=x.p;
+        landPts=(!isNaN(pos)&&pos>=1&&pos<=4&&realStanding[pos-1]===x.t)?25:0;
+      }
+      const landPtsHtml=landPts!==null?` <span style="font-size:10px;color:${landPts>0?'var(--green-text)':'var(--text3)'}">${landPts>0?'+'+landPts+'pt':'0pt'}</span>`:'';
+      sh+=`<div style="font-size:12px;padding:3px 0;color:var(--text2);display:flex;justify-content:space-between">${x.p===9?'?':x.p}. ${f(x.t)} ${x.t}${landPtsHtml}</div>`;
     });
     sh+='</div>';
     const div=document.createElement('div');div.className='group-card';
-    // Header with names
-    const nameHeaders=entries.map(e=>`<span style="font-size:10px;color:var(--blue-text);font-weight:600">${e.naam}</span>`).join('<span style="color:var(--text3);font-size:10px"> vs </span>');
-    div.innerHTML=`<div class="group-title">Groep ${gk} <span style="font-weight:400;color:var(--text3);font-size:10px;text-transform:none">${teams.map(t=>f(t)).join(' ')}</span></div>
-    <div style="margin-bottom:.5rem">${nameHeaders}</div>${mh}${sh}`;
+    div.innerHTML=`<div class="group-title">Groep ${gk} <span style="font-weight:400;color:var(--text3);font-size:10px;text-transform:none">${teams.map(t=>f(t)).join(' ')}</span></div>${mh}${sh}`;
     c.appendChild(div);
   });
 }
@@ -947,12 +951,13 @@ function buildKO(){
   });
 }
 
-function buildKOViewer(entry1,entry2){
+function buildKOViewer(entry){
   const c=document.getElementById('ko-container');c.innerHTML='';
-  const entries=[entry1,entry2].filter(Boolean);
   KO_ROUNDS.forEach(r=>{
     const section=document.createElement('div');section.className='ko-section';
     section.innerHTML=`<h3>${r.label}${r.key==='r32'?' <span style="font-size:11px;font-weight:400;color:var(--text3)">— ingevuld door admin</span>':''}</h3>`;
+
+    // R32 read-only display
     if(r.key==='r32'){
       for(let i=0;i<r.n;i++){
         const real=uitslagen.ko?.[`r32_${i}`];
@@ -969,41 +974,37 @@ function buildKOViewer(entry1,entry2){
           </div>`;
         section.appendChild(matchDiv);
       }
-      c.appendChild(section);return;
+      c.appendChild(section);
+      return;
     }
+
     for(let i=0;i<r.n;i++){
       const id=r.key+'_'+i;
+      const pred=entry.ko?.[id];
       const real=uitslagen.ko?.[id];
       let lbl_home='Land 1',lbl_away='Land 2';
       if(r.key==='af'&&AF_LABELS[i]){lbl_home=AF_LABELS[i].home;lbl_away=AF_LABELS[i].away;}
       if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
       if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
       if(r.key==='fin'&&FIN_LABELS[i]){lbl_home=FIN_LABELS[i].home;lbl_away=FIN_LABELS[i].away;}
+      let pts=null;
+      if(real&&(real.home||real.away)&&pred){
+        let c2=0;
+        if(pred.home?.trim()&&real.home?.trim()&&pred.home.trim()===real.home.trim()) c2++;
+        if(pred.away?.trim()&&real.away?.trim()&&pred.away.trim()===real.away.trim()) c2++;
+        pts=c2*r.pts;
+      }
+      const ptsHtml=pts!==null?`<span style="font-size:10px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
       const matchDiv=document.createElement('div');matchDiv.className='ko-match';
-      // Build cells per entry
-      let homeCells='',awayCells='';
-      entries.forEach(entry=>{
-        const pred=entry?.ko?.[id];
-        let pts=null;
-        if(real&&(real.home||real.away)&&pred){
-          let c2=0;
-          if(pred.home?.trim()&&real.home?.trim()&&pred.home.trim()===real.home.trim()) c2++;
-          if(pred.away?.trim()&&real.away?.trim()&&pred.away.trim()===real.away.trim()) c2++;
-          pts=c2*r.pts;
-        }
-        const ptsHtml=pts!==null?`<span style="font-size:9px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
-        homeCells+=`<div style="font-size:11px;padding:3px 5px;background:var(--bg2);border-radius:4px;border:.5px solid var(--border);text-align:center">${pred?.home||'—'}<br>${ptsHtml}</div>`;
-        awayCells+=`<div style="font-size:11px;padding:3px 5px;background:var(--bg2);border-radius:4px;border:.5px solid var(--border);text-align:center">${pred?.away||'—'}<br>${ptsHtml}</div>`;
-      });
       matchDiv.innerHTML=`
         <div style="display:flex;flex-direction:column;gap:3px">
           <div class="ko-bracket">${lbl_home}</div>
-          <div style="display:flex;gap:4px">${homeCells}</div>
+          <input class="ko-input" disabled value="${pred?.home||''}" style="opacity:.7">
         </div>
-        <div class="ko-label">vs<br><span style="font-size:9px">M${{af:88,kf:96,hf:100,fin:102}[r.key]+i+1}</span></div>
+        <div class="ko-label">vs<br><span style="font-size:9px">M${{af:88,kf:96,hf:100,fin:102}[r.key]+i+1}</span><br>${ptsHtml}</div>
         <div style="display:flex;flex-direction:column;gap:3px">
           <div class="ko-bracket">${lbl_away}</div>
-          <div style="display:flex;gap:4px">${awayCells}</div>
+          <input class="ko-input" disabled value="${pred?.away||''}" style="opacity:.7">
         </div>`;
       section.appendChild(matchDiv);
     }
@@ -1096,11 +1097,10 @@ function makePlayerACInput(arr,idx,fase,locked){
   return wrap;
 }
 
-function buildTopscorersViewer(entry1,entry2){
+function buildTopscorersViewer(entry){
   const c=document.getElementById('topscorers-container');c.innerHTML='';
   const pub1=localStorage.getItem('wkp26_published')==='true';
   const pub2=localStorage.getItem('wkp26_published2')==='true';
-  const entries=[entry1,entry2].filter(Boolean);
 
   const renderFase=(fase,label,deadlineLabel,pub)=>{
     const card=document.createElement('div');card.className='card';
@@ -1108,31 +1108,24 @@ function buildTopscorersViewer(entry1,entry2){
     if(!pub){
       h+=`<div style="font-size:12px;color:var(--text2);padding:.5rem .75rem;background:var(--bg2);border-radius:var(--radius)">Nog niet gepubliceerd</div>`;
     } else {
-      // Name headers
-      h+=`<div style="display:flex;gap:8px;margin-bottom:.5rem">
-        <div style="flex:1"></div>
-        ${entries.map(e=>`<div style="min-width:120px;font-size:11px;font-weight:600;color:var(--blue-text)">${e.naam}</div>`).join('')}
-      </div>`;
-      for(let i=0;i<4;i++){
-        h+=`<div style="display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:.5px solid var(--border)">
-          <div style="flex:1;font-size:12px;color:var(--text2)">Speler ${i+1}</div>`;
-        entries.forEach(entry=>{
-          const name=(entry['topscorers_'+fase]||[])[i]||'';
-          const player=WK_PLAYERS.find(p=>p.name.toLowerCase()===name.toLowerCase());
-          const pos=player?.position||'?';
-          const goals=(uitslagen['topscorers_'+fase]?.[name])||0;
-          const ptsPerGoal=(fase==='poule'?{K:100,D:32,M:16,A:8}:{K:400,D:154,M:96,A:48})[pos]||(fase==='poule'?8:48);
-          const pts=goals&&name?ptsPerGoal*goals:null;
-          const flag=FLAGS[player?.team]||'';
-          const ptsHtml=pts!==null?`<span style="font-size:9px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
-          h+=`<div style="min-width:120px;font-size:11px">
-            ${name?`${playerBadge(pos)}${name} ${flag}`:'—'}
-            ${goals?`<br><span style="color:var(--text2)">${goals} goal${goals!==1?'s':''}</span>`:''}
-            ${ptsHtml?`<br>${ptsHtml}`:''}
-          </div>`;
-        });
-        h+='</div>';
-      }
+      const picks=entry['topscorers_'+fase]||[];
+      const picksArr=Array.isArray(picks)?picks:Object.values(picks);
+      picksArr.forEach((name,i)=>{
+        if(!name){h+=`<div style="font-size:12px;color:var(--text3);padding:3px 0">Speler ${i+1}: —</div>`;return;}
+        const player=WK_PLAYERS.find(p=>p.name.toLowerCase()===name.toLowerCase());
+        const pos=player?.position||'?';
+        const goals=(uitslagen['topscorers_'+fase]?.[name])||0;
+        const ptsPerGoal=(fase==='poule'?{K:100,D:32,M:16,A:8}:{K:400,D:154,M:96,A:48})[pos]||(fase==='poule'?8:48);
+        const pts=goals?ptsPerGoal*goals:null;
+        const flag=FLAGS[player?.team]||'';
+        const ptsHtml=pts!==null?`<span style="font-size:10px;color:${pts>0?'var(--green-text)':'var(--text3)'};margin-left:6px">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
+        h+=`<div style="display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:.5px solid var(--border)">
+          ${playerBadge(pos)}
+          <span style="flex:1;font-size:13px">${name} <span style="font-size:11px;color:var(--text2)">${flag}</span></span>
+          ${goals?`<span style="font-size:11px;color:var(--text2)">${goals} goal${goals!==1?'s':''}</span>`:''}
+          ${ptsHtml}
+        </div>`;
+      });
     }
     card.innerHTML=h;c.appendChild(card);
   };
@@ -1590,9 +1583,9 @@ function showTab(tab){
   if(tab==='admin'){loadEntries();loadPubStatus();loadDeadlineInput();loadFirebaseUrlInput();}
   if(tab==='overzicht') buildOverzicht();
   if(tab==='ranglijst') buildRanglijst();
-  if(tab==='poulefase'){updateViewerBars();const[e1,e2]=viewerEntry.poule;e1||e2?buildGroupsViewer(e1,e2):buildGroups();}
-  if(tab==='knockout'){updateViewerBars();const[e1,e2]=viewerEntry.ko;e1||e2?buildKOViewer(e1,e2):buildKO();}
-  if(tab==='topscorers'){updateViewerBars();const[e1,e2]=viewerEntry.ts;e1||e2?buildTopscorersViewer(e1,e2):buildTopscorers();}
+  if(tab==='poulefase'){updateViewerBars();if(viewerMode.poule&&viewerEntry.poule) buildGroupsViewer(viewerEntry.poule);else buildGroups();}
+  if(tab==='knockout'){updateViewerBars();if(viewerMode.ko&&viewerEntry.ko) buildKOViewer(viewerEntry.ko);else buildKO();}
+  if(tab==='topscorers'){updateViewerBars();if(viewerMode.ts&&viewerEntry.ts) buildTopscorersViewer(viewerEntry.ts);else buildTopscorers();}
   if(tab==='extra') buildExtra();
 }
 
