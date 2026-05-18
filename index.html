@@ -210,7 +210,7 @@ body.deadline-locked .lock-banner{display:block;}
 <!-- WELKOM -->
 <div id="sec-welkom" class="section active">
   <div class="card">
-    <h3>👋 Welkom bij de WK Poule 2026!</h3>
+    <h3>👋 Welkom bij de WK Poule 2026!!</h3>
     <p style="font-size:13px;line-height:1.8;color:var(--text2);margin-bottom:1rem">
       Dit jaar gaan we er écht voor. Het WK 2026 wordt gespeeld in de VS, Canada en Mexico, met maar liefst 48 landen en 104 wedstrijden. Grootser dan ooit dus, en dat betekent ook: meer kansen op punten, meer drama, en meer reden om elkaar af te troeven.
     </p>
@@ -266,7 +266,7 @@ body.deadline-locked .lock-banner{display:block;}
     <div class="rule-row"><span>Eerste goalscorer Nederland</span><span class="rule-pts">48 ptn</span></div>
     <div class="rule-row"><span>Totaal goals WK (exact)</span><span class="rule-pts">152 ptn</span></div>
     <div class="rule-row"><span>Topscorer Nederland (heel toernooi)</span><span class="rule-pts">12 ptn/goal</span></div>
-    <div class="rule-row"><span>Kaartenpakker NL</span><span class="rule-pts">18 geel / 54 rood</span></div>
+    <div class="rule-row"><span>Speler met meeste kaarten Nederland</span><span class="rule-pts">18 geel / 54 rood</span></div>
     <div class="rule-row"><span>WK-winnaar</span><span class="rule-pts">300 ptn</span></div>
   </div>
 </div>
@@ -1289,6 +1289,7 @@ function buildAdminKO(){
 
 function buildAdminTopscorers(){
   const c=document.getElementById('admin-topscorers-container');
+  c.innerHTML='';
   const entries=getEntries();
   
   ['poule','ko'].forEach(fase=>{
