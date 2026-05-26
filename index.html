@@ -1648,7 +1648,7 @@ function updateCountdowns(){
     const dl2Date=new Date(dl2);
     updateCD('cd-deadline2',now,dl2Date,'Verstreken!');
     const sub2=document.getElementById('cd-deadline2-sub');
-    if(sub2) sub2.textContent=localStorage.getItem('wkp26_deadline2')
+    if(sub2) sub2.textContent='Deadline 2: '+localStorage.getItem('wkp26_deadline2')
       ?dl2Date.toLocaleDateString('nl-NL',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})
       :'Nog niet ingesteld (= deadline 1)';
   }
