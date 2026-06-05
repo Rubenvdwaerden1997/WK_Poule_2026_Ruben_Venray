@@ -1762,6 +1762,16 @@ function submitEntry(){
     topscorers_ko:JSON.parse(JSON.stringify(state.topscorers_ko))};
   const entries=getEntries();entries.push(entry);setEntries(entries);
 
+  // Create blob early (synchronous, keeps gesture context alive)
+  const jsonBlob=new Blob([JSON.stringify(entry,null,2)],{type:'application/octet-stream'});
+  const dlUrl=URL.createObjectURL(jsonBlob);
+  const dlName='wkpoule_'+naam.replace(/\s+/g,'_')+'.json';
+  function triggerDownload(){
+    const a=document.createElement('a');a.href=dlUrl;a.download=dlName;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(dlUrl),3000);
+  }
+
   const btn=document.getElementById('submit-btn');btn.textContent='Versturen...';btn.disabled=true;
   const jsonTekst=JSON.stringify(entry);
   let emailTekst='=== DE WK POULE 2026 ===\nNaam: '+naam+'\nSlogan: "'+slogan+'"\n\n--- TOPSCORERS POULEFASE ---\n';
@@ -1779,13 +1789,16 @@ function submitEntry(){
     .then(()=>{
       btn.textContent='Opgeslagen & verstuurd! ✓';btn.classList.add('ok');btn.disabled=false;
       setTimeout(()=>{btn.textContent='Formulier inzenden ✓';btn.classList.remove('ok');},4000);
+      triggerDownload();
       alert('✅ Inzending opgeslagen!\n\nEr is automatisch een JSON-bestandje gedownload.\n\nStuur dit naar Ruben via: \n📧 voetbalpoules.ruben@gmail.com');
     })
-    .catch(()=>{btn.textContent='Opgeslagen (e-mail mislukt)';btn.disabled=false;setTimeout(()=>{btn.textContent='Formulier inzenden ✓';},3000);});
-
-  const jsonBlob=new Blob([JSON.stringify(entry,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(jsonBlob);
-  a.download='wkpoule_'+naam.replace(/\s+/g,'_')+'.json';a.click();
+    .catch((err)=>{
+      console.error('EmailJS fout:',err);
+      btn.textContent='Opgeslagen (e-mail mislukt)';btn.disabled=false;
+      triggerDownload();
+      alert('⚠️ Inzending lokaal opgeslagen, maar e-mail kon niet worden verstuurd.\n\nHet JSON-bestand is wel gedownload — stuur dit naar Ruben via:\n📧 voetbalpoules.ruben@gmail.com');
+      setTimeout(()=>{btn.textContent='Formulier inzenden ✓';},3000);
+    });
 }
 
 // ── ADMIN INZENDINGEN ─────────────────────────────────────────────────────
