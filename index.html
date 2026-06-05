@@ -600,10 +600,10 @@ function playerBadge(pos){
 }
 
 const EXTRA_QS=[
-  {id:'eerste_goal',label:'Eerste goalscorer Nederland',pts:'48 punten',type:'text'},
+  {id:'eerste_goal',label:'Eerste goalscorer Nederland',pts:'48 punten',type:'nlplayer'},
   {id:'totaal_goals',label:'Totaal goals WK (104 wedstrijden, strafschoppenreeks tellen niet)',pts:'152 ptn exact',type:'number'},
-  {id:'topscorer_nl',label:'Topscorer Nederland (heel toernooi)',pts:'12 ptn per doelpunt',type:'text'},
-  {id:'kaart_nl',label:'Kaartenpakker Nederland (meeste kaarten)',pts:'18 ptn geel · 54 ptn rood',type:'text'},
+  {id:'topscorer_nl',label:'Topscorer Nederland (heel toernooi)',pts:'12 ptn per doelpunt',type:'nlplayer'},
+  {id:'kaart_nl',label:'Kaartenpakker Nederland (meeste kaarten)',pts:'18 ptn geel · 54 ptn rood',type:'nlplayer'},
   {id:'winnaar',label:'WK-winnaar 2026',pts:'300 punten',type:'text'}
 ];
 
@@ -1159,6 +1159,13 @@ function buildExtra(){
     div.innerHTML=`<div class="extra-q">${q.label}</div><div class="extra-pts">${q.pts}</div>`;
     if(q.type==='number'){
       div.innerHTML+=`<input class="extra-input" type="number" min="0" max="600" placeholder="Aantal goals..." ${locked?'disabled':''} value="${state.extra[q.id]}" oninput="state.extra['${q.id}']=this.value">`;
+    } else if(q.type==='nlplayer'){
+      if(locked){
+        div.innerHTML+=`<input class="extra-input" type="text" disabled value="${state.extra[q.id]}">`;
+      } else {
+        const acWrap=makeNLPlayerACInput_state(q.id,state.extra[q.id]||'');
+        div.appendChild(acWrap);
+      }
     } else if(q.id==='winnaar'){
       if(locked){
         div.innerHTML+=`<input class="extra-input" type="text" disabled value="${state.extra[q.id]}">`;
@@ -1195,6 +1202,38 @@ function makeCountryACInput_state(field,initialValue){
   input.addEventListener('input',()=>{state.extra[field]=input.value;renderDropdown(getMatches(input.value));});
   input.addEventListener('blur',()=>{setTimeout(()=>{dropdown.style.display='none';},150);});
   input.addEventListener('focus',()=>{if(input.value)renderDropdown(getMatches(input.value));});
+  wrap.appendChild(input);wrap.appendChild(dropdown);
+  return wrap;
+}
+
+function makeNLPlayerACInput_state(field,initialValue){
+  const nlPlayers=WK_PLAYERS.filter(p=>p.team==='Nederland');
+  const wrap=document.createElement('div');wrap.style.position='relative';
+  const input=document.createElement('input');
+  input.className='extra-input';input.type='text';input.autocomplete='off';
+  input.placeholder='Zoek Nederlandse speler...';input.value=initialValue;
+  const dropdown=document.createElement('div');
+  dropdown.className='ac-dropdown';dropdown.style.display='none';
+  function getMatches(q){
+    if(!q)return nlPlayers.slice(0,10);
+    const ql=q.toLowerCase();
+    return nlPlayers.filter(p=>p.name.toLowerCase().includes(ql)).slice(0,10);
+  }
+  function renderDropdown(matches){
+    dropdown.innerHTML='';
+    if(!matches.length){dropdown.style.display='none';return;}
+    matches.forEach(p=>{
+      const item=document.createElement('div');item.className='ac-item';
+      const ps=POS_STYLE[p.position]||{color:'#aaa',bg:'#222',label:p.position};
+      item.innerHTML=`<span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:${ps.bg};color:${ps.color}">${ps.label}</span><span>${p.name}</span>`;
+      item.addEventListener('mousedown',e=>{e.preventDefault();input.value=p.name;state.extra[field]=p.name;dropdown.style.display='none';});
+      dropdown.appendChild(item);
+    });
+    dropdown.style.display='block';
+  }
+  input.addEventListener('input',()=>{state.extra[field]=input.value;renderDropdown(getMatches(input.value));});
+  input.addEventListener('focus',()=>{renderDropdown(getMatches(input.value));});
+  input.addEventListener('blur',()=>{setTimeout(()=>{dropdown.style.display='none';},150);});
   wrap.appendChild(input);wrap.appendChild(dropdown);
   return wrap;
 }
@@ -1723,10 +1762,6 @@ function submitEntry(){
     topscorers_ko:JSON.parse(JSON.stringify(state.topscorers_ko))};
   const entries=getEntries();entries.push(entry);setEntries(entries);
 
-  const jsonBlob=new Blob([JSON.stringify(entry,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(jsonBlob);
-  a.download='wkpoule_'+naam.replace(/\s+/g,'_')+'.json';a.click();
-
   const btn=document.getElementById('submit-btn');btn.textContent='Versturen...';btn.disabled=true;
   const jsonTekst=JSON.stringify(entry);
   let emailTekst='=== DE WK POULE 2026 ===\nNaam: '+naam+'\nSlogan: "'+slogan+'"\n\n--- TOPSCORERS POULEFASE ---\n';
@@ -1736,10 +1771,10 @@ function submitEntry(){
   emailTekst+='\n--- EXTRA ---\n';
   EXTRA_QS.forEach(q=>{emailTekst+=q.label+': '+(entry.extra[q.id]||'-')+'\n';});
 
- emailjs.send('service_1liqgli','template_1df3jsp',{
-  name:naam,
-  message:emailTekst+'\n\n--- JSON ---\n'+jsonTekst,
-  time:new Date().toLocaleString('nl-NL')
+  emailjs.send('service_1liqgli','template_1df3jsp',{
+    name:naam,
+    message:emailTekst+'\n\n--- JSON ---\n'+jsonTekst,
+    time:new Date().toLocaleString('nl-NL')
   })
     .then(()=>{
       btn.textContent='Opgeslagen & verstuurd! ✓';btn.classList.add('ok');btn.disabled=false;
@@ -1747,6 +1782,10 @@ function submitEntry(){
       alert('✅ Inzending opgeslagen!\n\nEr is automatisch een JSON-bestandje gedownload.\n\nStuur dit naar Ruben via: \n📧 voetbalpoules.ruben@gmail.com');
     })
     .catch(()=>{btn.textContent='Opgeslagen (e-mail mislukt)';btn.disabled=false;setTimeout(()=>{btn.textContent='Formulier inzenden ✓';},3000);});
+
+  const jsonBlob=new Blob([JSON.stringify(entry,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(jsonBlob);
+  a.download='wkpoule_'+naam.replace(/\s+/g,'_')+'.json';a.click();
 }
 
 // ── ADMIN INZENDINGEN ─────────────────────────────────────────────────────
