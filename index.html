@@ -1364,21 +1364,21 @@ function buildAdminTopscorers(){
 }
 
 function makePlayerACInput_admin(field,initialValue){
+  const nlPlayers=WK_PLAYERS.filter(p=>p.team==='Nederland');
   const wrap=document.createElement('div');wrap.style.position='relative';
   const input=document.createElement('input');
   input.className='extra-input';input.type='text';input.autocomplete='off';
-  input.placeholder='Zoek speler...';input.value=initialValue;
+  input.placeholder='Zoek Nederlandse speler...';input.value=initialValue;
   const dropdown=document.createElement('div');
   dropdown.className='ac-dropdown';dropdown.style.display='none';
   let activeIdx=-1;
-  function getMatches(q){if(!q||q.length<1)return[];const ql=q.toLowerCase();return WK_PLAYERS.filter(p=>p.name.toLowerCase().includes(ql)).slice(0,10);}
+  function getMatches(q){if(!q)return nlPlayers.slice(0,10);const ql=q.toLowerCase();return nlPlayers.filter(p=>p.name.toLowerCase().includes(ql)).slice(0,10);}
   function renderDropdown(matches){
     dropdown.innerHTML='';activeIdx=-1;
     if(!matches.length){dropdown.style.display='none';return;}
     matches.forEach(p=>{
       const item=document.createElement('div');item.className='ac-item';
-      const flag=FLAGS[p.team]||'';
-      item.innerHTML=`${playerBadge(p.position)}<span style="flex:1">${p.name}</span><span style="font-size:11px;color:var(--text2)">${flag} ${p.team}</span>`;
+      item.innerHTML=`${playerBadge(p.position)}<span style="flex:1">${p.name}</span>`;
       item.style.cssText='display:flex;align-items:center;gap:4px';
       item.addEventListener('mousedown',e=>{e.preventDefault();input.value=p.name;uitslagen.extra[field]=p.name;dropdown.style.display='none';});
       dropdown.appendChild(item);
@@ -1387,7 +1387,7 @@ function makePlayerACInput_admin(field,initialValue){
   }
   input.addEventListener('input',()=>{uitslagen.extra[field]=input.value;renderDropdown(getMatches(input.value));});
   input.addEventListener('blur',()=>{setTimeout(()=>{dropdown.style.display='none';},150);});
-  input.addEventListener('focus',()=>{if(input.value)renderDropdown(getMatches(input.value));});
+  input.addEventListener('focus',()=>{renderDropdown(getMatches(input.value));});
   wrap.appendChild(input);wrap.appendChild(dropdown);
   return wrap;
 }
@@ -1442,7 +1442,11 @@ function buildAdminExtra(){
   const w3ac=makePlayerACInput_admin('topscorer_nl',u.topscorer_nl||'');
   w3ac.style.flex='2';
   w3inner.appendChild(w3ac);
-  w3inner.innerHTML+=`<input class="extra-input" type="number" min="0" placeholder="Goals" value="${u.topscorer_nl_goals||''}" oninput="uitslagen.extra.topscorer_nl_goals=parseInt(this.value)||0" style="flex:1">`;
+  const w3goals=document.createElement('input');
+  w3goals.className='extra-input';w3goals.type='number';w3goals.min='0';w3goals.placeholder='Goals';
+  w3goals.value=u.topscorer_nl_goals||'';w3goals.style.flex='1';
+  w3goals.addEventListener('input',()=>{uitslagen.extra.topscorer_nl_goals=parseInt(w3goals.value)||0;});
+  w3inner.appendChild(w3goals);
   w3.appendChild(w3inner);
   c.appendChild(w3);
 
@@ -1453,15 +1457,22 @@ function buildAdminExtra(){
   const w4ac=makePlayerACInput_admin('kaart_nl',u.kaart_nl||'');
   w4ac.style.flex='2';w4ac.style.minWidth='150px';
   w4inner.appendChild(w4ac);
-  w4inner.innerHTML+=`
-    <div style="display:flex;gap:4px;align-items:center;flex:1">
-      <span style="font-size:11px;color:var(--text2)">🟨 Geel:</span>
-      <input class="extra-input" type="number" min="0" placeholder="0" value="${u.kaart_nl_geel||0}" oninput="uitslagen.extra.kaart_nl_geel=parseInt(this.value)||0" style="width:60px">
-    </div>
-    <div style="display:flex;gap:4px;align-items:center;flex:1">
-      <span style="font-size:11px;color:var(--text2)">🟥 Rood:</span>
-      <input class="extra-input" type="number" min="0" placeholder="0" value="${u.kaart_nl_rood||0}" oninput="uitslagen.extra.kaart_nl_rood=parseInt(this.value)||0" style="width:60px">
-    </div>`;
+  const w4geel=document.createElement('div');w4geel.style.cssText='display:flex;gap:4px;align-items:center;flex:1';
+  const w4geelInput=document.createElement('input');
+  w4geelInput.className='extra-input';w4geelInput.type='number';w4geelInput.min='0';w4geelInput.placeholder='0';
+  w4geelInput.value=u.kaart_nl_geel||0;w4geelInput.style.width='60px';
+  w4geelInput.addEventListener('input',()=>{uitslagen.extra.kaart_nl_geel=parseInt(w4geelInput.value)||0;});
+  w4geel.innerHTML='<span style="font-size:11px;color:var(--text2)">🟨 Geel:</span>';
+  w4geel.appendChild(w4geelInput);
+  w4inner.appendChild(w4geel);
+  const w4rood=document.createElement('div');w4rood.style.cssText='display:flex;gap:4px;align-items:center;flex:1';
+  const w4roodInput=document.createElement('input');
+  w4roodInput.className='extra-input';w4roodInput.type='number';w4roodInput.min='0';w4roodInput.placeholder='0';
+  w4roodInput.value=u.kaart_nl_rood||0;w4roodInput.style.width='60px';
+  w4roodInput.addEventListener('input',()=>{uitslagen.extra.kaart_nl_rood=parseInt(w4roodInput.value)||0;});
+  w4rood.innerHTML='<span style="font-size:11px;color:var(--text2)">🟥 Rood:</span>';
+  w4rood.appendChild(w4roodInput);
+  w4inner.appendChild(w4rood);
   w4.appendChild(w4inner);
   c.appendChild(w4);
 
