@@ -2024,11 +2024,11 @@ function buildOverzicht(){
       const realMatch=uitslagen.groups[gk]?.[normKey];
       const rh=a<b?realMatch?.home:realMatch?.away,ra=a<b?realMatch?.away:realMatch?.home;
       const realStr=realMatch&&(realMatch.home!==''||realMatch.away!=='')?`${rh}-${ra}`:'–';
-      html+=`<tr><td style="white-space:nowrap;color:var(--text2)">${f(teams[a])} ${teams[a]} – ${f(teams[b])} ${teams[b]}</td><td style="text-align:center;font-weight:600;color:var(--blue-text)">${realStr}</td>`;
+      html+=`<tr><td style="white-space:nowrap;color:var(--text2)">${f(teams[a])} ${teams[a]} – ${f(teams[b])} ${teams[b]}</td><td style="text-align:center;font-weight:600;color:var(--blue-text);white-space:nowrap">${realStr}</td>`;
       entries.forEach(e=>{
         const match=e.groups?.[gk]?.matches?.[normKey];
         const hv=a<b?match?.home:match?.away,av=a<b?match?.away:match?.home;
-        html+=`<td style="text-align:center">${match&&(match.home!==''||match.away!=='')?((hv!==''?hv:'?')+'-'+(av!==''?av:'?')):'-'}</td>`;
+        html+=`<td style="text-align:center;white-space:nowrap">${match&&(match.home!==''||match.away!=='')?((hv!==''?hv:'?')+'-'+(av!==''?av:'?')):'-'}</td>`;
       });
       html+='</tr>';
     });
