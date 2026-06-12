@@ -1,0 +1,16 @@
+{
+  "name": "WK Poule 2026 - Jouw Aars is Wahed Paars",
+  "short_name": "WK Poule JAiWP",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1c1510",
+  "theme_color": "#F28522",
+  "icons": [
+    {
+      "src": "Logo_app/apple-touch-icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
