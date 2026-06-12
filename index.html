@@ -34,8 +34,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cd-sub{font-size:10px;color:var(--text3);margin-top:2px;}
 .pub-banner{background:var(--green-bg);border:.5px solid var(--green-border);border-radius:var(--radius);padding:.65rem 1rem;font-size:13px;color:var(--green-text);margin-bottom:1rem;text-align:center;display:none;}
 .pub-banner a{color:var(--green-text);font-weight:600;}
-.lock-banner{background:#2A0A0A;border:.5px solid #7A3030;border-radius:var(--radius);padding:.75rem 1rem;font-size:13px;color:#F09595;margin-bottom:1rem;text-align:center;display:none;}
-body.deadline-locked .lock-banner{display:block;}
+.lock-banner{background:var(--bg2);border:.5px solid var(--amber-border);border-radius:var(--radius);padding:.75rem 1rem;font-size:13px;color:var(--text1);margin-bottom:1rem;text-align:center;display:none;}
+body.deadline-locked:not(.deadline2-locked) .lock-banner{display:block;}
 .tab-bar{display:flex;gap:3px;margin-bottom:1.25rem;background:var(--bg2);border-radius:var(--radius-lg);padding:4px;border:.5px solid var(--border);overflow-x:auto;}
 .tab{flex:1;min-width:fit-content;padding:8px 6px;text-align:center;font-size:11px;font-weight:500;border:none;background:transparent;cursor:pointer;border-radius:8px;color:var(--text2);transition:all .15s;white-space:nowrap;}
 .tab.active{background:var(--amber-bg);color:var(--orange);border:.5px solid var(--amber-border);}
@@ -192,7 +192,7 @@ body.deadline-locked .lock-banner{display:block;}
   Poulefase gepubliceerd &mdash;
   <a href="#" onclick="showTab('ranglijst');return false;">bekijk de ranglijst</a>
 </div>
-<div class="lock-banner" id="lock-banner">🔒 De deadline is verstreken — het formulier is gesloten en kan niet meer worden ingevuld of ingestuurd.</div>
+<div class="lock-banner" id="lock-banner">🏆 Poulefase zit erop! Vergeet niet je <strong>knock-out voorspellingen</strong> in te vullen vóór deadline 2.</div>
 
 <div class="tab-bar">
   <button class="tab active" onclick="showTab('welkom')">Welkom</button>
@@ -1674,6 +1674,7 @@ function lockForm(){
     document.querySelectorAll('.extra-input').forEach(el=>{if(!el.closest('#sec-admin')&&!el.closest('[id^="ts-wrap-ko"]')) el.disabled=true;});
   }
   if(l2){
+    document.body.classList.add('deadline2-locked');
     document.querySelectorAll('.ko-input').forEach(el=>el.disabled=true);
     const rb=document.getElementById('refresh-r32-btn');if(rb) rb.disabled=true;
   }
