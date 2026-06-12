@@ -1659,10 +1659,20 @@ function showTab(tab){
 
 function updateProgress(){
   let filled=0,total=0;
+  if(isDeadline1Passed()){
+    KO_ROUNDS.filter(r=>r.key!=='r32').forEach(r=>{
+      for(let i=0;i<r.n;i++){const m=state.ko[r.key+'_'+i]||{};total+=2;if(m.home!=='')filled++;if(m.away!=='')filled++;}
+    });
+    (state.topscorers_ko||[]).forEach(p=>{total++;if(p&&p!=='')filled++;});
+    const pct=total>0?Math.round(filled/total*100):0;
+    const fill=document.getElementById('progress-fill');if(fill) fill.style.width=pct+'%';
+    const info=document.getElementById('progress-info');if(info) info.textContent=filled+' van '+total+' knock-out voorspellingen ingevuld ('+pct+'%)';
+  } else {
   Object.values(state.groups).forEach(g=>Object.values(g.matches).forEach(m=>{total+=2;if(m.home!=='')filled++;if(m.away!=='')filled++;}));
   const pct=total>0?Math.round(filled/total*100):0;
   const fill=document.getElementById('progress-fill');if(fill) fill.style.width=pct+'%';
   const info=document.getElementById('progress-info');if(info) info.textContent=filled+' van '+total+' pouleuitslagen ingevuld ('+pct+'%)';
+  }
 }
 
 // ── COUNTDOWN & LOCK ──────────────────────────────────────────────────────
@@ -1678,7 +1688,7 @@ function lockForm(){
     document.querySelectorAll('.ko-input').forEach(el=>el.disabled=true);
     const rb=document.getElementById('refresh-r32-btn');if(rb) rb.disabled=true;
   }
-  if(l1){
+  if(l2){
     const btn=document.getElementById('submit-btn');
     if(btn){btn.disabled=true;btn.textContent='Deadline verstreken — inzenden niet meer mogelijk';}
     const sb=document.getElementById('save-progress-btn');if(sb) sb.disabled=true;
@@ -1761,7 +1771,7 @@ function loadProgress(){
 
 // ── EMAIL & INZENDEN ──────────────────────────────────────────────────────
 function submitEntry(){
-  if(isDeadline1Passed()){alert('De deadline is verstreken. Je kunt niet meer inzenden.');return;}
+  if(isDeadline2Passed()){alert('De deadline is verstreken. Je kunt niet meer inzenden.');return;}
   const naam=document.getElementById('naam-input').value.trim();
   const slogan=document.getElementById('slogan-input').value.trim();
   if(!naam){alert('Vul eerst je naam in!');return;}
