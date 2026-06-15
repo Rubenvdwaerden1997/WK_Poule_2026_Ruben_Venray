@@ -828,7 +828,7 @@ function buildGroupsViewer(entry1,entry2){
             pts=pT===rT?(ph===rh&&pa===ra?45:30):0;
           }
         }
-        const ptsHtml=pts!==null?`<span style="font-size:9px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
+        const ptsHtml=pts!==null?`<span style="font-size:9px;color:${pts>0?'var(--green-text)':'var(--red-text)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
         scoreCells+=`<div style="text-align:center;min-width:60px">
           <div style="font-size:12px">${hv!==''?hv:'-'} - ${av!==''?av:'-'}</div>
           ${ptsHtml}
@@ -856,7 +856,7 @@ function buildGroupsViewer(entry1,entry2){
         if(realStanding.filter(x=>x).length){
           landPts=(!isNaN(pos)&&pos>=1&&pos<=4&&realStanding[pos-1]===t)?25:0;
         }
-        const landPtsHtml=landPts!==null?`<span style="font-size:9px;color:${landPts>0?'var(--green-text)':'var(--text3)'}">${landPts>0?'+'+landPts+'pt':'0pt'}</span>`:'';
+        const landPtsHtml=landPts!==null?`<span style="font-size:9px;color:${landPts>0?'var(--green-text)':'var(--red-text)'}">${landPts>0?'+'+landPts+'pt':'0pt'}</span>`:'';
         cellsHtml+=`<div style="text-align:center;min-width:50px">${pos===9?'?':pos}e ${landPtsHtml}</div>`;
       });
       sh+=`<div style="font-size:12px;padding:3px 0;color:var(--text2);display:flex;align-items:center;gap:6px;border-bottom:.5px solid var(--border)">
