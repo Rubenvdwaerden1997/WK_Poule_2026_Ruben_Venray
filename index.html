@@ -573,6 +573,7 @@ const KO_ROUNDS=[
   {label:'Achtste finales',key:'af',n:8,pts:90,bonus:0},
   {label:'Kwartfinales',key:'kf',n:4,pts:120,bonus:0},
   {label:'Halve finales',key:'hf',n:2,pts:150,bonus:0},
+  {label:'3e/4e plaats',key:'d3',n:1,pts:180,bonus:0},
   {label:'Finale',key:'fin',n:1,pts:180,bonus:0}
 ];
 const R32_LABELS=[
@@ -582,14 +583,27 @@ const R32_LABELS=[
   {home:'1B',away:'3E/F/G/I/J'},{home:'1J',away:'2H'},{home:'1K',away:'3D/E/I/J/L'},{home:'2D',away:'2G'},
 ];
 const AF_LABELS=[
-  {home:'W73',away:'W74'},{home:'W75',away:'W76'},{home:'W77',away:'W78'},{home:'W79',away:'W80'},
-  {home:'W81',away:'W82'},{home:'W83',away:'W84'},{home:'W85',away:'W86'},{home:'W87',away:'W88'},
+  {home:'W74',away:'W77'},{home:'W73',away:'W75'},{home:'W76',away:'W78'},{home:'W79',away:'W80'},
+  {home:'W83',away:'W84'},{home:'W81',away:'W82'},{home:'W86',away:'W88'},{home:'W85',away:'W87'},
 ];
 const KF_LABELS=[
-  {home:'W(73/74)',away:'W(75/76)'},{home:'W(77/78)',away:'W(79/80)'},
-  {home:'W(81/82)',away:'W(83/84)'},{home:'W(85/86)',away:'W(87/88)'},
+  {home:'W89',away:'W90'},{home:'W93',away:'W94'},
+  {home:'W91',away:'W92'},{home:'W95',away:'W96'},
 ];
+const KO_DATES={
+  r32_0:{d:'Zo 28 jun',t:'21:00'},r32_1:{d:'Ma 29 jun',t:'22:30'},r32_2:{d:'Di 30 jun',t:'03:00'},r32_3:{d:'Ma 29 jun',t:'19:00'},
+  r32_4:{d:'Di 30 jun',t:'23:00'},r32_5:{d:'Di 30 jun',t:'19:00'},r32_6:{d:'Wo 1 jul', t:'03:00'},r32_7:{d:'Wo 1 jul', t:'18:00'},
+  r32_8:{d:'Do 2 jul', t:'02:00'},r32_9:{d:'Wo 1 jul', t:'22:00'},r32_10:{d:'Vr 3 jul',t:'01:00'},r32_11:{d:'Do 2 jul', t:'21:00'},
+  r32_12:{d:'Vr 3 jul',t:'05:00'},r32_13:{d:'Za 4 jul',t:'00:00'},r32_14:{d:'Za 4 jul',t:'03:30'},r32_15:{d:'Vr 3 jul',t:'20:00'},
+  af_0:{d:'Za 4 jul',t:'23:00'},af_1:{d:'Za 4 jul',t:'19:00'},af_2:{d:'Zo 5 jul',t:'22:00'},af_3:{d:'Ma 6 jul',t:'02:00'},
+  af_4:{d:'Ma 6 jul',t:'21:00'},af_5:{d:'Di 7 jul',t:'02:00'},af_6:{d:'Di 7 jul',t:'18:00'},af_7:{d:'Di 7 jul',t:'22:00'},
+  kf_0:{d:'Do 9 jul',t:'22:00'},kf_1:{d:'Vr 10 jul',t:'21:00'},kf_2:{d:'Za 11 jul',t:'23:00'},kf_3:{d:'Zo 12 jul',t:'03:00'},
+  hf_0:{d:'Di 14 jul',t:'21:00'},hf_1:{d:'Wo 15 jul',t:'21:00'},
+  d3_0:{d:'Za 18 jul',t:'23:00'},
+  fin_0:{d:'Zo 19 jul',t:'21:00'},
+};
 const HF_LABELS=[{home:'W97',away:'W98'},{home:'W99',away:'W100'}];
+const D3_LABELS=[{home:'V101',away:'V102'}];
 const FIN_LABELS=[{home:'W101',away:'W102'}];
 
 // Topscorer posities
@@ -950,6 +964,7 @@ function buildKO(){
       if(r.key==='af'&&AF_LABELS[i]){lbl_home=AF_LABELS[i].home;lbl_away=AF_LABELS[i].away;}
       if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
       if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
+      if(r.key==='d3'&&D3_LABELS[i]){lbl_home=D3_LABELS[i].home;lbl_away=D3_LABELS[i].away;}
       if(r.key==='fin'&&FIN_LABELS[i]){lbl_home=FIN_LABELS[i].home;lbl_away=FIN_LABELS[i].away;}
       const matchDiv=document.createElement('div');matchDiv.className='ko-match';
       const homeDiv=document.createElement('div');homeDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
@@ -959,7 +974,7 @@ function buildKO(){
       homeAC.querySelector('input').disabled=locked;
       homeDiv.appendChild(homeAC);
       const vsDiv=document.createElement('div');vsDiv.className='ko-label';
-      const _mOff={af:88,kf:96,hf:100,fin:102}[r.key];
+      const _mOff={af:88,kf:96,hf:100,d3:102,fin:103}[r.key];
       vsDiv.innerHTML=`vs<br><span style="font-size:9px">M${_mOff+i+1}</span>`;
       const awayDiv=document.createElement('div');awayDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
       const awayBracket=document.createElement('div');awayBracket.className='ko-bracket';awayBracket.textContent=lbl_away;
@@ -1005,6 +1020,7 @@ function buildKOViewer(entry1,entry2){
       if(r.key==='af'&&AF_LABELS[i]){lbl_home=AF_LABELS[i].home;lbl_away=AF_LABELS[i].away;}
       if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
       if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
+      if(r.key==='d3'&&D3_LABELS[i]){lbl_home=D3_LABELS[i].home;lbl_away=D3_LABELS[i].away;}
       if(r.key==='fin'&&FIN_LABELS[i]){lbl_home=FIN_LABELS[i].home;lbl_away=FIN_LABELS[i].away;}
       const matchDiv=document.createElement('div');matchDiv.className='ko-match';
       // Build cells per entry
@@ -1027,7 +1043,7 @@ function buildKOViewer(entry1,entry2){
           <div class="ko-bracket">${lbl_home}</div>
           <div style="display:flex;gap:4px">${homeCells}</div>
         </div>
-        <div class="ko-label">vs<br><span style="font-size:9px">M${{af:88,kf:96,hf:100,fin:102}[r.key]+i+1}</span></div>
+        <div class="ko-label">vs<br><span style="font-size:9px">M${{af:88,kf:96,hf:100,d3:102,fin:103}[r.key]+i+1}</span></div>
         <div style="display:flex;flex-direction:column;gap:3px">
           <div class="ko-bracket">${lbl_away}</div>
           <div style="display:flex;gap:4px">${awayCells}</div>
@@ -1326,13 +1342,14 @@ function buildAdminKO(){
       if(r.key==='af'&&AF_LABELS[i]){lbl_home=AF_LABELS[i].home;lbl_away=AF_LABELS[i].away;}
       if(r.key==='kf'&&KF_LABELS[i]){lbl_home=KF_LABELS[i].home;lbl_away=KF_LABELS[i].away;}
       if(r.key==='hf'&&HF_LABELS[i]){lbl_home=HF_LABELS[i].home;lbl_away=HF_LABELS[i].away;}
+      if(r.key==='d3'&&D3_LABELS[i]){lbl_home=D3_LABELS[i].home;lbl_away=D3_LABELS[i].away;}
       if(r.key==='fin'&&FIN_LABELS[i]){lbl_home=FIN_LABELS[i].home;lbl_away=FIN_LABELS[i].away;}
       const matchDiv=document.createElement('div');matchDiv.className='ko-match';
       const homeDiv=document.createElement('div');homeDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
       const homeBracket=document.createElement('div');homeBracket.className='ko-bracket';homeBracket.textContent=lbl_home;
       homeDiv.appendChild(homeBracket);homeDiv.appendChild(makeACInput(uitslagen.ko,id,'home',lbl_home,uitslagen.ko[id].home,onAdminKOChange));
       const vsDiv=document.createElement('div');vsDiv.className='ko-label';
-      vsDiv.innerHTML='vs<br><span style="font-size:9px">M'+({r32:72,af:88,kf:96,hf:100,fin:102}[r.key]+i+1)+'</span>';
+      vsDiv.innerHTML='vs<br><span style="font-size:9px">M'+({r32:72,af:88,kf:96,hf:100,d3:102,fin:103}[r.key]+i+1)+'</span>';
       const awayDiv=document.createElement('div');awayDiv.style.cssText='display:flex;flex-direction:column;gap:3px';
       const awayBracket=document.createElement('div');awayBracket.className='ko-bracket';awayBracket.textContent=lbl_away;
       awayDiv.appendChild(awayBracket);awayDiv.appendChild(makeACInput(uitslagen.ko,id,'away',lbl_away,uitslagen.ko[id].away,onAdminKOChange));
@@ -1988,28 +2005,32 @@ function handleUitslagenImport(input){
 }
 
 // ── OVERZICHT ─────────────────────────────────────────────────────────────
+function parseDatumNr(d){const p=d.split(' ');return(p[2]==='jun'?6:7)*100+parseInt(p[1]);}
 function buildDagFilter(){
-  const dates=[...new Set(GROUP_MATCHES.map(m=>m.d))];
+  const grpDates=[...new Set(GROUP_MATCHES.map(m=>m.d))];
+  const koDates=[...new Set(Object.values(KO_DATES).map(v=>v.d))];
+  const allDates=[...new Set([...grpDates,...koDates])].sort((a,b)=>parseDatumNr(a)-parseDatumNr(b));
   const fc=document.getElementById('dag-filter');if(!fc)return;
-  fc.innerHTML=dates.map(d=>`<button class="dag-btn" onclick="buildDagOverzicht('${d}')">${d}</button>`).join('');
-  const today=new Date();
-  const dag=today.getDate();const maand=today.getMonth();
-  if(maand===5){
-    const todayD=dates.find(d=>{const parts=d.split(' ');return parseInt(parts[1])===dag;});
+  fc.innerHTML=allDates.map(d=>`<button class="dag-btn" onclick="buildDagOverzicht('${d}')">${d}</button>`).join('');
+  const today=new Date();const dag=today.getDate();const maand=today.getMonth();
+  if(maand===5||maand===6){
+    const ms=maand===5?'jun':'jul';
+    const todayD=allDates.find(d=>{const p=d.split(' ');return parseInt(p[1])===dag&&p[2]===ms;});
     if(todayD) buildDagOverzicht(todayD);
   }
 }
 
 function buildDagOverzicht(datum){
-  const entries=getEntries();
-  const matches=GROUP_MATCHES.filter(m=>m.d===datum);
-  const names=entries.map(e=>e.naam);
+  const entries=getEntries();const names=entries.map(e=>e.naam);
   const dc=document.getElementById('dag-card');if(!dc)return;
   document.querySelectorAll('.dag-btn').forEach(b=>{b.classList.toggle('active',b.textContent===datum);});
-  if(!matches.length){dc.innerHTML='';return;}
+  const grpMatches=GROUP_MATCHES.filter(m=>m.d===datum);
+  const koMatches=[];
+  KO_ROUNDS.forEach(r=>{for(let i=0;i<r.n;i++){const id=r.key+'_'+i;if(KO_DATES[id]?.d===datum)koMatches.push({id,r,i});}});
+  if(!grpMatches.length&&!koMatches.length){dc.innerHTML='';return;}
   let html=`<div class="card" style="border-color:var(--amber-border)"><h3 style="color:var(--orange);margin-bottom:.75rem">${datum}</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Wedstrijd</th><th style="text-align:center">Tijd</th><th style="background:var(--blue-bg);color:var(--blue-text);text-align:center">✓</th>`;
   names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
-  matches.forEach(m=>{
+  grpMatches.forEach(m=>{
     const teams=GROUPS[m.g];const a=m.a,b=m.b,normKey=a<b?a+'_'+b:b+'_'+a;
     const rm=uitslagen.groups[m.g]?.[normKey];
     const rh=a<b?rm?.home:rm?.away,ra=a<b?rm?.away:rm?.home;
@@ -2022,6 +2043,18 @@ function buildDagOverzicht(datum){
       const hv=a<b?match?.home:match?.away,av=a<b?match?.away:match?.home;
       html+=`<td style="text-align:center;white-space:nowrap">${match&&(match.home!==''||match.away!=='')?((hv!==''?hv:'?')+'-'+(av!==''?av:'?')):'-'}</td>`;
     });
+    html+='</tr>';
+  });
+  const koLabelArrs={r32:R32_LABELS,af:AF_LABELS,kf:KF_LABELS,hf:HF_LABELS,d3:D3_LABELS,fin:FIN_LABELS};
+  koMatches.forEach(({id,r,i})=>{
+    const kd=KO_DATES[id];const lbl=koLabelArrs[r.key]?.[i];
+    const matchLabel=lbl?`${lbl.home} – ${lbl.away}`:`${r.label} #${i+1}`;
+    const real=uitslagen.ko?.[id];
+    const realStr=real&&(real.home||real.away)?(real.home||'?')+'-'+(real.away||'?'):'–';
+    html+=`<tr><td style="white-space:nowrap;color:var(--text2)">${matchLabel}</td>`;
+    html+=`<td style="text-align:center;color:var(--text3);font-size:11px">${kd?.t||''}</td>`;
+    html+=`<td style="text-align:center;font-weight:600;color:var(--blue-text);white-space:nowrap">${realStr}</td>`;
+    entries.forEach(e=>{const m=e.ko?.[id];html+=`<td style="text-align:center">${m&&(m.home||m.away)?(m.home||'?')+'-'+(m.away||'?'):'-'}</td>`;});
     html+='</tr>';
   });
   html+='</table></div></div>';
@@ -2071,13 +2104,13 @@ function buildOverzicht(){
   html+='</table></div></div>';
 
   // KO
-  html+=`<div class="card"><h3>Knock-out</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Ronde</th><th>#</th><th style="background:var(--blue-bg);color:var(--blue-text)">✓</th>`;
+  html+=`<div class="card"><h3>Knock-out</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Ronde</th><th>#</th><th>Datum</th><th style="background:var(--blue-bg);color:var(--blue-text)">✓</th>`;
   names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
   KO_ROUNDS.forEach(r=>{
     for(let i=0;i<r.n;i++){
-      const id=r.key+'_'+i;const real=uitslagen.ko?.[id];
+      const id=r.key+'_'+i;const real=uitslagen.ko?.[id];const kd=KO_DATES[id];
       const realStr=real&&(real.home||real.away)?(real.home||'?')+'-'+(real.away||'?'):'–';
-      html+=`<tr><td style="color:var(--text2)">${r.label}</td><td>${r.n>1?i+1:'-'}</td><td style="text-align:center;font-weight:600;color:var(--blue-text)">${realStr}</td>`;
+      html+=`<tr><td style="color:var(--text2)">${r.label}</td><td>${r.n>1?i+1:'-'}</td><td style="color:var(--text3);font-size:11px;white-space:nowrap">${kd?kd.d+' '+kd.t:'–'}</td><td style="text-align:center;font-weight:600;color:var(--blue-text);white-space:nowrap">${realStr}</td>`;
       entries.forEach(e=>{const m=e.ko?.[id];html+=`<td style="text-align:center">${m&&(m.home||m.away)?(m.home||'?')+'-'+(m.away||'?'):'-'}</td>`;});
       html+='</tr>';
     }
