@@ -128,6 +128,10 @@ body.deadline-locked:not(.deadline2-locked) .lock-banner{display:block;}
 .ov-table th:first-child{text-align:left;}
 .ov-table td{padding:5px 8px;border-bottom:.5px solid var(--border);}
 .ov-wrap{overflow-x:auto;border-radius:var(--radius);border:.5px solid var(--border);margin-bottom:1rem;}
+.dag-filter{overflow-x:auto;white-space:nowrap;margin-bottom:.75rem;padding-bottom:4px;}
+.dag-btn{display:inline-block;padding:5px 10px;margin:0 3px 4px 0;font-size:11px;font-weight:500;border:.5px solid var(--border2);border-radius:6px;background:var(--bg2);color:var(--text2);cursor:pointer;}
+.dag-btn.active{background:var(--amber-bg);color:var(--orange);border-color:var(--amber-border);}
+.dag-btn:hover:not(.active){background:var(--bg3);}
 .autosave-info{font-size:12px;color:var(--text2);padding:0 .25rem;margin-top:.25rem;min-height:16px;}
 .section-title{font-size:16px;font-weight:700;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border);}
 /* ── VIEWER DROPDOWN ── */
@@ -369,6 +373,8 @@ body.deadline-locked:not(.deadline2-locked) .lock-banner{display:block;}
     <div style="font-size:12px;color:var(--text2)">Gepubliceerd door de admin</div></div>
     <button class="btn btn-blue btn-sm" onclick="exportPDF()">PDF</button>
   </div>
+  <div id="dag-filter" class="dag-filter"></div>
+  <div id="dag-card" style="margin-bottom:1rem"></div>
   <div id="overzicht-container"></div>
 </div>
 
@@ -474,74 +480,74 @@ const f=t=>FLAGS[t]||'';
 const GROUP_MATCHES=[
   {g:'A',d:'Do 11 jun',t:'21:00',stad:'Mexico City',a:0,b:1},
   {g:'A',d:'Vr 12 jun',t:'04:00',stad:'',a:2,b:3},
-  {g:'A',d:'Wo 18 jun',t:'18:00',stad:'',a:3,b:1},
-  {g:'A',d:'Do 19 jun',t:'03:00',stad:'',a:0,b:2},
+  {g:'A',d:'Do 18 jun',t:'18:00',stad:'',a:3,b:1},
+  {g:'A',d:'Vr 19 jun',t:'03:00',stad:'',a:0,b:2},
   {g:'A',d:'Do 25 jun',t:'03:00',stad:'',a:3,b:0},
   {g:'A',d:'Do 25 jun',t:'03:00',stad:'',a:1,b:2},
   {g:'B',d:'Vr 12 jun',t:'21:00',stad:'Toronto',a:0,b:1},
   {g:'B',d:'Za 13 jun',t:'21:00',stad:'',a:2,b:3},
-  {g:'B',d:'Wo 18 jun',t:'21:00',stad:'',a:3,b:1},
-  {g:'B',d:'Do 19 jun',t:'00:00',stad:'',a:0,b:2},
+  {g:'B',d:'Do 18 jun',t:'21:00',stad:'',a:3,b:1},
+  {g:'B',d:'Vr 19 jun',t:'00:00',stad:'',a:0,b:2},
   {g:'B',d:'Wo 24 jun',t:'21:00',stad:'',a:3,b:0},
   {g:'B',d:'Wo 24 jun',t:'21:00',stad:'',a:1,b:2},
-  {g:'C',d:'Za 14 jun',t:'00:00',stad:'East Rutherford',a:0,b:1},
-  {g:'C',d:'Za 14 jun',t:'03:00',stad:'Foxborough',a:2,b:3},
-  {g:'C',d:'Vr 20 jun',t:'00:00',stad:'',a:3,b:1},
-  {g:'C',d:'Vr 20 jun',t:'03:00',stad:'',a:0,b:2},
+  {g:'C',d:'Zo 14 jun',t:'00:00',stad:'East Rutherford',a:0,b:1},
+  {g:'C',d:'Zo 14 jun',t:'03:00',stad:'Foxborough',a:2,b:3},
+  {g:'C',d:'Za 20 jun',t:'00:00',stad:'',a:3,b:1},
+  {g:'C',d:'Za 20 jun',t:'03:00',stad:'',a:0,b:2},
   {g:'C',d:'Do 25 jun',t:'00:00',stad:'',a:3,b:0},
   {g:'C',d:'Do 25 jun',t:'00:00',stad:'',a:1,b:2},
-  {g:'D',d:'Vr 13 jun',t:'03:00',stad:'Inglewood',a:0,b:1},
-  {g:'D',d:'Za 14 jun',t:'06:00',stad:'Vancouver',a:2,b:3},
-  {g:'D',d:'Do 19 jun',t:'21:00',stad:'',a:0,b:2},
-  {g:'D',d:'Vr 20 jun',t:'06:00',stad:'',a:3,b:1},
+  {g:'D',d:'Za 13 jun',t:'03:00',stad:'Inglewood',a:0,b:1},
+  {g:'D',d:'Zo 14 jun',t:'06:00',stad:'Vancouver',a:2,b:3},
+  {g:'D',d:'Vr 19 jun',t:'21:00',stad:'',a:0,b:2},
+  {g:'D',d:'Za 20 jun',t:'06:00',stad:'',a:3,b:1},
   {g:'D',d:'Vr 26 jun',t:'04:00',stad:'',a:3,b:0},
   {g:'D',d:'Vr 26 jun',t:'04:00',stad:'',a:1,b:2},
-  {g:'E',d:'Za 14 jun',t:'19:00',stad:'Houston',a:0,b:1},
-  {g:'E',d:'Zo 15 jun',t:'01:00',stad:'Philadelphia',a:2,b:3},
-  {g:'E',d:'Vr 20 jun',t:'22:00',stad:'',a:0,b:2},
-  {g:'E',d:'Za 21 jun',t:'02:00',stad:'',a:3,b:1},
+  {g:'E',d:'Zo 14 jun',t:'19:00',stad:'Houston',a:0,b:1},
+  {g:'E',d:'Ma 15 jun',t:'01:00',stad:'Philadelphia',a:2,b:3},
+  {g:'E',d:'Za 20 jun',t:'22:00',stad:'',a:0,b:2},
+  {g:'E',d:'Zo 21 jun',t:'02:00',stad:'',a:3,b:1},
   {g:'E',d:'Do 25 jun',t:'22:00',stad:'',a:3,b:0},
   {g:'E',d:'Do 25 jun',t:'22:00',stad:'',a:1,b:2},
-  {g:'F',d:'Za 14 jun',t:'22:00',stad:'Arlington',a:0,b:1},
-  {g:'F',d:'Zo 15 jun',t:'04:00',stad:'Guadalupe',a:2,b:3},
-  {g:'F',d:'Vr 20 jun',t:'06:00',stad:'',a:3,b:1},
-  {g:'F',d:'Vr 20 jun',t:'19:00',stad:'',a:0,b:2},
+  {g:'F',d:'Zo 14 jun',t:'22:00',stad:'Arlington',a:0,b:1},
+  {g:'F',d:'Ma 15 jun',t:'04:00',stad:'Guadalupe',a:2,b:3},
+  {g:'F',d:'Za 20 jun',t:'06:00',stad:'',a:3,b:1},
+  {g:'F',d:'Za 20 jun',t:'19:00',stad:'',a:0,b:2},
   {g:'F',d:'Vr 26 jun',t:'01:00',stad:'',a:1,b:2},
   {g:'F',d:'Vr 26 jun',t:'01:00',stad:'',a:3,b:0},
-  {g:'G',d:'Zo 15 jun',t:'21:00',stad:'Seattle',a:0,b:1},
-  {g:'G',d:'Ma 16 jun',t:'03:00',stad:'Inglewood',a:2,b:3},
-  {g:'G',d:'Za 21 jun',t:'21:00',stad:'',a:0,b:2},
-  {g:'G',d:'Zo 22 jun',t:'03:00',stad:'',a:3,b:1},
-  {g:'G',d:'Vr 27 jun',t:'05:00',stad:'',a:1,b:2},
-  {g:'G',d:'Vr 27 jun',t:'05:00',stad:'',a:3,b:0},
-  {g:'H',d:'Zo 15 jun',t:'18:00',stad:'Atlanta',a:0,b:1},
-  {g:'H',d:'Ma 16 jun',t:'00:00',stad:'Miami Gardens',a:2,b:3},
-  {g:'H',d:'Za 21 jun',t:'18:00',stad:'',a:0,b:2},
-  {g:'H',d:'Zo 22 jun',t:'00:00',stad:'',a:3,b:1},
-  {g:'H',d:'Vr 27 jun',t:'02:00',stad:'',a:1,b:2},
-  {g:'H',d:'Vr 27 jun',t:'02:00',stad:'',a:3,b:0},
-  {g:'I',d:'Ma 16 jun',t:'21:00',stad:'East Rutherford',a:0,b:1},
-  {g:'I',d:'Di 17 jun',t:'00:00',stad:'Foxborough',a:2,b:3},
-  {g:'I',d:'Zo 22 jun',t:'23:00',stad:'',a:0,b:2},
-  {g:'I',d:'Ma 23 jun',t:'02:00',stad:'',a:3,b:1},
-  {g:'I',d:'Do 26 jun',t:'21:00',stad:'',a:3,b:0},
-  {g:'I',d:'Do 26 jun',t:'21:00',stad:'',a:1,b:2},
-  {g:'J',d:'Di 17 jun',t:'03:00',stad:'Kansas City',a:0,b:1},
+  {g:'G',d:'Ma 15 jun',t:'21:00',stad:'Seattle',a:0,b:1},
+  {g:'G',d:'Di 16 jun',t:'03:00',stad:'Inglewood',a:2,b:3},
+  {g:'G',d:'Zo 21 jun',t:'21:00',stad:'',a:0,b:2},
+  {g:'G',d:'Ma 22 jun',t:'03:00',stad:'',a:3,b:1},
+  {g:'G',d:'Za 27 jun',t:'05:00',stad:'',a:1,b:2},
+  {g:'G',d:'Za 27 jun',t:'05:00',stad:'',a:3,b:0},
+  {g:'H',d:'Ma 15 jun',t:'18:00',stad:'Atlanta',a:0,b:1},
+  {g:'H',d:'Di 16 jun',t:'00:00',stad:'Miami Gardens',a:2,b:3},
+  {g:'H',d:'Zo 21 jun',t:'18:00',stad:'',a:0,b:2},
+  {g:'H',d:'Ma 22 jun',t:'00:00',stad:'',a:3,b:1},
+  {g:'H',d:'Za 27 jun',t:'02:00',stad:'',a:1,b:2},
+  {g:'H',d:'Za 27 jun',t:'02:00',stad:'',a:3,b:0},
+  {g:'I',d:'Di 16 jun',t:'21:00',stad:'East Rutherford',a:0,b:1},
+  {g:'I',d:'Wo 17 jun',t:'00:00',stad:'Foxborough',a:2,b:3},
+  {g:'I',d:'Ma 22 jun',t:'23:00',stad:'',a:0,b:2},
+  {g:'I',d:'Di 23 jun',t:'02:00',stad:'',a:3,b:1},
+  {g:'I',d:'Vr 26 jun',t:'21:00',stad:'',a:3,b:0},
+  {g:'I',d:'Vr 26 jun',t:'21:00',stad:'',a:1,b:2},
+  {g:'J',d:'Wo 17 jun',t:'03:00',stad:'Kansas City',a:0,b:1},
   {g:'J',d:'Di 16 jun',t:'06:00',stad:'Santa Clara',a:2,b:3},
-  {g:'J',d:'Zo 22 jun',t:'19:00',stad:'',a:0,b:2},
-  {g:'J',d:'Ma 23 jun',t:'05:00',stad:'',a:3,b:1},
-  {g:'J',d:'Za 28 jun',t:'04:00',stad:'',a:1,b:2},
-  {g:'J',d:'Za 28 jun',t:'04:00',stad:'',a:3,b:0},
-  {g:'K',d:'Di 17 jun',t:'19:00',stad:'Houston',a:0,b:1},
-  {g:'K',d:'Wo 18 jun',t:'04:00',stad:'Zapopan',a:2,b:3},
-  {g:'K',d:'Ma 23 jun',t:'19:00',stad:'',a:0,b:2},
-  {g:'K',d:'Di 24 jun',t:'04:00',stad:'',a:3,b:1},
-  {g:'K',d:'Za 28 jun',t:'01:30',stad:'',a:3,b:0},
-  {g:'K',d:'Za 28 jun',t:'01:30',stad:'',a:1,b:2},
-  {g:'L',d:'Di 17 jun',t:'22:00',stad:'Foxborough',a:0,b:1},
-  {g:'L',d:'Wo 18 jun',t:'01:00',stad:'Toronto',a:2,b:3},
-  {g:'L',d:'Ma 23 jun',t:'22:00',stad:'',a:0,b:2},
-  {g:'L',d:'Di 24 jun',t:'01:00',stad:'',a:3,b:1},
+  {g:'J',d:'Ma 22 jun',t:'19:00',stad:'',a:0,b:2},
+  {g:'J',d:'Di 23 jun',t:'05:00',stad:'',a:3,b:1},
+  {g:'J',d:'Zo 28 jun',t:'04:00',stad:'',a:1,b:2},
+  {g:'J',d:'Zo 28 jun',t:'04:00',stad:'',a:3,b:0},
+  {g:'K',d:'Wo 17 jun',t:'19:00',stad:'Houston',a:0,b:1},
+  {g:'K',d:'Do 18 jun',t:'04:00',stad:'Zapopan',a:2,b:3},
+  {g:'K',d:'Di 23 jun',t:'19:00',stad:'',a:0,b:2},
+  {g:'K',d:'Wo 24 jun',t:'04:00',stad:'',a:3,b:1},
+  {g:'K',d:'Zo 28 jun',t:'01:30',stad:'',a:3,b:0},
+  {g:'K',d:'Zo 28 jun',t:'01:30',stad:'',a:1,b:2},
+  {g:'L',d:'Wo 17 jun',t:'22:00',stad:'Foxborough',a:0,b:1},
+  {g:'L',d:'Do 18 jun',t:'01:00',stad:'Toronto',a:2,b:3},
+  {g:'L',d:'Di 23 jun',t:'22:00',stad:'',a:0,b:2},
+  {g:'L',d:'Wo 24 jun',t:'01:00',stad:'',a:3,b:1},
   {g:'L',d:'Za 27 jun',t:'23:00',stad:'',a:3,b:0},
   {g:'L',d:'Za 27 jun',t:'23:00',stad:'',a:1,b:2},
 ];
@@ -1637,7 +1643,7 @@ function buildRanglijst(){
 
 function toggleDetail(hd){
   const detail=hd.parentElement.querySelector('.rang-detail');
-  const arrow=hd.querySelector('div:last-child');
+  const arrow=hd.lastElementChild;
   detail.classList.toggle('open');
   arrow.textContent=detail.classList.contains('open')?'▲':'▼';
 }
@@ -1982,7 +1988,48 @@ function handleUitslagenImport(input){
 }
 
 // ── OVERZICHT ─────────────────────────────────────────────────────────────
+function buildDagFilter(){
+  const dates=[...new Set(GROUP_MATCHES.map(m=>m.d))];
+  const fc=document.getElementById('dag-filter');if(!fc)return;
+  fc.innerHTML=dates.map(d=>`<button class="dag-btn" onclick="buildDagOverzicht('${d}')">${d}</button>`).join('');
+  const today=new Date();
+  const dag=today.getDate();const maand=today.getMonth();
+  if(maand===5){
+    const todayD=dates.find(d=>{const parts=d.split(' ');return parseInt(parts[1])===dag;});
+    if(todayD) buildDagOverzicht(todayD);
+  }
+}
+
+function buildDagOverzicht(datum){
+  const entries=getEntries();
+  const matches=GROUP_MATCHES.filter(m=>m.d===datum);
+  const names=entries.map(e=>e.naam);
+  const dc=document.getElementById('dag-card');if(!dc)return;
+  document.querySelectorAll('.dag-btn').forEach(b=>{b.classList.toggle('active',b.textContent===datum);});
+  if(!matches.length){dc.innerHTML='';return;}
+  let html=`<div class="card" style="border-color:var(--amber-border)"><h3 style="color:var(--orange);margin-bottom:.75rem">${datum}</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Wedstrijd</th><th style="text-align:center">Tijd</th><th style="background:var(--blue-bg);color:var(--blue-text);text-align:center">✓</th>`;
+  names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
+  matches.forEach(m=>{
+    const teams=GROUPS[m.g];const a=m.a,b=m.b,normKey=a<b?a+'_'+b:b+'_'+a;
+    const rm=uitslagen.groups[m.g]?.[normKey];
+    const rh=a<b?rm?.home:rm?.away,ra=a<b?rm?.away:rm?.home;
+    const realStr=rm&&(rm.home!==''||rm.away!=='')?`${rh}-${ra}`:'–';
+    html+=`<tr><td style="white-space:nowrap;color:var(--text2)">${f(teams[a])} ${teams[a]} – ${f(teams[b])} ${teams[b]}</td>`;
+    html+=`<td style="text-align:center;color:var(--text3);font-size:11px">${m.t}</td>`;
+    html+=`<td style="text-align:center;font-weight:600;color:var(--blue-text);white-space:nowrap">${realStr}</td>`;
+    entries.forEach(e=>{
+      const match=e.groups?.[m.g]?.matches?.[normKey];
+      const hv=a<b?match?.home:match?.away,av=a<b?match?.away:match?.home;
+      html+=`<td style="text-align:center;white-space:nowrap">${match&&(match.home!==''||match.away!=='')?((hv!==''?hv:'?')+'-'+(av!==''?av:'?')):'-'}</td>`;
+    });
+    html+='</tr>';
+  });
+  html+='</table></div></div>';
+  dc.innerHTML=html;
+}
+
 function buildOverzicht(){
+  buildDagFilter();
   const entries=getEntries();const c=document.getElementById('overzicht-container');
   if(!entries.length){c.innerHTML='<p style="color:var(--text2);font-size:13px">Geen inzendingen.</p>';return;}
   const names=entries.map(e=>e.naam);let html='';
