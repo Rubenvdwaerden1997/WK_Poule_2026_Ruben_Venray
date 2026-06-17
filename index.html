@@ -131,6 +131,7 @@ body.deadline-locked:not(.deadline2-locked) .lock-banner{display:block;}
 .dag-filter{overflow-x:auto;white-space:nowrap;margin-bottom:.75rem;padding-bottom:4px;}
 .dag-btn{display:inline-block;padding:5px 10px;margin:0 3px 4px 0;font-size:11px;font-weight:500;border:.5px solid var(--border2);border-radius:6px;background:var(--bg2);color:var(--text2);cursor:pointer;}
 .dag-btn.active{background:var(--amber-bg);color:var(--orange);border-color:var(--amber-border);}
+.dag-btn.today{box-shadow:0 0 0 2px var(--orange);}
 .dag-btn:hover:not(.active){background:var(--bg3);}
 .autosave-info{font-size:12px;color:var(--text2);padding:0 .25rem;margin-top:.25rem;min-height:16px;}
 .section-title{font-size:16px;font-weight:700;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border);}
@@ -2016,7 +2017,10 @@ function buildDagFilter(){
   if(maand===5||maand===6){
     const ms=maand===5?'jun':'jul';
     const todayD=allDates.find(d=>{const p=d.split(' ');return parseInt(p[1])===dag&&p[2]===ms;});
-    if(todayD) buildDagOverzicht(todayD);
+    if(todayD){
+      document.querySelectorAll('.dag-btn').forEach(b=>{if(b.textContent===todayD) b.classList.add('today');});
+      buildDagOverzicht(todayD);
+    }
   }
 }
 
