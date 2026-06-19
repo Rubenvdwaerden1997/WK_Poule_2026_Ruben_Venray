@@ -1669,12 +1669,17 @@ function toggleDetail(hd){
 }
 
 // ── TABS ──────────────────────────────────────────────────────────────────
-function showTab(tab){
+async function showTab(tab){
   if(tab==='admin'){
     if(sessionStorage.getItem('wkp26_admin')!=='ok'){
       const pw=prompt('Wachtwoord:');
       if(pw!=='paarseaars'){alert('Onjuist wachtwoord.');return;}
       sessionStorage.setItem('wkp26_admin','ok');
+    }
+    if(!firebaseAuthToken){
+      const email=prompt('Firebase e-mail:');if(!email)return;
+      const password=prompt('Firebase wachtwoord:');if(!password)return;
+      const ok=await signInFirebase(email,password);if(!ok)return;
     }
     buildAdminGroups();buildAdminStandings();buildAdminKO();buildAdminTopscorers();buildAdminExtra();
   }
@@ -1923,7 +1928,20 @@ function applyPubStatus(n,pub){
 }
 
 // ── FIREBASE ──────────────────────────────────────────────────────────────
+const FIREBASE_API_KEY='AIzaSyClQnMZHUL7EV4ENd92wz7FVdBydLq4AS4';
+let firebaseAuthToken=null;
 function getFirebaseUrl(){const u=localStorage.getItem('wkp26_firebase_url')||'';return u.endsWith('/')?u.slice(0,-1):u;}
+async function signInFirebase(email,password){
+  try{
+    const r=await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='+FIREBASE_API_KEY,
+      {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password,returnSecureToken:true})});
+    const data=await r.json();
+    if(!r.ok)throw new Error(data.error?.message||'Login mislukt');
+    firebaseAuthToken=data.idToken;
+    sessionStorage.setItem('wkp26_token',data.idToken);
+    return true;
+  }catch(e){alert('Firebase login mislukt: '+e.message);return false;}
+}
 function saveFirebaseUrl(){
   let v=document.getElementById('firebase-url-input').value.trim();if(v.endsWith('/'))v=v.slice(0,-1);
   if(!v){alert('Vul een URL in.');return;}
@@ -1932,14 +1950,14 @@ function saveFirebaseUrl(){
 function loadFirebaseUrlInput(){const url=getFirebaseUrl();const inp=document.getElementById('firebase-url-input');if(inp&&url) inp.value=url;}
 async function testFirebase(){
   const url=getFirebaseUrl();const el=document.getElementById('firebase-status');if(!url){if(el)el.textContent='';return;}
-  try{const r=await fetch(url+'/wkp26_ping.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:'"ok"'});
+  try{const r=await fetch(url+'/wkpoule26.json?shallow=true');
     if(el){el.textContent=r.ok?'✓ Verbinding OK':'✗ Fout '+r.status;el.style.color=r.ok?'var(--green-text)':'var(--red-text)';}}
   catch(e){if(el){el.textContent='✗ Kan niet verbinden';el.style.color='var(--red-text)';}}
 }
 async function pushToFirebase(){
-  const url=getFirebaseUrl();if(!url)return false;
+  const url=getFirebaseUrl();if(!url||!firebaseAuthToken)return false;
   try{
-    const r=await fetch(url+'/wkpoule26.json',{method:'PUT',headers:{'Content-Type':'application/json'},
+    const r=await fetch(url+'/wkpoule26.json?auth='+firebaseAuthToken,{method:'PUT',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({published:localStorage.getItem('wkp26_published')==='true',published2:localStorage.getItem('wkp26_published2')==='true',gepubliceerd_op:new Date().toLocaleString('nl-NL'),uitslagen:JSON.parse(JSON.stringify(uitslagen)),entries:getEntries()})});
     return r.ok;
   }catch(e){return false;}
@@ -2213,6 +2231,7 @@ function handleImport(input){
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 (async()=>{
+  firebaseAuthToken=sessionStorage.getItem('wkp26_token')||null;
   if(!localStorage.getItem('wkp26_deadline')){
     localStorage.setItem('wkp26_deadline','2026-06-11T18:30:00.000Z');
   }
