@@ -2042,9 +2042,10 @@ function buildDagOverzicht(datum){
   const entries=getEntries();const names=entries.map(e=>e.naam);
   const dc=document.getElementById('dag-card');if(!dc)return;
   document.querySelectorAll('.dag-btn').forEach(b=>{b.classList.toggle('active',b.textContent===datum);});
-  const grpMatches=GROUP_MATCHES.filter(m=>m.d===datum);
+  const grpMatches=GROUP_MATCHES.filter(m=>m.d===datum).sort((a,b)=>a.t.localeCompare(b.t));
   const koMatches=[];
   KO_ROUNDS.forEach(r=>{for(let i=0;i<r.n;i++){const id=r.key+'_'+i;if(KO_DATES[id]?.d===datum)koMatches.push({id,r,i});}});
+  koMatches.sort((a,b)=>(KO_DATES[a.id]?.t||'').localeCompare(KO_DATES[b.id]?.t||''));
   if(!grpMatches.length&&!koMatches.length){dc.innerHTML='';return;}
   let html=`<div class="card" style="border-color:var(--amber-border)"><h3 style="color:var(--orange);margin-bottom:.75rem">${datum}</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Wedstrijd</th><th style="text-align:center">Tijd</th><th style="background:var(--blue-bg);color:var(--blue-text);text-align:center">✓</th>`;
   names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
