@@ -843,7 +843,8 @@ function buildGroupsViewer(entry1,entry2){
         const hv=isFlipped?s.away:s.home,av=isFlipped?s.home:s.away;
         let pts=null;
         if(real&&real.home!==''&&real.away!==''){
-          const ph=parseInt(hv),pa=parseInt(av),rh=parseInt(real.home),ra=parseInt(real.away);
+          const ph=parseInt(hv),pa=parseInt(av);
+          const rh=parseInt(isFlipped?real.away:real.home),ra=parseInt(isFlipped?real.home:real.away);
           if(!isNaN(ph)&&!isNaN(pa)&&!isNaN(rh)&&!isNaN(ra)){
             const pT=ph>pa?'W':ph<pa?'L':'D',rT=rh>ra?'W':rh<ra?'L':'D';
             pts=pT===rT?(ph===rh&&pa===ra?45:30):0;
