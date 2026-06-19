@@ -2002,7 +2002,7 @@ function migrateFlippedMatches(){
   saveUitslagen();
 }
 function loadUitslagen(){
-  try{const raw=localStorage.getItem('wkp26_uitslagen');if(raw) uitslagen=JSON.parse(raw);initUitslagen();migrateFlippedMatches();}catch(e){initUitslagen();}
+  try{const raw=localStorage.getItem('wkp26_uitslagen');if(raw) uitslagen=JSON.parse(raw);initUitslagen();}catch(e){initUitslagen();}
 }
 function exportUitslagenJSON(){
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(uitslagen,null,2)],{type:'application/json'}));a.download='wk2026_uitslagen.json';a.click();
@@ -2228,8 +2228,9 @@ function handleImport(input){
   updateCountdowns();
   setInterval(updateCountdowns,1000);
   setInterval(saveProgress,10000);
+  await initFromFirebase();
+  migrateFlippedMatches();
   setInterval(saveUitslagen,10000);
-  initFromFirebase();
 })();
 </script>
 </body>
