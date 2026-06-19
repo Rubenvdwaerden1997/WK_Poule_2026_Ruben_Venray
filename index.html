@@ -1283,12 +1283,13 @@ function buildAdminGroups(){
       const key=m.a<m.b?m.a+'_'+m.b:m.b+'_'+m.a;
       const s=uitslagen.groups[gk]?.[key]||{home:'',away:''};
       const ha=teams[m.a],hb=teams[m.b];
+      const isFlipped=m.a>m.b;
       html+=`<div class="uitslag-match">
         <div class="uitslag-home">${f(ha)} ${ha}</div>
         <div class="uitslag-score">
-          <input class="uitslag-input" type="number" min="0" max="30" placeholder="-" value="${s.home}" oninput="setUitslag('${gk}','${key}','home',this.value)">
+          <input class="uitslag-input" type="number" min="0" max="30" placeholder="-" value="${isFlipped?s.away:s.home}" oninput="setUitslag('${gk}','${key}','${isFlipped?'away':'home'}',this.value)">
           <span class="sdash">-</span>
-          <input class="uitslag-input" type="number" min="0" max="30" placeholder="-" value="${s.away}" oninput="setUitslag('${gk}','${key}','away',this.value)">
+          <input class="uitslag-input" type="number" min="0" max="30" placeholder="-" value="${isFlipped?s.home:s.away}" oninput="setUitslag('${gk}','${key}','${isFlipped?'home':'away'}',this.value)">
         </div>
         <div class="uitslag-away">${f(hb)} ${hb}</div>
       </div>`;
@@ -1987,8 +1988,20 @@ function saveUitslagen(){
   setTimeout(()=>{el.style.color='var(--text2)';},3000);
   pushToFirebase();
 }
+function migrateFlippedMatches(){
+  if(uitslagen._v>=2) return;
+  GROUP_MATCHES.forEach(m=>{
+    if(m.a<=m.b) return;
+    const key=m.b+'_'+m.a;
+    const s=uitslagen.groups[m.g]?.[key];
+    if(!s||s.home===''&&s.away==='') return;
+    const tmp=s.home;s.home=s.away;s.away=tmp;
+  });
+  uitslagen._v=2;
+  saveUitslagen();
+}
 function loadUitslagen(){
-  try{const raw=localStorage.getItem('wkp26_uitslagen');if(raw) uitslagen=JSON.parse(raw);initUitslagen();}catch(e){initUitslagen();}
+  try{const raw=localStorage.getItem('wkp26_uitslagen');if(raw) uitslagen=JSON.parse(raw);initUitslagen();migrateFlippedMatches();}catch(e){initUitslagen();}
 }
 function exportUitslagenJSON(){
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(uitslagen,null,2)],{type:'application/json'}));a.download='wk2026_uitslagen.json';a.click();
