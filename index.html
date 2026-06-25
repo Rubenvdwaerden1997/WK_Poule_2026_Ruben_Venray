@@ -1548,7 +1548,7 @@ function berekenPunten(entry){
   const u=uitslagen;let totaal=0;const details=[];
 
   // POULEFASE
-  let poulePts=0;
+  let poulePts=0,standingPts=0;
   Object.keys(GROUPS).forEach(gk=>{
     const teams=GROUPS[gk];
     GROUP_MATCHES.filter(m=>m.g===gk).forEach(m=>{
@@ -1568,12 +1568,13 @@ function berekenPunten(entry){
     if(realStanding.filter(t=>t).length){
       predStanding.forEach((v,i)=>{
         const pos=parseInt(v);
-        if(pos&&realStanding[pos-1]&&realStanding[pos-1]===teams[i]) poulePts+=25;
+        if(pos&&realStanding[pos-1]&&realStanding[pos-1]===teams[i]) standingPts+=25;
       });
     }
   });
-  if(poulePts>0) details.push({label:'Poulefase',pts:poulePts});
-  totaal+=poulePts;
+  if(poulePts>0) details.push({label:'Poulefase wedstrijden',pts:poulePts});
+  if(standingPts>0) details.push({label:'Poulefase groepsstanden',pts:standingPts});
+  totaal+=poulePts+standingPts;
 
   // KNOCK-OUT
   KO_ROUNDS.forEach(r=>{
