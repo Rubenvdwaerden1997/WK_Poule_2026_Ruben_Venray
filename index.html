@@ -263,8 +263,8 @@ body.deadline-locked:not(.deadline2-locked) .lock-banner{display:block;}
     <div class="rule-row"><span>Correct land – Kwartfinales</span><span class="rule-pts">120 ptn</span></div>
     <div class="rule-row"><span>Correct land – Halve finales</span><span class="rule-pts">150 ptn</span></div>
     <div class="rule-row"><span>Correct land – Finale</span><span class="rule-pts">180 ptn</span></div>
-    <div class="rule-row"><span>Winnaar finale (TOTO)</span><span class="rule-pts">250 ptn</span></div>
-    <div class="rule-row"><span>Exacte uitslag finale (bonus bovenop TOTO)</span><span class="rule-pts">+150 bonus</span></div>
+    <div class="rule-row"><span>Winnaar finale (TOTO)</span><span class="rule-pts">120 ptn</span></div>
+    <div class="rule-row"><span>Exacte uitslag finale (bonus bovenop TOTO)</span><span class="rule-pts">+60 bonus</span></div>
     <div style="margin-top:.5rem;font-size:11px;color:var(--text3)">Ronde van 32 wordt ingevuld door de admin</div>
   </div>
   <div class="card"><h3>⚽ Topscorers</h3>
@@ -998,7 +998,7 @@ function buildKO(){
       const inH=document.createElement('input');inH.type='number';inH.min=0;inH.max=20;inH.value=fu.home;inH.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text)';inH.disabled=locked;inH.placeholder='0';inH.oninput=e=>{state.ko['fin_uitslag'].home=e.target.value;};
       const dash=document.createElement('span');dash.textContent='–';dash.style.cssText='font-size:18px;font-weight:700;color:var(--text2)';
       const inA=document.createElement('input');inA.type='number';inA.min=0;inA.max=20;inA.value=fu.away;inA.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text)';inA.disabled=locked;inA.placeholder='0';inA.oninput=e=>{state.ko['fin_uitslag'].away=e.target.value;};
-      const lbl=document.createElement('span');lbl.style.cssText='font-size:10px;color:var(--text3);margin-left:4px';lbl.textContent='winnaar: 250 ptn · exact: +150 bonus';
+      const lbl=document.createElement('span');lbl.style.cssText='font-size:10px;color:var(--text3);margin-left:4px';lbl.textContent='winnaar: 120 ptn · exact: +60 bonus';
       scoreRow.appendChild(hdr);scoreRow.appendChild(inH);scoreRow.appendChild(dash);scoreRow.appendChild(inA);scoreRow.appendChild(lbl);
       section.appendChild(scoreRow);
     }
@@ -1080,8 +1080,8 @@ function buildKOViewer(entry1,entry2){
         let pts=null;
         if(!isNaN(rrh)&&!isNaN(rra)&&!isNaN(prh)&&!isNaN(pra)){
           const predW=prh>pra?'home':'away',realW=rrh>rra?'home':'away';
-          pts=(predW===realW)?250:0;
-          if(pts&&prh===rrh&&pra===rra) pts+=150;
+          pts=(predW===realW)?120:0;
+          if(pts&&prh===rrh&&pra===rra) pts+=60;
         }
         const ptsHtml=pts!==null?`<span style="font-size:9px;color:${pts>0?'var(--green-text)':'var(--text3)'}">${pts>0?'+'+pts+'pt':'0pt'}</span>`:'';
         html+=`<div style="font-size:11px;padding:3px 5px;background:var(--bg2);border-radius:4px;border:.5px solid var(--border);text-align:center;margin-left:4px">${ph}–${pa}<br>${ptsHtml}</div>`;
@@ -1404,7 +1404,7 @@ function buildAdminKO(){
       const inH=document.createElement('input');inH.type='number';inH.min=0;inH.max=20;inH.value=fu.home;inH.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text)';inH.placeholder='0';inH.oninput=e=>{uitslagen.ko['fin_uitslag'].home=e.target.value;};
       const dash=document.createElement('span');dash.textContent='–';dash.style.cssText='font-size:18px;font-weight:700;color:var(--text2)';
       const inA=document.createElement('input');inA.type='number';inA.min=0;inA.max=20;inA.value=fu.away;inA.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text)';inA.placeholder='0';inA.oninput=e=>{uitslagen.ko['fin_uitslag'].away=e.target.value;};
-      const lbl=document.createElement('span');lbl.style.cssText='font-size:10px;color:var(--text3);margin-left:4px';lbl.textContent='winnaar: 250 ptn · exact: +150 bonus';
+      const lbl=document.createElement('span');lbl.style.cssText='font-size:10px;color:var(--text3);margin-left:4px';lbl.textContent='winnaar: 120 ptn · exact: +60 bonus';
       scoreRow.appendChild(hdr);scoreRow.appendChild(inH);scoreRow.appendChild(dash);scoreRow.appendChild(inA);scoreRow.appendChild(lbl);
       section.appendChild(scoreRow);
     }
@@ -1650,8 +1650,8 @@ function berekenPunten(entry){
     if(!isNaN(ph)&&!isNaN(pa)&&!isNaN(rh)&&!isNaN(ra)){
       const predW=ph>pa?'home':'away',realW=rh>ra?'home':'away';
       if(predW===realW){
-        details.push({label:'Winnaar finale',pts:250});totaal+=250;
-        if(ph===rh&&pa===ra){details.push({label:'Exacte uitslag finale (bonus)',pts:150});totaal+=150;}
+        details.push({label:'Winnaar finale',pts:120});totaal+=120;
+        if(ph===rh&&pa===ra){details.push({label:'Exacte uitslag finale (bonus)',pts:60});totaal+=60;}
       }
     }
   }
