@@ -2125,6 +2125,7 @@ function buildDagFilter(){
 }
 
 function buildDagOverzicht(datum){
+  const pub2=localStorage.getItem('wkp26_published2')==='true';
   const entries=getEntries();const names=entries.map(e=>e.naam);
   const dc=document.getElementById('dag-card');if(!dc)return;
   document.querySelectorAll('.dag-btn').forEach(b=>{b.classList.toggle('active',b.textContent===datum);});
@@ -2159,7 +2160,8 @@ function buildDagOverzicht(datum){
     html+=`<tr><td style="white-space:nowrap;color:var(--text2)">${matchLabel}</td>`;
     html+=`<td style="text-align:center;color:var(--text3);font-size:11px">${kd?.t||''}</td>`;
     html+=`<td style="text-align:center;font-weight:600;color:var(--blue-text);white-space:nowrap">${realStr}</td>`;
-    entries.forEach(e=>{const m=e.ko?.[id];html+=`<td style="text-align:center">${m&&(m.home||m.away)?(m.home||'?')+'-'+(m.away||'?'):'-'}</td>`;});
+    if(pub2){entries.forEach(e=>{const m=e.ko?.[id];html+=`<td style="text-align:center">${m&&(m.home||m.away)?(m.home||'?')+'-'+(m.away||'?'):'-'}</td>`;});}
+    else{entries.forEach(()=>{html+=`<td style="text-align:center;color:var(--text3)">–</td>`;});}
     html+='</tr>';
   });
   html+='</table></div></div>';
