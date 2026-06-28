@@ -995,9 +995,9 @@ function buildKO(){
       const fu=state.ko['fin_uitslag']||{home:'',away:''};
       const scoreRow=document.createElement('div');scoreRow.style.cssText='margin-top:.75rem;display:flex;align-items:center;gap:8px;justify-content:center;padding:.5rem;background:var(--bg2);border-radius:var(--radius)';
       const hdr=document.createElement('span');hdr.style.cssText='font-size:12px;color:var(--text2);font-weight:500';hdr.textContent='Uitslag finale:';
-      const inH=document.createElement('input');inH.type='number';inH.min=0;inH.max=20;inH.value=fu.home;inH.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg)';inH.disabled=locked;inH.placeholder='0';inH.oninput=e=>{state.ko['fin_uitslag'].home=e.target.value;};
+      const inH=document.createElement('input');inH.type='number';inH.min=0;inH.max=20;inH.value=fu.home;inH.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text)';inH.disabled=locked;inH.placeholder='0';inH.oninput=e=>{state.ko['fin_uitslag'].home=e.target.value;};
       const dash=document.createElement('span');dash.textContent='–';dash.style.cssText='font-size:18px;font-weight:700;color:var(--text2)';
-      const inA=document.createElement('input');inA.type='number';inA.min=0;inA.max=20;inA.value=fu.away;inA.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg)';inA.disabled=locked;inA.placeholder='0';inA.oninput=e=>{state.ko['fin_uitslag'].away=e.target.value;};
+      const inA=document.createElement('input');inA.type='number';inA.min=0;inA.max=20;inA.value=fu.away;inA.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text)';inA.disabled=locked;inA.placeholder='0';inA.oninput=e=>{state.ko['fin_uitslag'].away=e.target.value;};
       const lbl=document.createElement('span');lbl.style.cssText='font-size:10px;color:var(--text3);margin-left:4px';lbl.textContent='winnaar: 250 ptn · exact: +150 bonus';
       scoreRow.appendChild(hdr);scoreRow.appendChild(inH);scoreRow.appendChild(dash);scoreRow.appendChild(inA);scoreRow.appendChild(lbl);
       section.appendChild(scoreRow);
@@ -1401,9 +1401,9 @@ function buildAdminKO(){
       const fu=uitslagen.ko['fin_uitslag'];
       const scoreRow=document.createElement('div');scoreRow.style.cssText='margin-top:.75rem;display:flex;align-items:center;gap:8px;justify-content:center;padding:.5rem;background:var(--bg2);border-radius:var(--radius)';
       const hdr=document.createElement('span');hdr.style.cssText='font-size:12px;color:var(--text2);font-weight:500';hdr.textContent='Werkelijke uitslag:';
-      const inH=document.createElement('input');inH.type='number';inH.min=0;inH.max=20;inH.value=fu.home;inH.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg)';inH.placeholder='0';inH.oninput=e=>{uitslagen.ko['fin_uitslag'].home=e.target.value;};
+      const inH=document.createElement('input');inH.type='number';inH.min=0;inH.max=20;inH.value=fu.home;inH.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text)';inH.placeholder='0';inH.oninput=e=>{uitslagen.ko['fin_uitslag'].home=e.target.value;};
       const dash=document.createElement('span');dash.textContent='–';dash.style.cssText='font-size:18px;font-weight:700;color:var(--text2)';
-      const inA=document.createElement('input');inA.type='number';inA.min=0;inA.max=20;inA.value=fu.away;inA.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg)';inA.placeholder='0';inA.oninput=e=>{uitslagen.ko['fin_uitslag'].away=e.target.value;};
+      const inA=document.createElement('input');inA.type='number';inA.min=0;inA.max=20;inA.value=fu.away;inA.style.cssText='width:52px;text-align:center;font-size:18px;font-weight:700;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text)';inA.placeholder='0';inA.oninput=e=>{uitslagen.ko['fin_uitslag'].away=e.target.value;};
       const lbl=document.createElement('span');lbl.style.cssText='font-size:10px;color:var(--text3);margin-left:4px';lbl.textContent='winnaar: 250 ptn · exact: +150 bonus';
       scoreRow.appendChild(hdr);scoreRow.appendChild(inH);scoreRow.appendChild(dash);scoreRow.appendChild(inA);scoreRow.appendChild(lbl);
       section.appendChild(scoreRow);
@@ -1868,7 +1868,7 @@ function loadProgress(){
     if(draft.ko){
       state.ko=draft.ko;
       KO_ROUNDS.forEach(r=>{for(let i=0;i<r.n;i++){const id=r.key+'_'+i;if(!state.ko[id]) state.ko[id]={home:'',away:''}}});
-      if(!state.ko['fin_uitslag']) state.ko['fin_uitslag']={home:'',away:''};)
+      if(!state.ko['fin_uitslag']) state.ko['fin_uitslag']={home:'',away:''};
     }
     if(draft.extra) state.extra=draft.extra;
     if(draft.topscorers_poule) state.topscorers_poule=draft.topscorers_poule;
