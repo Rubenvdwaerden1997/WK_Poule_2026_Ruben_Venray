@@ -1802,7 +1802,10 @@ function loadProgress(){
     if(draft.naam) document.getElementById('naam-input').value=draft.naam;
     if(draft.slogan) document.getElementById('slogan-input').value=draft.slogan;
     if(draft.groups) state.groups=draft.groups;
-    if(draft.ko) state.ko=draft.ko;
+    if(draft.ko){
+      state.ko=draft.ko;
+      KO_ROUNDS.forEach(r=>{for(let i=0;i<r.n;i++){const id=r.key+'_'+i;if(!state.ko[id]) state.ko[id]={home:'',away:''}}})
+    }
     if(draft.extra) state.extra=draft.extra;
     if(draft.topscorers_poule) state.topscorers_poule=draft.topscorers_poule;
     if(draft.topscorers_ko) state.topscorers_ko=draft.topscorers_ko;
@@ -2236,9 +2239,7 @@ function handleImport(input){
   if(!localStorage.getItem('wkp26_deadline')){
     localStorage.setItem('wkp26_deadline','2026-06-11T18:30:00.000Z');
   }
-  if(!localStorage.getItem('wkp26_deadline2')){
-    localStorage.setItem('wkp26_deadline2','2026-06-28T18:59:59.000Z');
-  }
+  localStorage.setItem('wkp26_deadline2','2026-06-28T18:59:59.000Z');
   localStorage.setItem('wkp26_firebase_url','https://wk-poule-2026-ruben-default-rtdb.europe-west1.firebasedatabase.app');
   await loadPlayers();
   initState();
