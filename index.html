@@ -2170,6 +2170,7 @@ function buildOverzicht(){
   buildDagFilter();
   const entries=getEntries();const c=document.getElementById('overzicht-container');
   if(!entries.length){c.innerHTML='<p style="color:var(--text2);font-size:13px">Geen inzendingen.</p>';return;}
+  const pub2=localStorage.getItem('wkp26_published2')==='true';
   const names=entries.map(e=>e.naam);let html='';
   html+=`<div class="card"><h3>Slogans</h3>`;
   entries.forEach(e=>{html+=`<div class="rule-row"><span style="font-weight:600">${e.naam}</span><span style="font-style:italic;color:var(--text2)">"${e.slogan||'-'}"</span></div>`;});
@@ -2179,6 +2180,10 @@ function buildOverzicht(){
   html+=`<div class="card"><h3>⚽ Topscorers</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Speler</th>`;
   names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
   ['poule','ko'].forEach(fase=>{
+      if(fase==='ko'&&!pub2){
+        html+=`<tr><td colspan="${names.length+1}" style="color:var(--text2);font-style:italic;padding:6px 4px">KO-fase topscorers — nog niet gepubliceerd</td></tr>`;
+        return;
+      }
       const ts=uitslagen['topscorers_'+fase];
       html+=`<tr><td colspan="${names.length+1}" style="font-weight:600;color:var(--orange);padding-top:8px">${fase==='poule'?'Poulefase':'KO-fase'}</td></tr>`;
       for(let i=0;i<4;i++){
@@ -2209,6 +2214,8 @@ function buildOverzicht(){
   html+='</table></div></div>';
 
   // KO
+  if(!pub2){html+=`<div class="card"><h3>Knock-out</h3><p style="font-size:13px;color:var(--text2)">Nog niet gepubliceerd.</p></div>`;}
+  else{
   html+=`<div class="card"><h3>Knock-out</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Ronde</th><th>#</th><th>Datum</th><th style="background:var(--blue-bg);color:var(--blue-text)">✓</th>`;
   names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
   KO_ROUNDS.forEach(r=>{
@@ -2225,6 +2232,7 @@ function buildOverzicht(){
   entries.forEach(e=>{const pu=e.ko?.['fin_uitslag'];html+=`<td style="text-align:center">${pu&&(pu.home!=null&&pu.home!==''||pu.away!=null&&pu.away!=='')?pu.home+'–'+pu.away:'-'}</td>`;});
   html+='</tr>';}
   html+='</table></div></div>';
+  }
 
   // Groepen
   Object.keys(GROUPS).forEach(gk=>{
