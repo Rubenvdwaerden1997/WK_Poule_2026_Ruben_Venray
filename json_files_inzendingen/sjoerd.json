@@ -412,132 +412,8 @@
       ]
     }
   },
-  "ko": {
-    "r32_0": {
-      "home": "",
-      "away": ""
-    },
-    "r32_1": {
-      "home": "",
-      "away": ""
-    },
-    "r32_2": {
-      "home": "",
-      "away": ""
-    },
-    "r32_3": {
-      "home": "",
-      "away": ""
-    },
-    "r32_4": {
-      "home": "",
-      "away": ""
-    },
-    "r32_5": {
-      "home": "",
-      "away": ""
-    },
-    "r32_6": {
-      "home": "",
-      "away": ""
-    },
-    "r32_7": {
-      "home": "",
-      "away": ""
-    },
-    "r32_8": {
-      "home": "",
-      "away": ""
-    },
-    "r32_9": {
-      "home": "",
-      "away": ""
-    },
-    "r32_10": {
-      "home": "",
-      "away": ""
-    },
-    "r32_11": {
-      "home": "",
-      "away": ""
-    },
-    "r32_12": {
-      "home": "",
-      "away": ""
-    },
-    "r32_13": {
-      "home": "",
-      "away": ""
-    },
-    "r32_14": {
-      "home": "",
-      "away": ""
-    },
-    "r32_15": {
-      "home": "",
-      "away": ""
-    },
-    "af_0": {
-      "home": "",
-      "away": ""
-    },
-    "af_1": {
-      "home": "",
-      "away": ""
-    },
-    "af_2": {
-      "home": "",
-      "away": ""
-    },
-    "af_3": {
-      "home": "",
-      "away": ""
-    },
-    "af_4": {
-      "home": "",
-      "away": ""
-    },
-    "af_5": {
-      "home": "",
-      "away": ""
-    },
-    "af_6": {
-      "home": "",
-      "away": ""
-    },
-    "af_7": {
-      "home": "",
-      "away": ""
-    },
-    "kf_0": {
-      "home": "",
-      "away": ""
-    },
-    "kf_1": {
-      "home": "",
-      "away": ""
-    },
-    "kf_2": {
-      "home": "",
-      "away": ""
-    },
-    "kf_3": {
-      "home": "",
-      "away": ""
-    },
-    "hf_0": {
-      "home": "",
-      "away": ""
-    },
-    "hf_1": {
-      "home": "",
-      "away": ""
-    },
-    "fin_0": {
-      "home": "",
-      "away": ""
-    }
-  },
+  "ko":{"r32_0":{"home":"","away":""},"r32_1":{"home":"","away":""},"r32_2":{"home":"","away":""},"r32_3":{"home":"","away":""},"r32_4":{"home":"","away":""},"r32_5":{"home":"","away":""},"r32_6":{"home":"","away":""},"r32_7":{"home":"","away":""},"r32_8":{"home":"","away":""},"r32_9":{"home":"","away":""},"r32_10":{"home":"","away":""},"r32_11":{"home":"","away":""},"r32_12":{"home":"","away":""},"r32_13":{"home":"","away":""},"r32_14":{"home":"","away":""},"r32_15":{"home":"","away":""},"af_0":{"home":"Duitsland","away":"Frankrijk"},"af_1":{"home":"Canada","away":"Nederland"},"af_2":{"home":"Japan","away":"Noorwegen"},"af_3":{"home":"Mexico","away":"Engeland"},"af_4":{"home":"Portugal","away":"Spanje"},"af_5":{"home":"VS","away":"Senegal"},"af_6":{"home":"Argentinië","away":"Egypte"},"af_7":{"home":"Zwitserland","away":"Colombia"},"kf_0":{"home":"Frankrijk","away":"Nederland"},"kf_1":{"home":"Spanje","away":"Senegal"},"kf_2":{"home":"Japan","away":"Engeland"},"kf_3":{"home":"Argentinië","away":"Colombia"},"hf_0":{"home":"Nederland","away":"Spanje"},"hf_1":{"home":"Engeland","away":"Argentinië"},"d3_0":{"home":"Engeland","away":"Spanje"},"fin_0":{"home":"Nederland","away":"Argentinië"},"fin_uitslag":{"home":"2","away":"1"}}
+  ,
   "extra": {
     "eerste_goal": "Donyell Malen",
     "totaal_goals": "299",
@@ -551,10 +427,5 @@
     "Brahim Díaz",
     "Mikel Oyarzabal"
   ],
-  "topscorers_ko": [
-    "",
-    "",
-    "",
-    ""
-  ]
+  "topscorers_ko": ["Harry Kane","Jude Bellingham","Lionel Messi","Mikel Oyarzabal"]
 }

@@ -1,0 +1,4546 @@
+[
+  {
+    "extra": {
+      "eerste_goal": "Cody Gakpo",
+      "kaart_nl": "Virgil van Dijk",
+      "topscorer_nl": "Donyell Malen",
+      "totaal_goals": "248",
+      "winnaar": "Frankrijk"
+    },
+    "groups": {
+      "A": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "2",
+          "3"
+        ]
+      },
+      "B": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "C": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "0"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "1",
+          "4",
+          "3"
+        ]
+      },
+      "D": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "E": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "2",
+          "3"
+        ]
+      },
+      "F": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "G": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "H": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "I": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "J": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "K": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "L": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "ko": {
+      "af_0": {
+        "away": "Frankrijk",
+        "home": "Duitsland"
+      },
+      "af_1": {
+        "away": "Nederland",
+        "home": "Canada"
+      },
+      "af_2": {
+        "away": "Noorwegen",
+        "home": "Brazilië"
+      },
+      "af_3": {
+        "away": "Engeland",
+        "home": "Mexico"
+      },
+      "af_4": {
+        "away": "Spanje",
+        "home": "Portugal"
+      },
+      "af_5": {
+        "away": "België",
+        "home": "VS"
+      },
+      "af_6": {
+        "away": "Egypte",
+        "home": "Argentinië"
+      },
+      "af_7": {
+        "away": "Colombia",
+        "home": "Zwitserland"
+      },
+      "d3_0": {
+        "away": "Argentinië",
+        "home": "Spanje"
+      },
+      "fin_0": {
+        "away": "Engeland",
+        "home": "Duitsland"
+      },
+      "fin_uitslag": {
+        "away": "0",
+        "home": "1"
+      },
+      "hf_0": {
+        "away": "Spanje",
+        "home": "Duitsland"
+      },
+      "hf_1": {
+        "away": "Argentinië",
+        "home": "Engeland"
+      },
+      "kf_0": {
+        "away": "Nederland",
+        "home": "Duitsland"
+      },
+      "kf_1": {
+        "away": "België",
+        "home": "Spanje"
+      },
+      "kf_2": {
+        "away": "Engeland",
+        "home": "Brazilië"
+      },
+      "kf_3": {
+        "away": "Colombia",
+        "home": "Argentinië"
+      },
+      "r32_0": {
+        "away": "",
+        "home": ""
+      },
+      "r32_1": {
+        "away": "",
+        "home": ""
+      },
+      "r32_10": {
+        "away": "",
+        "home": ""
+      },
+      "r32_11": {
+        "away": "",
+        "home": ""
+      },
+      "r32_12": {
+        "away": "",
+        "home": ""
+      },
+      "r32_13": {
+        "away": "",
+        "home": ""
+      },
+      "r32_14": {
+        "away": "",
+        "home": ""
+      },
+      "r32_15": {
+        "away": "",
+        "home": ""
+      },
+      "r32_2": {
+        "away": "",
+        "home": ""
+      },
+      "r32_3": {
+        "away": "",
+        "home": ""
+      },
+      "r32_4": {
+        "away": "",
+        "home": ""
+      },
+      "r32_5": {
+        "away": "",
+        "home": ""
+      },
+      "r32_6": {
+        "away": "",
+        "home": ""
+      },
+      "r32_7": {
+        "away": "",
+        "home": ""
+      },
+      "r32_8": {
+        "away": "",
+        "home": ""
+      },
+      "r32_9": {
+        "away": "",
+        "home": ""
+      }
+    },
+    "naam": "Ruben",
+    "slogan": "Frenkie",
+    "tijdstip": "8-6-2026, 21:27:06",
+    "topscorers_ko": [
+      "Harry Kane",
+      "Lionel Messi",
+      "Denzel Dumfries",
+      "Felix Nmecha"
+    ],
+    "topscorers_poule": [
+      "Bruno Fernandes",
+      "Virgil van Dijk",
+      "Kylian Mbappé",
+      "Harry Kane"
+    ]
+  },
+  {
+    "extra": {
+      "eerste_goal": "Cody Gakpo",
+      "kaart_nl": "Denzel Dumfries",
+      "topscorer_nl": "Cody Gakpo",
+      "totaal_goals": "298",
+      "winnaar": "Spanje"
+    },
+    "groups": {
+      "A": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "B": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "C": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "6"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "4"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "4",
+          "3"
+        ]
+      },
+      "D": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "E": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "5"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "3",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "2",
+          "3"
+        ]
+      },
+      "F": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "G": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "H": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "I": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "J": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "K": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "L": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "ko": {
+      "af_0": {
+        "away": "Frankrijk",
+        "home": "Duitsland"
+      },
+      "af_1": {
+        "away": "Nederland",
+        "home": "Canada"
+      },
+      "af_2": {
+        "away": "Noorwegen",
+        "home": "Brazilië"
+      },
+      "af_3": {
+        "away": "Engeland",
+        "home": "Mexico"
+      },
+      "af_4": {
+        "away": "Spanje",
+        "home": "Portugal"
+      },
+      "af_5": {
+        "away": "Senegal",
+        "home": "Vs"
+      },
+      "af_6": {
+        "away": "Egypte",
+        "home": "Argentinië"
+      },
+      "af_7": {
+        "away": "Colombia",
+        "home": "Zwitserland"
+      },
+      "d3_0": {
+        "away": "Engeland",
+        "home": "Spanje"
+      },
+      "fin_0": {
+        "away": "Argentinië",
+        "home": "Frankrijk"
+      },
+      "fin_uitslag": {
+        "away": "1",
+        "home": "3"
+      },
+      "hf_0": {
+        "away": "Spanje",
+        "home": "Frankrijk"
+      },
+      "hf_1": {
+        "away": "Argentinië",
+        "home": "Engeland"
+      },
+      "kf_0": {
+        "away": "Nederland",
+        "home": "Frankrijk"
+      },
+      "kf_1": {
+        "away": "VS",
+        "home": "Spanje"
+      },
+      "kf_2": {
+        "away": "Engeland",
+        "home": "Brazilië"
+      },
+      "kf_3": {
+        "away": "Zwitserland",
+        "home": "Argentinië"
+      },
+      "r32_0": {
+        "away": "",
+        "home": ""
+      },
+      "r32_1": {
+        "away": "",
+        "home": ""
+      },
+      "r32_10": {
+        "away": "",
+        "home": ""
+      },
+      "r32_11": {
+        "away": "",
+        "home": ""
+      },
+      "r32_12": {
+        "away": "",
+        "home": ""
+      },
+      "r32_13": {
+        "away": "",
+        "home": ""
+      },
+      "r32_14": {
+        "away": "",
+        "home": ""
+      },
+      "r32_15": {
+        "away": "",
+        "home": ""
+      },
+      "r32_2": {
+        "away": "",
+        "home": ""
+      },
+      "r32_3": {
+        "away": "",
+        "home": ""
+      },
+      "r32_4": {
+        "away": "",
+        "home": ""
+      },
+      "r32_5": {
+        "away": "",
+        "home": ""
+      },
+      "r32_6": {
+        "away": "",
+        "home": ""
+      },
+      "r32_7": {
+        "away": "",
+        "home": ""
+      },
+      "r32_8": {
+        "away": "",
+        "home": ""
+      },
+      "r32_9": {
+        "away": "",
+        "home": ""
+      }
+    },
+    "naam": "Sander",
+    "slogan": "Crysencio Summerville, alleen als ik mijn Oranje shirt aanheb",
+    "tijdstip": "6-6-2026, 12:15:54",
+    "topscorers_ko": [
+      "Virgil van Dijk",
+      "Dani Olmo",
+      "Kylian Mbappé",
+      "Lionel Messi"
+    ],
+    "topscorers_poule": [
+      "Achraf Hakimi",
+      "Bruno Fernandes",
+      "Virgil van Dijk",
+      "Kylian Mbappé"
+    ]
+  },
+  {
+    "extra": {
+      "eerste_goal": "Donyell Malen",
+      "kaart_nl": "Frenkie de Jong",
+      "topscorer_nl": "Cody Gakpo",
+      "totaal_goals": "299",
+      "winnaar": "Engeland"
+    },
+    "groups": {
+      "A": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "2",
+          "3"
+        ]
+      },
+      "B": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "3",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "3",
+          "2",
+          "4",
+          "1"
+        ]
+      },
+      "C": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "1",
+          "4",
+          "3"
+        ]
+      },
+      "D": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "3",
+          "2",
+          "4",
+          "1"
+        ]
+      },
+      "E": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "2",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "2",
+          "3"
+        ]
+      },
+      "F": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "G": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "2",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "H": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "I": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "J": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "3"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "1",
+          "4"
+        ]
+      },
+      "K": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "L": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "ko": {
+      "af_0": {
+        "away": "Frankrijk",
+        "home": "Duitsland"
+      },
+      "af_1": {
+        "away": "Nederland",
+        "home": "Canada"
+      },
+      "af_2": {
+        "away": "Noorwegen",
+        "home": "Japan"
+      },
+      "af_3": {
+        "away": "Engeland",
+        "home": "Mexico"
+      },
+      "af_4": {
+        "away": "Spanje",
+        "home": "Portugal"
+      },
+      "af_5": {
+        "away": "Senegal",
+        "home": "VS"
+      },
+      "af_6": {
+        "away": "Egypte",
+        "home": "Argentinië"
+      },
+      "af_7": {
+        "away": "Colombia",
+        "home": "Zwitserland"
+      },
+      "d3_0": {
+        "away": "Spanje",
+        "home": "Engeland"
+      },
+      "fin_0": {
+        "away": "Argentinië",
+        "home": "Nederland"
+      },
+      "fin_uitslag": {
+        "away": "1",
+        "home": "2"
+      },
+      "hf_0": {
+        "away": "Spanje",
+        "home": "Nederland"
+      },
+      "hf_1": {
+        "away": "Argentinië",
+        "home": "Engeland"
+      },
+      "kf_0": {
+        "away": "Nederland",
+        "home": "Frankrijk"
+      },
+      "kf_1": {
+        "away": "Senegal",
+        "home": "Spanje"
+      },
+      "kf_2": {
+        "away": "Engeland",
+        "home": "Japan"
+      },
+      "kf_3": {
+        "away": "Colombia",
+        "home": "Argentinië"
+      },
+      "r32_0": {
+        "away": "",
+        "home": ""
+      },
+      "r32_1": {
+        "away": "",
+        "home": ""
+      },
+      "r32_10": {
+        "away": "",
+        "home": ""
+      },
+      "r32_11": {
+        "away": "",
+        "home": ""
+      },
+      "r32_12": {
+        "away": "",
+        "home": ""
+      },
+      "r32_13": {
+        "away": "",
+        "home": ""
+      },
+      "r32_14": {
+        "away": "",
+        "home": ""
+      },
+      "r32_15": {
+        "away": "",
+        "home": ""
+      },
+      "r32_2": {
+        "away": "",
+        "home": ""
+      },
+      "r32_3": {
+        "away": "",
+        "home": ""
+      },
+      "r32_4": {
+        "away": "",
+        "home": ""
+      },
+      "r32_5": {
+        "away": "",
+        "home": ""
+      },
+      "r32_6": {
+        "away": "",
+        "home": ""
+      },
+      "r32_7": {
+        "away": "",
+        "home": ""
+      },
+      "r32_8": {
+        "away": "",
+        "home": ""
+      },
+      "r32_9": {
+        "away": "",
+        "home": ""
+      }
+    },
+    "naam": "Sjoerd",
+    "slogan": "Peter Crouch",
+    "tijdstip": "9-6-2026, 21:41:46",
+    "topscorers_ko": [
+      "Harry Kane",
+      "Jude Bellingham",
+      "Lionel Messi",
+      "Mikel Oyarzabal"
+    ],
+    "topscorers_poule": [
+      "Bruno Fernandes",
+      "Kai Havertz",
+      "Brahim Díaz",
+      "Mikel Oyarzabal"
+    ]
+  },
+  {
+    "extra": {
+      "eerste_goal": "Cody Gakpo",
+      "kaart_nl": "Micky van de Ven",
+      "topscorer_nl": "Memphis Depay",
+      "totaal_goals": "281",
+      "winnaar": "Frankrijk"
+    },
+    "groups": {
+      "A": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "B": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "C": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "4",
+          "3"
+        ]
+      },
+      "D": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "E": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "F": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "G": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "H": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "I": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "J": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "K": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "L": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "ko": {
+      "af_0": {
+        "away": "Frankrijk",
+        "home": "Duitsland"
+      },
+      "af_1": {
+        "away": "Nederland",
+        "home": "Canada"
+      },
+      "af_2": {
+        "away": "Noorwegen",
+        "home": "Brazilië"
+      },
+      "af_3": {
+        "away": "Engeland",
+        "home": "Mexico"
+      },
+      "af_4": {
+        "away": "Spanje",
+        "home": "Portugal"
+      },
+      "af_5": {
+        "away": "België",
+        "home": "VS"
+      },
+      "af_6": {
+        "away": "Australië",
+        "home": "Argentinië"
+      },
+      "af_7": {
+        "away": "Colombia",
+        "home": "Zwitserland"
+      },
+      "d3_0": {
+        "away": "Engeland",
+        "home": "Spanje"
+      },
+      "fin_0": {
+        "away": "Argentinië",
+        "home": "Frankrijk"
+      },
+      "fin_uitslag": {
+        "away": "1",
+        "home": "3"
+      },
+      "hf_0": {
+        "away": "Spanje",
+        "home": "Frankrijk"
+      },
+      "hf_1": {
+        "away": "Argentinië",
+        "home": "Engeland"
+      },
+      "kf_0": {
+        "away": "Nederland",
+        "home": "Frankrijk"
+      },
+      "kf_1": {
+        "away": "VS",
+        "home": "Spanje"
+      },
+      "kf_2": {
+        "away": "Engeland",
+        "home": "Brazilië"
+      },
+      "kf_3": {
+        "away": "Colombia",
+        "home": "Argentinië"
+      },
+      "r32_0": {
+        "away": "",
+        "home": ""
+      },
+      "r32_1": {
+        "away": "",
+        "home": ""
+      },
+      "r32_10": {
+        "away": "",
+        "home": ""
+      },
+      "r32_11": {
+        "away": "",
+        "home": ""
+      },
+      "r32_12": {
+        "away": "",
+        "home": ""
+      },
+      "r32_13": {
+        "away": "",
+        "home": ""
+      },
+      "r32_14": {
+        "away": "",
+        "home": ""
+      },
+      "r32_15": {
+        "away": "",
+        "home": ""
+      },
+      "r32_2": {
+        "away": "",
+        "home": ""
+      },
+      "r32_3": {
+        "away": "",
+        "home": ""
+      },
+      "r32_4": {
+        "away": "",
+        "home": ""
+      },
+      "r32_5": {
+        "away": "",
+        "home": ""
+      },
+      "r32_6": {
+        "away": "",
+        "home": ""
+      },
+      "r32_7": {
+        "away": "",
+        "home": ""
+      },
+      "r32_8": {
+        "away": "",
+        "home": ""
+      },
+      "r32_9": {
+        "away": "",
+        "home": ""
+      }
+    },
+    "naam": "STEIN VERHOEVEN",
+    "slogan": "Peter Crouch, de souplesse",
+    "tijdstip": "10-6-2026, 22:20:35",
+    "topscorers_ko": [
+      "Kylian Mbappé",
+      "Harry Kane",
+      "Lionel Messi",
+      "Ousmane Dembélé"
+    ],
+    "topscorers_poule": [
+      "Harry Kane",
+      "Jude Bellingham",
+      "Florian Wirtz",
+      "Kylian Mbappé"
+    ]
+  },
+  {
+    "extra": {
+      "eerste_goal": "Cody Gakpo",
+      "kaart_nl": "Denzel Dumfries",
+      "topscorer_nl": "Cody Gakpo",
+      "totaal_goals": "386",
+      "winnaar": "Frankrijk"
+    },
+    "groups": {
+      "A": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "2",
+          "4",
+          "3",
+          "1"
+        ]
+      },
+      "B": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "C": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "4",
+          "3"
+        ]
+      },
+      "D": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "E": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "F": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "G": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "H": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "I": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "J": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "K": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "L": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "ko": {
+      "af_0": {
+        "away": "Frankrijk",
+        "home": "Duitsland"
+      },
+      "af_1": {
+        "away": "Nederland",
+        "home": "Canada"
+      },
+      "af_2": {
+        "away": "Noorwegen",
+        "home": "Brazilië"
+      },
+      "af_3": {
+        "away": "Engeland",
+        "home": "Mexico"
+      },
+      "af_4": {
+        "away": "Spanje",
+        "home": "Portugal"
+      },
+      "af_5": {
+        "away": "Senegal",
+        "home": "VS"
+      },
+      "af_6": {
+        "away": "Egypte",
+        "home": "Argentinië"
+      },
+      "af_7": {
+        "away": "Colombia",
+        "home": "Zwitserland"
+      },
+      "d3_0": {
+        "away": "Brazilië",
+        "home": "Portugal"
+      },
+      "fin_0": {
+        "away": "Argentinië",
+        "home": "Nederland"
+      },
+      "fin_uitslag": {
+        "away": "2",
+        "home": "3"
+      },
+      "hf_0": {
+        "away": "Portugal",
+        "home": "Nederland"
+      },
+      "hf_1": {
+        "away": "Argentinië",
+        "home": "Brazilië"
+      },
+      "kf_0": {
+        "away": "Nederland",
+        "home": "Frankrijk"
+      },
+      "kf_1": {
+        "away": "VS",
+        "home": "Portugal"
+      },
+      "kf_2": {
+        "away": "Engeland",
+        "home": "Brazilië"
+      },
+      "kf_3": {
+        "away": "Zwitserland",
+        "home": "Argentinië"
+      },
+      "r32_0": {
+        "away": "",
+        "home": ""
+      },
+      "r32_1": {
+        "away": "",
+        "home": ""
+      },
+      "r32_10": {
+        "away": "",
+        "home": ""
+      },
+      "r32_11": {
+        "away": "",
+        "home": ""
+      },
+      "r32_12": {
+        "away": "",
+        "home": ""
+      },
+      "r32_13": {
+        "away": "",
+        "home": ""
+      },
+      "r32_14": {
+        "away": "",
+        "home": ""
+      },
+      "r32_15": {
+        "away": "",
+        "home": ""
+      },
+      "r32_2": {
+        "away": "",
+        "home": ""
+      },
+      "r32_3": {
+        "away": "",
+        "home": ""
+      },
+      "r32_4": {
+        "away": "",
+        "home": ""
+      },
+      "r32_5": {
+        "away": "",
+        "home": ""
+      },
+      "r32_6": {
+        "away": "",
+        "home": ""
+      },
+      "r32_7": {
+        "away": "",
+        "home": ""
+      },
+      "r32_8": {
+        "away": "",
+        "home": ""
+      },
+      "r32_9": {
+        "away": "",
+        "home": ""
+      }
+    },
+    "naam": "Wouter",
+    "slogan": "Noa Lang, want shorty hoe kan t dat ik val voor types zoals jij?",
+    "tijdstip": "11-6-2026, 13:09:30",
+    "topscorers_ko": [
+      "Lionel Messi",
+      "Jamal Musiala",
+      "Denzel Dumfries",
+      "Jude Bellingham"
+    ],
+    "topscorers_poule": [
+      "Granit Xhaka",
+      "Kylian Mbappé",
+      "Harry Kane",
+      "Achraf Hakimi"
+    ]
+  },
+  {
+    "extra": {
+      "eerste_goal": "Cody Gakpo",
+      "kaart_nl": "Micky van de Ven",
+      "topscorer_nl": "Cody Gakpo",
+      "totaal_goals": "301",
+      "winnaar": "Portugal"
+    },
+    "groups": {
+      "A": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "2",
+          "3"
+        ]
+      },
+      "B": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "C": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "4"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "4",
+          "3"
+        ]
+      },
+      "D": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "E": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "4"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "F": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "G": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "H": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "4"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "I": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "J": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "K": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "4"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "L": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "ko": {
+      "af_0": {
+        "away": "Frankrijk",
+        "home": "Duitsland"
+      },
+      "af_1": {
+        "away": "Nederland",
+        "home": "Canada"
+      },
+      "af_2": {
+        "away": "Noorwegen",
+        "home": "Brazilië"
+      },
+      "af_3": {
+        "away": "Engeland",
+        "home": "Ecuador"
+      },
+      "af_4": {
+        "away": "Spanje",
+        "home": "Portugal"
+      },
+      "af_5": {
+        "away": "België",
+        "home": "VS"
+      },
+      "af_6": {
+        "away": "Egypte",
+        "home": "Argentinië"
+      },
+      "af_7": {
+        "away": "Colombia",
+        "home": "Zwitserland"
+      },
+      "d3_0": {
+        "away": "Argentinië",
+        "home": "Nederland"
+      },
+      "fin_0": {
+        "away": "Engeland",
+        "home": "Portugal"
+      },
+      "fin_uitslag": {
+        "away": "1",
+        "home": "3"
+      },
+      "hf_0": {
+        "away": "Portugal",
+        "home": "Nederland"
+      },
+      "hf_1": {
+        "away": "Argentinië",
+        "home": "Engeland"
+      },
+      "kf_0": {
+        "away": "Nederland",
+        "home": "Duitsland"
+      },
+      "kf_1": {
+        "away": "België",
+        "home": "Portugal"
+      },
+      "kf_2": {
+        "away": "Engeland",
+        "home": "Noorwegen"
+      },
+      "kf_3": {
+        "away": "Zwitserland",
+        "home": "Argentinië"
+      },
+      "r32_0": {
+        "away": "",
+        "home": ""
+      },
+      "r32_1": {
+        "away": "",
+        "home": ""
+      },
+      "r32_10": {
+        "away": "",
+        "home": ""
+      },
+      "r32_11": {
+        "away": "",
+        "home": ""
+      },
+      "r32_12": {
+        "away": "",
+        "home": ""
+      },
+      "r32_13": {
+        "away": "",
+        "home": ""
+      },
+      "r32_14": {
+        "away": "",
+        "home": ""
+      },
+      "r32_15": {
+        "away": "",
+        "home": ""
+      },
+      "r32_2": {
+        "away": "",
+        "home": ""
+      },
+      "r32_3": {
+        "away": "",
+        "home": ""
+      },
+      "r32_4": {
+        "away": "",
+        "home": ""
+      },
+      "r32_5": {
+        "away": "",
+        "home": ""
+      },
+      "r32_6": {
+        "away": "",
+        "home": ""
+      },
+      "r32_7": {
+        "away": "",
+        "home": ""
+      },
+      "r32_8": {
+        "away": "",
+        "home": ""
+      },
+      "r32_9": {
+        "away": "",
+        "home": ""
+      }
+    },
+    "naam": "Goof Classens",
+    "slogan": "Havertz, want ik houd ook van ezels",
+    "tijdstip": "11-6-2026, 18:53:33",
+    "topscorers_ko": [
+      "Lionel Messi",
+      "João Cancelo",
+      "Kylian Mbappé",
+      "Lucas Paquetá"
+    ],
+    "topscorers_poule": [
+      "Bruno Fernandes",
+      "João Cancelo",
+      "Erling Haaland",
+      "Lucas Paquetá"
+    ]
+  },
+  {
+    "extra": {
+      "eerste_goal": "Tijjani Reijnders",
+      "kaart_nl": "Denzel Dumfries",
+      "topscorer_nl": "Donyell Malen",
+      "totaal_goals": "276",
+      "winnaar": "Spanje"
+    },
+    "groups": {
+      "A": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "2",
+          "3"
+        ]
+      },
+      "B": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "C": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "4",
+          "3"
+        ]
+      },
+      "D": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "E": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "F": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "G": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "H": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "I": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "4",
+          "3"
+        ]
+      },
+      "J": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "K": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "L": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "ko": {
+      "af_0": {
+        "away": "Frankrijk",
+        "home": "Duitsland"
+      },
+      "af_1": {
+        "away": "Nederland",
+        "home": "Canada"
+      },
+      "af_2": {
+        "away": "Noorwegen",
+        "home": "Brazilië"
+      },
+      "af_3": {
+        "away": "Engeland",
+        "home": "Mexico"
+      },
+      "af_4": {
+        "away": "Spanje",
+        "home": "Portugal"
+      },
+      "af_5": {
+        "away": "België",
+        "home": "VS"
+      },
+      "af_6": {
+        "away": "Australië",
+        "home": "Argentinië"
+      },
+      "af_7": {
+        "away": "Colombia",
+        "home": "Zwitserland"
+      },
+      "d3_0": {
+        "away": "Argentinië",
+        "home": "Frankrijk"
+      },
+      "fin_0": {
+        "away": "Brazilië",
+        "home": "Spanje"
+      },
+      "fin_uitslag": {
+        "away": "3",
+        "home": "1"
+      },
+      "hf_0": {
+        "away": "Spanje",
+        "home": "Frankrijk"
+      },
+      "hf_1": {
+        "away": "Argentinië",
+        "home": "Brazilië"
+      },
+      "kf_0": {
+        "away": "Nederland",
+        "home": "Frankrijk"
+      },
+      "kf_1": {
+        "away": "België",
+        "home": "Spanje"
+      },
+      "kf_2": {
+        "away": "Engeland",
+        "home": "Brazilië"
+      },
+      "kf_3": {
+        "away": "Colombia",
+        "home": "Argentinië"
+      },
+      "r32_0": {
+        "away": "",
+        "home": ""
+      },
+      "r32_1": {
+        "away": "",
+        "home": ""
+      },
+      "r32_10": {
+        "away": "",
+        "home": ""
+      },
+      "r32_11": {
+        "away": "",
+        "home": ""
+      },
+      "r32_12": {
+        "away": "",
+        "home": ""
+      },
+      "r32_13": {
+        "away": "",
+        "home": ""
+      },
+      "r32_14": {
+        "away": "",
+        "home": ""
+      },
+      "r32_15": {
+        "away": "",
+        "home": ""
+      },
+      "r32_2": {
+        "away": "",
+        "home": ""
+      },
+      "r32_3": {
+        "away": "",
+        "home": ""
+      },
+      "r32_4": {
+        "away": "",
+        "home": ""
+      },
+      "r32_5": {
+        "away": "",
+        "home": ""
+      },
+      "r32_6": {
+        "away": "",
+        "home": ""
+      },
+      "r32_7": {
+        "away": "",
+        "home": ""
+      },
+      "r32_8": {
+        "away": "",
+        "home": ""
+      },
+      "r32_9": {
+        "away": "",
+        "home": ""
+      }
+    },
+    "naam": "Bas",
+    "slogan": "Stanislav Manolev, soms briljant soms waardeloos",
+    "tijdstip": "11-6-2026, 19:06:30",
+    "topscorers_ko": [
+      "Mikel Oyarzabal",
+      "Kylian Mbappé",
+      "Lionel Messi",
+      "Vinícius Júnior"
+    ],
+    "topscorers_poule": [
+      "Mikel Oyarzabal",
+      "Kylian Mbappé",
+      "Harry Kane",
+      "Kai Havertz"
+    ]
+  },
+  {
+    "extra": {
+      "eerste_goal": "Denzel Dumfries",
+      "kaart_nl": "Denzel Dumfries",
+      "topscorer_nl": "Memphis Depay",
+      "totaal_goals": "394",
+      "winnaar": "Frankrijk"
+    },
+    "groups": {
+      "A": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_3": {
+            "away": "3",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "2",
+          "4",
+          "3",
+          "1"
+        ]
+      },
+      "B": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "C": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "6"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "4"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "4"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "2_3": {
+            "away": "3",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "4",
+          "3"
+        ]
+      },
+      "D": {
+        "matches": {
+          "0_1": {
+            "away": "2",
+            "home": "1"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "3",
+          "4",
+          "2",
+          "1"
+        ]
+      },
+      "E": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "5"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "1"
+          }
+        },
+        "standing": [
+          "1",
+          "4",
+          "3",
+          "2"
+        ]
+      },
+      "F": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "2",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "G": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "4"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "2",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "1",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "H": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "5"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "4"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "0",
+            "home": "1"
+          },
+          "1_3": {
+            "away": "3",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "I": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "1"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "J": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "3"
+          },
+          "0_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "0"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "0",
+            "home": "3"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ]
+      },
+      "K": {
+        "matches": {
+          "0_1": {
+            "away": "0",
+            "home": "5"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "2",
+            "home": "0"
+          },
+          "2_3": {
+            "away": "2",
+            "home": "0"
+          }
+        },
+        "standing": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      "L": {
+        "matches": {
+          "0_1": {
+            "away": "1",
+            "home": "2"
+          },
+          "0_2": {
+            "away": "0",
+            "home": "3"
+          },
+          "0_3": {
+            "away": "0",
+            "home": "3"
+          },
+          "1_2": {
+            "away": "1",
+            "home": "2"
+          },
+          "1_3": {
+            "away": "0",
+            "home": "2"
+          },
+          "2_3": {
+            "away": "1",
+            "home": "2"
+          }
+        },
+        "standing": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "ko": {
+      "af_0": {
+        "away": "Frankrijk",
+        "home": "Duitsland"
+      },
+      "af_1": {
+        "away": "Nederland",
+        "home": "Canada"
+      },
+      "af_2": {
+        "away": "Noorwegen",
+        "home": "Brazilië"
+      },
+      "af_3": {
+        "away": "Engeland",
+        "home": "Mexico"
+      },
+      "af_4": {
+        "away": "Spanje",
+        "home": "Portugal"
+      },
+      "af_5": {
+        "away": "België",
+        "home": "VS"
+      },
+      "af_6": {
+        "away": "Egypte",
+        "home": "Argentinië"
+      },
+      "af_7": {
+        "away": "Colombia",
+        "home": "Zwitserland"
+      },
+      "d3_0": {
+        "away": "Argentinië",
+        "home": "Portugal"
+      },
+      "fin_0": {
+        "away": "Brazilië",
+        "home": "Frankrijk"
+      },
+      "fin_uitslag": {
+        "away": "2",
+        "home": "3"
+      },
+      "hf_0": {
+        "away": "Portugal",
+        "home": "Frankrijk"
+      },
+      "hf_1": {
+        "away": "Argentinië",
+        "home": "Brazilië"
+      },
+      "kf_0": {
+        "away": "Nederland",
+        "home": "Frankrijk"
+      },
+      "kf_1": {
+        "away": "België",
+        "home": "Portugal"
+      },
+      "kf_2": {
+        "away": "Engeland",
+        "home": "Brazilië"
+      },
+      "kf_3": {
+        "away": "Zwitserland",
+        "home": "Argentinië"
+      },
+      "r32_0": {
+        "away": "",
+        "home": ""
+      },
+      "r32_1": {
+        "away": "",
+        "home": ""
+      },
+      "r32_10": {
+        "away": "",
+        "home": ""
+      },
+      "r32_11": {
+        "away": "",
+        "home": ""
+      },
+      "r32_12": {
+        "away": "",
+        "home": ""
+      },
+      "r32_13": {
+        "away": "",
+        "home": ""
+      },
+      "r32_14": {
+        "away": "",
+        "home": ""
+      },
+      "r32_15": {
+        "away": "",
+        "home": ""
+      },
+      "r32_2": {
+        "away": "",
+        "home": ""
+      },
+      "r32_3": {
+        "away": "",
+        "home": ""
+      },
+      "r32_4": {
+        "away": "",
+        "home": ""
+      },
+      "r32_5": {
+        "away": "",
+        "home": ""
+      },
+      "r32_6": {
+        "away": "",
+        "home": ""
+      },
+      "r32_7": {
+        "away": "",
+        "home": ""
+      },
+      "r32_8": {
+        "away": "",
+        "home": ""
+      },
+      "r32_9": {
+        "away": "",
+        "home": ""
+      }
+    },
+    "naam": "De Boot",
+    "slogan": "Philip cocu",
+    "tijdstip": "11-6-2026, 19:57:09",
+    "topscorers_ko": [
+      "Kylian Mbappé",
+      "Vinícius Júnior",
+      "Lionel Messi",
+      "Kai Havertz"
+    ],
+    "topscorers_poule": [
+      "Kylian Mbappé",
+      "Vinícius Júnior",
+      "Luis Díaz",
+      "Harry Kane"
+    ]
+  }
+]

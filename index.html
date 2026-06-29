@@ -452,6 +452,14 @@ body.deadline-locked:not(.deadline2-locked) .lock-banner{display:block;}
     <div class="admin-section-hd">Extra vragen — werkelijke antwoorden</div>
     <div class="card" id="admin-extra-container"></div>
 
+    <div class="admin-section-hd">Tussenstanden</div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:500;margin-bottom:.5rem">🏆 Winnaar groepsfase</div>
+      <select id="admin-winnaar-groepsfase" class="text-input" style="font-size:13px" onchange="uitslagen.winnaar_groepsfase=this.value">
+        <option value="">— niemand —</option>
+      </select>
+    </div>
+
     <button class="btn btn-green" onclick="saveUitslagen()" style="margin-top:1rem">💾 Uitslagen opslaan & punten berekenen</button>
     <button class="btn" onclick="exportUitslagenJSON()" style="margin-top:.5rem">Exporteer uitslagen (JSON)</button>
     <button class="btn btn-red" onclick="importUitslagenJSON()" style="margin-top:.5rem">Importeer uitslagen (JSON)</button>
@@ -649,7 +657,8 @@ let uitslagen={
   ko:{},
   extra:{eerste_goal:'',totaal_goals:'',topscorer_nl:'',topscorer_nl_goals:0,kaart_nl:'',kaart_nl_geel:0,kaart_nl_rood:0,winnaar:''},
   topscorers_poule:{},
-  topscorers_ko:{}
+  topscorers_ko:{},
+  winnaar_groepsfase:''
 };
 
 // Viewer state
@@ -688,6 +697,7 @@ function initUitslagen(){
   if(!uitslagen.topscorers_poule) uitslagen.topscorers_poule={};
   if(!uitslagen.topscorers_ko) uitslagen.topscorers_ko={};
   if(!uitslagen.extra) uitslagen.extra={eerste_goal:'',totaal_goals:'',topscorer_nl:'',topscorer_nl_goals:0,kaart_nl:'',kaart_nl_type:'geel',winnaar:''};
+  if(!uitslagen.winnaar_groepsfase) uitslagen.winnaar_groepsfase='';
 }
 
 // ── DEADLINE HELPERS ─────────────────────────────────────────────────────
@@ -1693,6 +1703,13 @@ function berekenPunten(entry){
   return {totaal,details};
 }
 
+function buildAdminTussenstanden(){
+  const sel=document.getElementById('admin-winnaar-groepsfase');if(!sel)return;
+  const cur=uitslagen.winnaar_groepsfase||'';
+  sel.innerHTML='<option value="">— niemand —</option>';
+  getEntries().forEach(e=>{const opt=document.createElement('option');opt.value=e.naam;opt.textContent=e.naam;if(e.naam===cur)opt.selected=true;sel.appendChild(opt);});
+}
+
 // ── RANGLIJST ─────────────────────────────────────────────────────────────
 function buildRanglijst(){
   const entries=getEntries();const c=document.getElementById('ranglijst-container');
@@ -1710,7 +1727,7 @@ function buildRanglijst(){
       <div class="rang-hd" onclick="toggleDetail(this)">
         <div class="rang-pos ${medal}">${posLabel}</div>
         <div style="flex:1">
-          <div class="rang-name">${e.naam}</div>
+          <div class="rang-name">${e.naam}${uitslagen.winnaar_groepsfase&&e.naam===uitslagen.winnaar_groepsfase?' <span style="font-size:10px;font-weight:700;color:var(--gold);background:#2A2200;padding:1px 6px;border-radius:3px;margin-left:6px">🏆 Groepsfase</span>':''}</div>
           ${e.slogan?`<div class="rang-slogan">"${e.slogan}"</div>`:''}
         </div>
         <div class="rang-pts">${e.totaal} ptn</div>
@@ -1744,7 +1761,7 @@ async function showTab(tab){
       const password=prompt('Firebase wachtwoord:');if(!password)return;
       const ok=await signInFirebase(email,password);if(!ok)return;
     }
-    buildAdminGroups();buildAdminStandings();buildAdminKO();buildAdminTopscorers();buildAdminExtra();
+    buildAdminGroups();buildAdminStandings();buildAdminKO();buildAdminTopscorers();buildAdminExtra();buildAdminTussenstanden();
   }
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -1791,7 +1808,7 @@ function lockForm(){
   }
   if(l2){
     document.body.classList.add('deadline2-locked');
-    document.querySelectorAll('.ko-input').forEach(el=>el.disabled=true);
+    document.querySelectorAll('.ko-input').forEach(el=>{if(!el.closest('#sec-admin')) el.disabled=true;});
     const rb=document.getElementById('refresh-r32-btn');if(rb) rb.disabled=true;
   }
   if(l2){
@@ -2048,6 +2065,7 @@ async function initFromFirebase(){
     if(data.uitslagen.extra) Object.assign(uitslagen.extra,data.uitslagen.extra);
     if(data.uitslagen.topscorers_poule) uitslagen.topscorers_poule=data.uitslagen.topscorers_poule;
     if(data.uitslagen.topscorers_ko) uitslagen.topscorers_ko=data.uitslagen.topscorers_ko;
+    if(data.uitslagen.winnaar_groepsfase) uitslagen.winnaar_groepsfase=data.uitslagen.winnaar_groepsfase;
   }
   if(data.entries&&data.entries.length) setEntries(data.entries);
   localStorage.setItem('wkp26_published',data.published?'true':'false');

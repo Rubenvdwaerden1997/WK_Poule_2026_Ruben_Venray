@@ -478,64 +478,72 @@
       "away": ""
     },
     "af_0": {
-      "home": "",
-      "away": ""
+      "home": "Duitsland",
+      "away": "Frankrijk"
     },
     "af_1": {
-      "home": "",
-      "away": ""
+      "home": "Canada",
+      "away": "Nederland"
     },
     "af_2": {
-      "home": "",
-      "away": ""
+      "home": "Brazilië",
+      "away": "Noorwegen"
     },
     "af_3": {
-      "home": "",
-      "away": ""
+      "home": "Mexico",
+      "away": "Engeland"
     },
     "af_4": {
-      "home": "",
-      "away": ""
+      "home": "Portugal",
+      "away": "Spanje"
     },
     "af_5": {
-      "home": "",
-      "away": ""
+      "home": "VS",
+      "away": "België"
     },
     "af_6": {
-      "home": "",
-      "away": ""
+      "home": "Argentinië",
+      "away": "Egypte"
     },
     "af_7": {
-      "home": "",
-      "away": ""
+      "home": "Zwitserland",
+      "away": "Colombia"
     },
     "kf_0": {
-      "home": "",
-      "away": ""
+      "home": "Duitsland",
+      "away": "Nederland"
     },
     "kf_1": {
-      "home": "",
-      "away": ""
+      "home": "Spanje",
+      "away": "België"
     },
     "kf_2": {
-      "home": "",
-      "away": ""
+      "home": "Brazilië",
+      "away": "Engeland"
     },
     "kf_3": {
-      "home": "",
-      "away": ""
+      "home": "Argentinië",
+      "away": "Colombia"
     },
     "hf_0": {
-      "home": "",
-      "away": ""
+      "home": "Duitsland",
+      "away": "Spanje"
     },
     "hf_1": {
-      "home": "",
-      "away": ""
+      "home": "Engeland",
+      "away": "Argentinië"
     },
     "fin_0": {
-      "home": "",
-      "away": ""
+      "home": "Duitsland",
+      "away": "Engeland"
+    },
+    "d3_0": {
+      "home": "Spanje",
+      "away": "Argentinië"
+    },
+    "fin_uitslag": {
+      "home": "1",
+      "away": "0"
     }
   },
   "extra": {
@@ -552,9 +560,9 @@
     "Harry Kane"
   ],
   "topscorers_ko": [
-    "",
-    "",
-    "",
-    ""
+    "Harry Kane",
+    "Lionel Messi",
+    "Denzel Dumfries",
+    "Felix Nmecha"
   ]
 }
