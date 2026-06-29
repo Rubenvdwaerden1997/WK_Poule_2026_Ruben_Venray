@@ -2348,6 +2348,14 @@ function handleImport(input){
   await initFromFirebase();
   migrateFlippedMatches();
   setInterval(saveUitslagen,10000);
+  document.addEventListener('visibilitychange',async()=>{
+    if(document.visibilityState==='visible'){
+      await initFromFirebase();
+      const id=document.querySelector('.section.active')?.id?.replace('sec-','');
+      if(id==='ranglijst') buildRanglijst();
+      if(id==='overzicht') buildOverzicht();
+    }
+  });
 })();
 </script>
 </body>
