@@ -655,7 +655,7 @@ let uitslagen={
   groups:{},
   standings:{},
   ko:{},
-  extra:{eerste_goal:'',totaal_goals:'',topscorer_nl:'',topscorer_nl_goals:0,kaart_nl:'',kaart_nl_geel:0,kaart_nl_rood:0,winnaar:''},
+  extra:{eerste_goal:'',totaal_goals:'',topscorer_nl:['','',''],topscorer_nl_goals:0,kaart_nl:['','',''],kaart_nl_geel:0,kaart_nl_rood:0,winnaar:''},
   topscorers_poule:{},
   topscorers_ko:{},
   winnaar_groepsfase:''
@@ -696,7 +696,9 @@ function initUitslagen(){
   if(!uitslagen.ko['fin_uitslag']) uitslagen.ko['fin_uitslag']={home:'',away:''};
   if(!uitslagen.topscorers_poule) uitslagen.topscorers_poule={};
   if(!uitslagen.topscorers_ko) uitslagen.topscorers_ko={};
-  if(!uitslagen.extra) uitslagen.extra={eerste_goal:'',totaal_goals:'',topscorer_nl:'',topscorer_nl_goals:0,kaart_nl:'',kaart_nl_type:'geel',winnaar:''};
+  if(!uitslagen.extra) uitslagen.extra={eerste_goal:'',totaal_goals:'',topscorer_nl:['','',''],topscorer_nl_goals:0,kaart_nl:['','',''],kaart_nl_geel:0,kaart_nl_rood:0,winnaar:''};
+  if(!Array.isArray(uitslagen.extra.topscorer_nl)) uitslagen.extra.topscorer_nl=[uitslagen.extra.topscorer_nl||'','',''];
+  if(!Array.isArray(uitslagen.extra.kaart_nl)) uitslagen.extra.kaart_nl=[uitslagen.extra.kaart_nl||'','',''];
   if(!uitslagen.winnaar_groepsfase) uitslagen.winnaar_groepsfase='';
 }
 
@@ -1488,6 +1490,34 @@ function makePlayerACInput_admin(field,initialValue){
   return wrap;
 }
 
+function makePlayerACInput_admin_idx(field,idx,initialValue){
+  const nlPlayers=WK_PLAYERS.filter(p=>p.team==='Nederland');
+  const wrap=document.createElement('div');wrap.style.position='relative';
+  const input=document.createElement('input');
+  input.className='extra-input';input.type='text';input.autocomplete='off';
+  input.placeholder='Zoek Nederlandse speler...';input.value=initialValue;
+  const dropdown=document.createElement('div');
+  dropdown.className='ac-dropdown';dropdown.style.display='none';
+  function getMatches(q){if(!q)return nlPlayers.slice(0,10);const ql=q.toLowerCase();return nlPlayers.filter(p=>p.name.toLowerCase().includes(ql)).slice(0,10);}
+  function renderDropdown(matches){
+    dropdown.innerHTML='';
+    if(!matches.length){dropdown.style.display='none';return;}
+    matches.forEach(p=>{
+      const item=document.createElement('div');item.className='ac-item';
+      item.innerHTML=`${playerBadge(p.position)}<span style="flex:1">${p.name}</span>`;
+      item.style.cssText='display:flex;align-items:center;gap:4px';
+      item.addEventListener('mousedown',e=>{e.preventDefault();input.value=p.name;if(!Array.isArray(uitslagen.extra[field]))uitslagen.extra[field]=['','',''];uitslagen.extra[field][idx]=p.name;dropdown.style.display='none';});
+      dropdown.appendChild(item);
+    });
+    dropdown.style.display='block';
+  }
+  input.addEventListener('input',()=>{if(!Array.isArray(uitslagen.extra[field]))uitslagen.extra[field]=['','',''];uitslagen.extra[field][idx]=input.value;renderDropdown(getMatches(input.value));});
+  input.addEventListener('blur',()=>{setTimeout(()=>{dropdown.style.display='none';},150);});
+  input.addEventListener('focus',()=>{renderDropdown(getMatches(input.value));});
+  wrap.appendChild(input);wrap.appendChild(dropdown);
+  return wrap;
+}
+
 function makeCountryACInput_admin(field,initialValue){
   const wrap=document.createElement('div');wrap.style.position='relative';
   const input=document.createElement('input');
@@ -1531,45 +1561,61 @@ function buildAdminExtra(){
     <input class="extra-input" type="number" placeholder="Aantal..." value="${u.totaal_goals||''}" oninput="uitslagen.extra.totaal_goals=this.value">`;
   c.appendChild(w2);
 
-  // Topscorer NL
+  // Topscorer NL (tot 3 namen bij gelijke stand)
   const w3=document.createElement('div');w3.className='extra-card';
-  w3.innerHTML='<div class="extra-q">Topscorer Nederland — naam & goals</div>';
-  const w3inner=document.createElement('div');w3inner.style.cssText='display:flex;gap:8px;align-items:center';
-  const w3ac=makePlayerACInput_admin('topscorer_nl',u.topscorer_nl||'');
-  w3ac.style.flex='2';
-  w3inner.appendChild(w3ac);
+  w3.innerHTML='<div class="extra-q">Topscorer Nederland — namen & doelpunten</div><div style="font-size:11px;color:var(--text2);margin-bottom:6px">Vul meerdere namen in bij een gedeelde topscorer</div>';
+  const topNames=Array.isArray(u.topscorer_nl)?u.topscorer_nl:[u.topscorer_nl||'','',''];
+  for(let i=0;i<3;i++){
+    const row=document.createElement('div');row.style.cssText='display:flex;gap:8px;align-items:center;margin-bottom:5px';
+    const lbl=document.createElement('span');lbl.style.cssText='font-size:11px;color:var(--text2);min-width:52px;flex-shrink:0';lbl.textContent='Naam '+(i+1)+':';
+    row.appendChild(lbl);
+    const ac=makePlayerACInput_admin_idx('topscorer_nl',i,topNames[i]||'');
+    ac.style.flex='1';
+    row.appendChild(ac);
+    w3.appendChild(row);
+  }
+  const w3goalsRow=document.createElement('div');w3goalsRow.style.cssText='display:flex;gap:8px;align-items:center;margin-top:4px';
+  const w3goalsLbl=document.createElement('span');w3goalsLbl.style.cssText='font-size:11px;color:var(--text2);min-width:52px;flex-shrink:0';w3goalsLbl.textContent='Doelpunten:';
+  w3goalsRow.appendChild(w3goalsLbl);
   const w3goals=document.createElement('input');
   w3goals.className='extra-input';w3goals.type='number';w3goals.min='0';w3goals.placeholder='Goals';
-  w3goals.value=u.topscorer_nl_goals||'';w3goals.style.flex='1';
+  w3goals.value=u.topscorer_nl_goals||'';w3goals.style.width='80px';
   w3goals.addEventListener('input',()=>{uitslagen.extra.topscorer_nl_goals=parseInt(w3goals.value)||0;});
-  w3inner.appendChild(w3goals);
-  w3.appendChild(w3inner);
+  w3goalsRow.appendChild(w3goals);
+  w3.appendChild(w3goalsRow);
   c.appendChild(w3);
 
-  // Kaartenpakker NL
+  // Kaartenpakker NL (tot 3 namen bij gelijke stand)
   const w4=document.createElement('div');w4.className='extra-card';
-  w4.innerHTML='<div class="extra-q">Kaartenpakker Nederland — naam, geel & rood</div>';
-  const w4inner=document.createElement('div');w4inner.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap';
-  const w4ac=makePlayerACInput_admin('kaart_nl',u.kaart_nl||'');
-  w4ac.style.flex='2';w4ac.style.minWidth='150px';
-  w4inner.appendChild(w4ac);
-  const w4geel=document.createElement('div');w4geel.style.cssText='display:flex;gap:4px;align-items:center;flex:1';
+  w4.innerHTML='<div class="extra-q">Kaartenpakker Nederland — namen, geel & rood</div><div style="font-size:11px;color:var(--text2);margin-bottom:6px">Vul meerdere namen in bij een gedeelde kaartenpakker</div>';
+  const kaartNames=Array.isArray(u.kaart_nl)?u.kaart_nl:[u.kaart_nl||'','',''];
+  for(let i=0;i<3;i++){
+    const row=document.createElement('div');row.style.cssText='display:flex;gap:8px;align-items:center;margin-bottom:5px';
+    const lbl=document.createElement('span');lbl.style.cssText='font-size:11px;color:var(--text2);min-width:52px;flex-shrink:0';lbl.textContent='Naam '+(i+1)+':';
+    row.appendChild(lbl);
+    const ac=makePlayerACInput_admin_idx('kaart_nl',i,kaartNames[i]||'');
+    ac.style.flex='1';
+    row.appendChild(ac);
+    w4.appendChild(row);
+  }
+  const w4cardsRow=document.createElement('div');w4cardsRow.style.cssText='display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:4px';
+  const w4geel=document.createElement('div');w4geel.style.cssText='display:flex;gap:4px;align-items:center';
   const w4geelInput=document.createElement('input');
   w4geelInput.className='extra-input';w4geelInput.type='number';w4geelInput.min='0';w4geelInput.placeholder='0';
   w4geelInput.value=u.kaart_nl_geel||0;w4geelInput.style.width='60px';
   w4geelInput.addEventListener('input',()=>{uitslagen.extra.kaart_nl_geel=parseInt(w4geelInput.value)||0;});
   w4geel.innerHTML='<span style="font-size:11px;color:var(--text2)">🟨 Geel:</span>';
   w4geel.appendChild(w4geelInput);
-  w4inner.appendChild(w4geel);
-  const w4rood=document.createElement('div');w4rood.style.cssText='display:flex;gap:4px;align-items:center;flex:1';
+  w4cardsRow.appendChild(w4geel);
+  const w4rood=document.createElement('div');w4rood.style.cssText='display:flex;gap:4px;align-items:center';
   const w4roodInput=document.createElement('input');
   w4roodInput.className='extra-input';w4roodInput.type='number';w4roodInput.min='0';w4roodInput.placeholder='0';
   w4roodInput.value=u.kaart_nl_rood||0;w4roodInput.style.width='60px';
   w4roodInput.addEventListener('input',()=>{uitslagen.extra.kaart_nl_rood=parseInt(w4roodInput.value)||0;});
   w4rood.innerHTML='<span style="font-size:11px;color:var(--text2)">🟥 Rood:</span>';
   w4rood.appendChild(w4roodInput);
-  w4inner.appendChild(w4rood);
-  w4.appendChild(w4inner);
+  w4cardsRow.appendChild(w4rood);
+  w4.appendChild(w4cardsRow);
   c.appendChild(w4);
 
   // WK-winnaar
@@ -1693,8 +1739,12 @@ function berekenPunten(entry){
   let extraPts=0;
   if(entry.extra?.eerste_goal&&u.extra?.eerste_goal&&entry.extra.eerste_goal.trim().toLowerCase()===u.extra.eerste_goal.trim().toLowerCase()) extraPts+=48;
   if(entry.extra?.totaal_goals&&u.extra?.totaal_goals&&parseInt(entry.extra.totaal_goals)===parseInt(u.extra.totaal_goals)) extraPts+=152;
-  if(entry.extra?.topscorer_nl&&u.extra?.topscorer_nl&&entry.extra.topscorer_nl.trim().toLowerCase()===u.extra.topscorer_nl.trim().toLowerCase()&&u.extra.topscorer_nl_goals>0) extraPts+=12*u.extra.topscorer_nl_goals;
-  if(entry.extra?.kaart_nl&&u.extra?.kaart_nl&&entry.extra.kaart_nl.trim().toLowerCase()===u.extra.kaart_nl.trim().toLowerCase()){
+  const topPick=(entry.extra?.topscorer_nl||'').trim().toLowerCase();
+  const topCorrect=(Array.isArray(u.extra?.topscorer_nl)?u.extra.topscorer_nl:[u.extra?.topscorer_nl||'']).map(s=>s.trim().toLowerCase()).filter(Boolean);
+  if(topPick&&topCorrect.length&&topCorrect.includes(topPick)&&u.extra.topscorer_nl_goals>0) extraPts+=12*u.extra.topscorer_nl_goals;
+  const kaartPick=(entry.extra?.kaart_nl||'').trim().toLowerCase();
+  const kaartCorrect=(Array.isArray(u.extra?.kaart_nl)?u.extra.kaart_nl:[u.extra?.kaart_nl||'']).map(s=>s.trim().toLowerCase()).filter(Boolean);
+  if(kaartPick&&kaartCorrect.length&&kaartCorrect.includes(kaartPick)){
   extraPts+=(u.extra.kaart_nl_geel||0)*18+(u.extra.kaart_nl_rood||0)*54;
   }
   if(extraPts>0) details.push({label:'Extra vragen',pts:extraPts});
@@ -1928,7 +1978,7 @@ function submitEntry(){
   emailTekst+='\n--- TOPSCORERS KO ---\n';
   (entry.topscorers_ko||[]).forEach((p,i)=>{emailTekst+='Speler '+(i+1)+': '+(p||'-')+'\n';});
   emailTekst+='\n--- EXTRA ---\n';
-  EXTRA_QS.forEach(q=>{emailTekst+=q.label+': '+(entry.extra[q.id]||'-')+'\n';});
+  EXTRA_QS.forEach(q=>{const v=entry.extra[q.id];emailTekst+=q.label+': '+(Array.isArray(v)?v.filter(Boolean).join(', ')||'-':v||'-')+'\n';});
 
   emailjs.send('service_1liqgli','template_1df3jsp',{
     name:naam,
@@ -2062,7 +2112,7 @@ async function initFromFirebase(){
     if(data.uitslagen.groups) Object.assign(uitslagen.groups,data.uitslagen.groups);
     if(data.uitslagen.standings) Object.assign(uitslagen.standings,data.uitslagen.standings);
     if(data.uitslagen.ko) Object.assign(uitslagen.ko,data.uitslagen.ko);
-    if(data.uitslagen.extra) Object.assign(uitslagen.extra,data.uitslagen.extra);
+    if(data.uitslagen.extra){Object.assign(uitslagen.extra,data.uitslagen.extra);if(!Array.isArray(uitslagen.extra.topscorer_nl))uitslagen.extra.topscorer_nl=[uitslagen.extra.topscorer_nl||'','',''];if(!Array.isArray(uitslagen.extra.kaart_nl))uitslagen.extra.kaart_nl=[uitslagen.extra.kaart_nl||'','',''];}
     if(data.uitslagen.topscorers_poule) uitslagen.topscorers_poule=data.uitslagen.topscorers_poule;
     if(data.uitslagen.topscorers_ko) uitslagen.topscorers_ko=data.uitslagen.topscorers_ko;
     if(data.uitslagen.winnaar_groepsfase) uitslagen.winnaar_groepsfase=data.uitslagen.winnaar_groepsfase;
@@ -2226,9 +2276,10 @@ function buildOverzicht(){
   html+=`<div class="card"><h3>Extra vragen</h3><div class="ov-wrap"><table class="ov-table"><tr><th>Vraag</th><th style="background:var(--blue-bg);color:var(--blue-text)">✓ Uitslag</th>`;
   names.forEach(n=>{html+=`<th>${n}</th>`;});html+='</tr>';
   EXTRA_QS.forEach(q=>{
-    const realVal=uitslagen.extra?.[q.id]||'–';
+    const rv=uitslagen.extra?.[q.id];
+    const realVal=Array.isArray(rv)?rv.filter(Boolean).join(', ')||'–':rv||'–';
     html+=`<tr><td style="color:var(--text2)">${q.label}</td><td style="text-align:center;font-weight:600;color:var(--blue-text)">${realVal}</td>`;
-    entries.forEach(e=>{html+=`<td style="text-align:center">${e.extra?.[q.id]||'-'}</td>`;});
+    entries.forEach(e=>{const v=e.extra?.[q.id];html+=`<td style="text-align:center">${Array.isArray(v)?v.filter(Boolean).join(', ')||'-':v||'-'}</td>`;});
     html+='</tr>';
   });
   html+='</table></div></div>';
