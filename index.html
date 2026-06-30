@@ -1057,9 +1057,9 @@ function buildKOViewer(entry1,entry2){
       entries.forEach(entry=>{
         const pred=entry?.ko?.[id];
         let homePts=null,awayPts=null;
-        if(real&&(real.home||real.away)&&pred){
-          homePts=(pred.home?.trim()&&real.home?.trim()&&pred.home.trim()===real.home.trim())?r.pts:0;
-          awayPts=(pred.away?.trim()&&real.away?.trim()&&pred.away.trim()===real.away.trim())?r.pts:0;
+        if(real&&pred){
+          if(real.home?.trim()) homePts=(pred.home?.trim()&&pred.home.trim()===real.home.trim())?r.pts:0;
+          if(real.away?.trim()) awayPts=(pred.away?.trim()&&pred.away.trim()===real.away.trim())?r.pts:0;
         }
         const hPtsHtml=homePts!==null?`<span style="font-size:9px;color:${homePts>0?'var(--green-text)':'var(--text3)'}">${homePts>0?'+'+homePts+'pt':'0pt'}</span>`:'';
         const aPtsHtml=awayPts!==null?`<span style="font-size:9px;color:${awayPts>0?'var(--green-text)':'var(--text3)'}">${awayPts>0?'+'+awayPts+'pt':'0pt'}</span>`:'';
